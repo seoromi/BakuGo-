@@ -1,0 +1,28 @@
+// ============================================================================
+// BAKUGO TOUR ADMIN PANEL - MAIN IMPORT FILE
+// ============================================================================
+// This file imports all admin SCSS modules in the correct order
+// Maintains 100% identical compiled CSS output
+// ============================================================================
+
+// 1. Variables (must come first)
+@import 'variables';
+
+// 2. Base styles
+@import 'base';
+
+// 3. Layout (sidebar, header, main content)
+@import 'layout';
+
+// 4. Components (buttons, cards, tables, modals, etc.)
+@import 'components';
+
+// 5. Forms (form sections, inputs, checkboxes, etc.)
+@import 'forms';
+
+// 6. Pages (destination grid, confirmation modal, etc.)
+@import 'pages';
+
+// 7. Utilities (responsive design, utility classes)
+@import 'utilities';
+

@@ -1,0 +1,23 @@
+﻿# Ignore auto-compiled CSS in SCSS folders
+src/scss/**/*.css
+src/scss/**/*.css.map
+
+# Build output
+dist/
+
+# Dependencies
+node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/settings.json
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+npm-debug.log*

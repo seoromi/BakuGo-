@@ -1,0 +1,1526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BakuGo Tour - Admin Panel</title>
+    
+    <!-- Content Security Policy (CSP) - XSS Protection -->
+    <!-- Optimized CSP: Allows necessary resources while maintaining security -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://fonts.googleapis.com; script-src-elem 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https: blob:; connect-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; object-src 'none'; base-uri 'self';">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="/logo/favicon-96x96.png" sizes="96x96" />
+    <!-- Compiled SCSS - Admin Page Only -->
+    <link rel="stylesheet" href="dist/css/admin.css">
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <img src="assets/img/ui/logo/logo (2).png" alt="BakuGo Tour Logo" loading="lazy" onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'40\' height=\'40\'%3E%3Ctext x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dominant-baseline=\'middle\' font-size=\'20\'%3EBG%3C/text%3E%3C/svg%3E';">
+                <span>Admin Panel</span>
+            </div>
+            <button class="sidebar-toggle" id="sidebarToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <nav class="sidebar-nav">
+            <div class="nav-section">
+                <h3>Dashboard</h3>
+                <ul>
+                    <li><a href="#dashboard" class="nav-link active" data-section="dashboard">
+                        <i class="fas fa-chart-pie"></i>
+                        <span>Overview</span>
+                    </a></li>
+                </ul>
+            </div>
+
+            <div class="nav-section">
+                <h3>Content Management</h3>
+                <ul>
+                    <li><a href="#tours" class="nav-link" data-section="tours">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <span>Tours</span>
+                        <span class="nav-badge" id="toursCount">27</span>
+                    </a></li>
+                    <li><a href="#destinations" class="nav-link" data-section="destinations">
+                        <i class="fas fa-map-pin"></i>
+                        <span>Destinations</span>
+                        <span class="nav-badge" id="destinationsCount">20</span>
+                    </a></li>
+                    <li><a href="#content" class="nav-link" data-section="content">
+                        <i class="fas fa-edit"></i>
+                        <span>Content</span>
+                    </a></li>
+                </ul>
+            </div>
+
+            <div class="nav-section">
+                <h3>Bookings & Customers</h3>
+                <ul>
+                    <li><a href="#bookings" class="nav-link" data-section="bookings">
+                        <i class="fas fa-calendar-check"></i>
+                        <span>Bookings</span>
+                        <span class="nav-badge" id="bookingsCount">156</span>
+                    </a></li>
+                    <li><a href="#customers" class="nav-link" data-section="customers">
+                        <i class="fas fa-users"></i>
+                        <span>Customers</span>
+                        <span class="nav-badge" id="customersCount">89</span>
+                    </a></li>
+                    <li><a href="#reviews" class="nav-link" data-section="reviews">
+                        <i class="fas fa-star"></i>
+                        <span>Reviews</span>
+                        <span class="nav-badge" id="reviewsCount">45</span>
+                    </a></li>
+                </ul>
+            </div>
+
+            <div class="nav-section">
+                <h3>Marketing</h3>
+                <ul>
+                    <li><a href="#promo-codes" class="nav-link" data-section="promo-codes">
+                        <i class="fas fa-tags"></i>
+                        <span>Promo Codes</span>
+                        <span class="nav-badge" id="promoCodesCount">8</span>
+                    </a></li>
+                    <li><a href="#analytics" class="nav-link" data-section="analytics">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Analytics</span>
+                    </a></li>
+                </ul>
+            </div>
+
+            <div class="nav-section">
+                <h3>Settings</h3>
+                <ul>
+                    <li><a href="#users" class="nav-link" data-section="users">
+                        <i class="fas fa-user-shield"></i>
+                        <span>Admin Users</span>
+                    </a></li>
+                    <li><a href="#settings" class="nav-link" data-section="settings">
+                        <i class="fas fa-cog"></i>
+                        <span>Settings</span>
+                    </a></li>
+                </ul>
+            </div>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-left">
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="breadcrumb">
+                    <span id="currentSection">Dashboard</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="search-box">
+                    <input type="text" placeholder="Search..." id="globalSearch">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="notifications">
+                    <button class="notification-btn" id="notificationBtn">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </button>
+                </div>
+                <div class="user-menu">
+                    <button class="user-menu-btn" id="userMenuBtn">
+                        <img src="assets/img/ui/logo/logo (2).png" alt="Admin" class="user-avatar-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
+                        <i class="fas fa-user-circle" style="display:none; font-size: 2rem;"></i>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="user-menu-dropdown" id="userMenuDropdown">
+                        <a href="#profile"><i class="fas fa-user"></i> Profile</a>
+                        <a href="#settings"><i class="fas fa-cog"></i> Settings</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#logout" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Content Area -->
+        <div class="content-area">
+            <!-- Dashboard Section -->
+            <section id="dashboard-section" class="content-section active">
+                <div class="section-header">
+                    <h1>Dashboard Overview</h1>
+                    <div class="section-actions">
+                        <button class="btn btn-primary" onclick="refreshDashboard()">
+                            <i class="fas fa-sync-alt"></i> Refresh
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-number">156</div>
+                            <div class="stat-label">Total Bookings</div>
+                            <div class="stat-change positive">+12% this month</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-number">$12,450</div>
+                            <div class="stat-label">Revenue</div>
+                            <div class="stat-change positive">+8% this month</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-number">89</div>
+                            <div class="stat-label">Active Customers</div>
+                            <div class="stat-change positive">+5% this month</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-number">4.8</div>
+                            <div class="stat-label">Average Rating</div>
+                            <div class="stat-change neutral">No change</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts and Recent Activity -->
+                <div class="dashboard-grid">
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h3>Booking Trends</h3>
+                            <div class="card-actions">
+                                <select class="chart-period">
+                                    <option value="7">Last 7 days</option>
+                                    <option value="30" selected>Last 30 days</option>
+                                    <option value="90">Last 90 days</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <canvas id="bookingChart" width="400" height="200"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h3>Recent Bookings</h3>
+                            <a href="#bookings" class="view-all-link">View All</a>
+                        </div>
+                        <div class="card-content">
+                            <div class="recent-bookings">
+                                <div class="booking-item">
+                                    <div class="booking-info">
+                                        <div class="booking-tour">Gobustan Group Tour</div>
+                                        <div class="booking-customer">Sarah Johnson</div>
+                                    </div>
+                                    <div class="booking-meta">
+                                        <div class="booking-date">Dec 15, 2024</div>
+                                        <div class="booking-status confirmed">Confirmed</div>
+                                    </div>
+                                </div>
+                                <div class="booking-item">
+                                    <div class="booking-info">
+                                        <div class="booking-tour">Private Baku Night Tour</div>
+                                        <div class="booking-customer">Marco Rossi</div>
+                                    </div>
+                                    <div class="booking-meta">
+                                        <div class="booking-date">Dec 14, 2024</div>
+                                        <div class="booking-status pending">Pending</div>
+                                    </div>
+                                </div>
+                                <div class="booking-item">
+                                    <div class="booking-info">
+                                        <div class="booking-tour">Qabala & Shamakhi Tour</div>
+                                        <div class="booking-customer">Elena Kozlova</div>
+                                    </div>
+                                    <div class="booking-meta">
+                                        <div class="booking-date">Dec 13, 2024</div>
+                                        <div class="booking-status completed">Completed</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h3>Popular Tours</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="popular-tours">
+                                <div class="tour-item">
+                                    <div class="tour-name">Gobustan Group Tour</div>
+                                    <div class="tour-bookings">45 bookings</div>
+                                </div>
+                                <div class="tour-item">
+                                    <div class="tour-name">Private Old City Tour</div>
+                                    <div class="tour-bookings">38 bookings</div>
+                                </div>
+                                <div class="tour-item">
+                                    <div class="tour-name">Qabala & Shamakhi</div>
+                                    <div class="tour-bookings">32 bookings</div>
+                                </div>
+                                <div class="tour-item">
+                                    <div class="tour-name">Baku Night Tour</div>
+                                    <div class="tour-bookings">28 bookings</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h3>Recent Reviews</h3>
+                            <a href="#reviews" class="view-all-link">View All</a>
+                        </div>
+                        <div class="card-content">
+                            <div class="recent-reviews">
+                                <div class="review-item">
+                                    <div class="review-header">
+                                        <div class="reviewer-name">Sarah Johnson</div>
+                                        <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                                    </div>
+                                    <div class="review-text">"Amazing tour! The guide was excellent and very knowledgeable."</div>
+                                    <div class="review-tour">Gobustan Group Tour</div>
+                                </div>
+                                <div class="review-item">
+                                    <div class="review-header">
+                                        <div class="reviewer-name">Marco Rossi</div>
+                                        <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                                    </div>
+                                    <div class="review-text">"Perfect organization and beautiful sights. Highly recommended!"</div>
+                                    <div class="review-tour">Private Baku Night Tour</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tours Section -->
+            <section id="tours-section" class="content-section">
+                <div class="section-header">
+                    <h1>Tours Management</h1>
+                    <div class="section-actions">
+                        <button class="btn btn-secondary" onclick="exportTours()">
+                            <i class="fas fa-download"></i> Export
+                        </button>
+                        <button class="btn btn-primary" onclick="openTourModal()">
+                            <i class="fas fa-plus"></i> Add Tour
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tours Filter -->
+                <div class="filter-bar">
+                    <div class="filter-group">
+                        <label>Type:</label>
+                        <select id="tourTypeFilter">
+                            <option value="">All Types</option>
+                            <option value="group">Group Tours</option>
+                            <option value="private">Private Tours</option>
+                            <option value="driver">Driver Only</option>
+                            <option value="package">Tour Packages</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Status:</label>
+                        <select id="tourStatusFilter">
+                            <option value="">All Status</option>
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
+                            <option value="draft">Draft</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Search:</label>
+                        <input type="text" id="tourSearch" placeholder="Search tours...">
+                    </div>
+                </div>
+
+                <!-- Tours Table -->
+                <div class="table-container">
+                    <table class="data-table" id="toursTable">
+                        <thead>
+                            <tr>
+                                <th>Tour</th>
+                                <th>Type</th>
+                                <th>Price</th>
+                                <th>Duration</th>
+                                <th>Status</th>
+                                <th>Bookings</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="toursTableBody">
+                            <!-- Tours will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination">
+                    <button class="pagination-btn" onclick="previousPage('tours')">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <span class="pagination-info">
+                        <span id="toursPageInfo">Page 1 of 3</span>
+                    </span>
+                    <button class="pagination-btn" onclick="nextPage('tours')">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Destinations Section -->
+            <section id="destinations-section" class="content-section">
+                <div class="section-header">
+                    <h1>Destinations Management</h1>
+                    <div class="section-actions">
+                        <button class="btn btn-secondary" onclick="exportDestinations()">
+                            <i class="fas fa-download"></i> Export
+                        </button>
+                        <button class="btn btn-primary" onclick="openDestinationModal()">
+                            <i class="fas fa-plus"></i> Add Destination
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Destinations Filter -->
+                <div class="filter-bar">
+                    <div class="filter-group">
+                        <label>Region:</label>
+                        <select id="destinationRegionFilter">
+                            <option value="">All Regions</option>
+                            <option value="baku">Baku</option>
+                            <option value="gobustan">Gobustan</option>
+                            <option value="qabala">Qabala</option>
+                            <option value="shamakhi">Shamakhi</option>
+                            <option value="quba">Quba</option>
+                            <option value="sheki">Sheki</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Type:</label>
+                        <select id="destinationTypeFilter">
+                            <option value="">All Types</option>
+                            <option value="historical">Historical</option>
+                            <option value="natural">Natural</option>
+                            <option value="cultural">Cultural</option>
+                            <option value="adventure">Adventure</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Search:</label>
+                        <input type="text" id="destinationSearch" placeholder="Search destinations...">
+                    </div>
+                </div>
+
+                <!-- Destinations Grid -->
+                <div class="destinations-grid" id="destinationsGrid">
+                    <!-- Destinations will be populated by JavaScript -->
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination">
+                    <button class="pagination-btn" onclick="previousPage('destinations')">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <span class="pagination-info">
+                        <span id="destinationsPageInfo">Page 1 of 2</span>
+                    </span>
+                    <button class="pagination-btn" onclick="nextPage('destinations')">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Content Section -->
+            <section id="content-section" class="content-section">
+                <div class="section-header">
+                    <h1>Content Management</h1>
+                    <div class="section-actions">
+                        <button class="btn btn-secondary" onclick="exportContent()">
+                            <i class="fas fa-download"></i> Export
+                        </button>
+                        <button class="btn btn-primary" onclick="openContentModal()">
+                            <i class="fas fa-plus"></i> Add Content
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Content Filter -->
+                <div class="filter-bar">
+                    <div class="filter-group">
+                        <label>Type:</label>
+                        <select id="contentTypeFilter">
+                            <option value="">All Types</option>
+                            <option value="page">Page Content</option>
+                            <option value="blog">Blog Post</option>
+                            <option value="news">News Article</option>
+                            <option value="announcement">Announcement</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Status:</label>
+                        <select id="contentStatusFilter">
+                            <option value="">All Status</option>
+                            <option value="published">Published</option>
+                            <option value="draft">Draft</option>
+                            <option value="archived">Archived</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Search:</label>
+                        <input type="text" id="contentSearch" placeholder="Search content...">
+                    </div>
+                </div>
+
+                <!-- Content Table -->
+                <div class="table-container">
+                    <table class="data-table" id="contentTable">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Type</th>
+                                <th>Author</th>
+                                <th>Created</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="contentTableBody">
+                            <!-- Content will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination">
+                    <button class="pagination-btn" onclick="previousPage('content')">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <span class="pagination-info">
+                        <span id="contentPageInfo">Page 1 of 1</span>
+                    </span>
+                    <button class="pagination-btn" onclick="nextPage('content')">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Bookings Section -->
+            <section id="bookings-section" class="content-section">
+                <div class="section-header">
+                    <h1>Bookings Management</h1>
+                    <div class="section-actions">
+                        <button class="btn btn-secondary" onclick="exportBookings()">
+                            <i class="fas fa-download"></i> Export
+                        </button>
+                        <button class="btn btn-primary" onclick="openBookingModal()">
+                            <i class="fas fa-plus"></i> Add Booking
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Bookings Filter -->
+                <div class="filter-bar">
+                    <div class="filter-group">
+                        <label>Status:</label>
+                        <select id="bookingStatusFilter">
+                            <option value="">All Status</option>
+                            <option value="pending">Pending</option>
+                            <option value="confirmed">Confirmed</option>
+                            <option value="completed">Completed</option>
+                            <option value="cancelled">Cancelled</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Date Range:</label>
+                        <input type="date" id="bookingDateFrom">
+                        <input type="date" id="bookingDateTo">
+                    </div>
+                    <div class="filter-group">
+                        <label>Search:</label>
+                        <input type="text" id="bookingSearch" placeholder="Search bookings...">
+                    </div>
+                </div>
+
+                <!-- Bookings Table -->
+                <div class="table-container">
+                    <table class="data-table" id="bookingsTable">
+                        <thead>
+                            <tr>
+                                <th>Booking ID</th>
+                                <th>Customer</th>
+                                <th>Tour</th>
+                                <th>Date</th>
+                                <th>Guests</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bookingsTableBody">
+                            <!-- Bookings will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination">
+                    <button class="pagination-btn" onclick="previousPage('bookings')">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <span class="pagination-info">
+                        <span id="bookingsPageInfo">Page 1 of 5</span>
+                    </span>
+                    <button class="pagination-btn" onclick="nextPage('bookings')">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Reviews Section -->
+            <section id="reviews-section" class="content-section">
+                <div class="section-header">
+                    <h1>Reviews Management</h1>
+                    <div class="section-actions">
+                        <button class="btn btn-secondary" onclick="exportReviews()">
+                            <i class="fas fa-download"></i> Export
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Reviews Filter -->
+                <div class="filter-bar">
+                    <div class="filter-group">
+                        <label>Status:</label>
+                        <select id="reviewStatusFilter">
+                            <option value="">All Status</option>
+                            <option value="pending">Pending</option>
+                            <option value="approved">Approved</option>
+                            <option value="rejected">Rejected</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Rating:</label>
+                        <select id="reviewRatingFilter">
+                            <option value="">All Ratings</option>
+                            <option value="5">5 Stars</option>
+                            <option value="4">4 Stars</option>
+                            <option value="3">3 Stars</option>
+                            <option value="2">2 Stars</option>
+                            <option value="1">1 Star</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Search:</label>
+                        <input type="text" id="reviewSearch" placeholder="Search reviews...">
+                    </div>
+                </div>
+
+                <!-- Reviews List -->
+                <div class="reviews-list" id="reviewsList">
+                    <!-- Reviews will be populated by JavaScript -->
+                </div>
+            </section>
+
+            <!-- Customers Section -->
+            <section id="customers-section" class="content-section">
+                <div class="section-header">
+                    <h1>Customers Management</h1>
+                    <div class="section-actions">
+                        <button class="btn btn-secondary" onclick="exportCustomers()">
+                            <i class="fas fa-download"></i> Export
+                        </button>
+                        <button class="btn btn-primary" onclick="openCustomerModal()">
+                            <i class="fas fa-plus"></i> Add Customer
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Customers Filter -->
+                <div class="filter-bar">
+                    <div class="filter-group">
+                        <label>Status:</label>
+                        <select id="customerStatusFilter">
+                            <option value="">All Status</option>
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
+                            <option value="blocked">Blocked</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Registration Date:</label>
+                        <input type="date" id="customerDateFrom">
+                        <input type="date" id="customerDateTo">
+                    </div>
+                    <div class="filter-group">
+                        <label>Search:</label>
+                        <input type="text" id="customerSearch" placeholder="Search customers...">
+                    </div>
+                </div>
+
+                <!-- Customers Table -->
+                <div class="table-container">
+                    <table class="data-table" id="customersTable">
+                        <thead>
+                            <tr>
+                                <th>Customer</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Registration Date</th>
+                                <th>Total Bookings</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="customersTableBody">
+                            <!-- Customers will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination">
+                    <button class="pagination-btn" onclick="previousPage('customers')">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <span class="pagination-info">
+                        <span id="customersPageInfo">Page 1 of 3</span>
+                    </span>
+                    <button class="pagination-btn" onclick="nextPage('customers')">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Promo Codes Section -->
+            <section id="promo-codes-section" class="content-section">
+                <div class="section-header">
+                    <h1>Promo Codes Management</h1>
+                    <div class="section-actions">
+                        <button class="btn btn-primary" onclick="openPromoCodeModal()">
+                            <i class="fas fa-plus"></i> Add Promo Code
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Promo Codes Grid -->
+                <div class="promo-codes-grid" id="promoCodesGrid">
+                    <!-- Promo codes will be populated by JavaScript -->
+                </div>
+            </section>
+
+            <!-- Analytics Section -->
+            <section id="analytics-section" class="content-section">
+                <div class="section-header">
+                    <h1>Analytics & Reports</h1>
+                    <div class="section-actions">
+                        <button class="btn btn-secondary" onclick="generateReport()">
+                            <i class="fas fa-file-pdf"></i> Generate Report
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Analytics Cards -->
+                <div class="analytics-grid">
+                    <div class="analytics-card">
+                        <h3>Revenue Analytics</h3>
+                        <canvas id="revenueChart" width="400" height="300"></canvas>
+                    </div>
+                    <div class="analytics-card">
+                        <h3>Tour Performance</h3>
+                        <canvas id="tourPerformanceChart" width="400" height="300"></canvas>
+                    </div>
+                    <div class="analytics-card">
+                        <h3>Customer Demographics</h3>
+                        <canvas id="demographicsChart" width="400" height="300"></canvas>
+                    </div>
+                    <div class="analytics-card">
+                        <h3>Booking Trends</h3>
+                        <canvas id="bookingTrendsChart" width="400" height="300"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Settings Section -->
+            <section id="settings-section" class="content-section">
+                <div class="section-header">
+                    <h1>Settings</h1>
+                </div>
+
+                <div class="settings-grid">
+                    <div class="settings-card">
+                        <h3>General Settings</h3>
+                        <form class="settings-form">
+                            <div class="form-group">
+                                <label>Site Name</label>
+                                <input type="text" value="BakuGo Tour" id="siteName">
+                            </div>
+                            <div class="form-group">
+                                <label>Contact Email</label>
+                                <input type="email" value="info@oldcitytours.az" id="contactEmail">
+                            </div>
+                            <div class="form-group">
+                                <label>Contact Phone</label>
+                                <input type="tel" value="+994 50 444 12 34" id="contactPhone">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Save Settings</button>
+                        </form>
+                    </div>
+
+                    <div class="settings-card">
+                        <h3>Email Settings</h3>
+                        <form class="settings-form">
+                            <div class="form-group">
+                                <label>SMTP Host</label>
+                                <input type="text" placeholder="smtp.gmail.com" id="smtpHost">
+                            </div>
+                            <div class="form-group">
+                                <label>SMTP Port</label>
+                                <input type="number" placeholder="587" id="smtpPort">
+                            </div>
+                            <div class="form-group">
+                                <label>Email Username</label>
+                                <input type="email" placeholder="your-email@gmail.com" id="emailUsername">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Save Email Settings</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Modals -->
+    <!-- Tour Modal -->
+    <div id="tourModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="tourModalTitle">Add New Tour</h2>
+                <button class="modal-close" onclick="closeModal('tourModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="tourForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="tourTitle">Tour Title *</label>
+                            <input type="text" id="tourTitle" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="tourType">Tour Type *</label>
+                            <select id="tourType" required>
+                                <option value="">Select Type</option>
+                                <option value="group">Group Tour</option>
+                                <option value="private">Private Tour</option>
+                                <option value="driver">Driver Only</option>
+                                <option value="package">Tour Package</option>
+                                <option value="walking">Private Walking Tour</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="tourPrice">Price ($) *</label>
+                        <input type="number" id="tourPrice" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="tourActivity">Activity Level</label>
+                        <select id="tourActivity">
+                            <option value="easy">Easy Walk</option>
+                            <option value="moderate">Moderate</option>
+                            <option value="challenging">Challenging</option>
+                            <option value="flexible">Flexible</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="tourGuide">Guide Type</label>
+                        <select id="tourGuide">
+                            <option value="professional">Professional Guide</option>
+                            <option value="historian">Personal Historian</option>
+                            <option value="local">Local Expert</option>
+                            <option value="specialist">Specialist Guide</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Accommodation Section (for multi-day tours) -->
+                    <div class="form-group" id="accommodationSection" style="display: none;">
+                        <label for="tourAccommodation">Accommodation Details</label>
+                        <div class="accommodation-options">
+                            <div class="accommodation-item">
+                                <input type="text" id="tourAccommodation" placeholder="e.g., Hotel 3-4*" class="accommodation-input">
+                                <div class="accommodation-help">
+                                    <small>This will show as "Проживание: [your text]" in package details</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="tourDuration">Duration *</label>
+                            <input type="text" id="tourDuration" placeholder="e.g., 8 hours" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="tourStatus">Status</label>
+                            <select id="tourStatus">
+                                <option value="active">Active</option>
+                                <option value="inactive">Inactive</option>
+                                <option value="draft">Draft</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="tourDescription">Description *</label>
+                        <textarea id="tourDescription" rows="4" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="tourHighlights">Highlights</label>
+                        <textarea id="tourHighlights" rows="3" placeholder="Enter highlights separated by commas"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="tourImage">Main Card Image</label>
+                        <div class="image-upload-section">
+                            <input type="file" id="tourImage" accept="image/*" style="display: none;">
+                            <div class="image-preview" id="imagePreview">
+                                <div class="image-placeholder">
+                                    <i class="fas fa-image"></i>
+                                    <p>Click to select main image</p>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('tourImage').click()">
+                                <i class="fas fa-upload"></i> Select Main Image
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Gallery Images Section -->
+                    <div class="form-group">
+                        <label for="tourGallery">Photo Gallery Images</label>
+                        <div class="gallery-upload-section">
+                            <input type="file" id="tourGallery" accept="image/*" multiple style="display: none;">
+                            <div class="gallery-preview" id="galleryPreview">
+                                <div class="gallery-placeholder">
+                                    <i class="fas fa-images"></i>
+                                    <p>Click to select multiple images</p>
+                                    <small>For Фотогалерея section</small>
+                                </div>
+                            </div>
+                            <div class="gallery-actions">
+                                <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('tourGallery').click()">
+                                    <i class="fas fa-plus"></i> Add Gallery Images
+                                </button>
+                                <button type="button" class="btn btn-danger btn-sm" onclick="clearGallery()" style="display: none;" id="clearGalleryBtn">
+                                    <i class="fas fa-trash"></i> Clear All
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Destinations</label>
+                        <div class="destinations-checkboxes">
+                            <label class="checkbox-label">
+                                <input type="checkbox" value="baku" class="destination-checkbox"> Baku
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" value="gobustan" class="destination-checkbox"> Gobustan
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" value="qabala" class="destination-checkbox"> Qabala
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" value="shamakhi" class="destination-checkbox"> Shamakhi
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" value="quba" class="destination-checkbox"> Quba
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" value="sheki" class="destination-checkbox"> Sheki
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Booking Card Details -->
+                    <div class="form-section">
+                        <h4>Booking Card Details</h4>
+                        
+                        <div class="form-group">
+                            <label for="tourIncluded">What's Included</label>
+                            <div id="includedItems">
+                                <div class="included-item">
+                                    <input type="text" placeholder="e.g., Professional guide" class="included-input">
+                                    <button type="button" class="remove-included" onclick="removeIncludedItem(this)">×</button>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-secondary btn-sm" onclick="addIncludedItem()">
+                                <i class="fas fa-plus"></i> Add Included Item
+                            </button>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="tourNotIncluded">What's Not Included</label>
+                            <div id="notIncludedItems">
+                                <div class="not-included-item">
+                                    <input type="text" placeholder="e.g., Lunch (15-20$)" class="not-included-input">
+                                    <button type="button" class="remove-not-included" onclick="removeNotIncludedItem(this)">×</button>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-secondary btn-sm" onclick="addNotIncludedItem()">
+                                <i class="fas fa-plus"></i> Add Not Included Item
+                            </button>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="tourTransport">Transport Details</label>
+                            <input type="text" id="tourTransport" placeholder="e.g., Comfortable bus, Private car">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="tourStartTimes">Start Times</label>
+                            <div id="startTimes">
+                                <div class="start-time-item">
+                                    <input type="text" placeholder="e.g., 09:00 (morning group)" class="start-time-input">
+                                    <button type="button" class="remove-start-time" onclick="removeStartTime(this)">×</button>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-secondary btn-sm" onclick="addStartTime()">
+                                <i class="fas fa-plus"></i> Add Start Time
+                            </button>
+                        </div>
+
+
+                    <div class="form-group">
+                        <label for="tourCancellation">Cancellation Policy</label>
+                        <input type="text" id="tourCancellation" placeholder="e.g., Free cancellation 24h before">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tourLanguages">Languages</label>
+                        <div class="language-checkboxes">
+                            <label class="checkbox-label">
+                                <input type="checkbox" value="EN" class="language-checkbox"> English (EN)
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" value="RU" class="language-checkbox"> Russian (RU)
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" value="TR" class="language-checkbox"> Turkish (TR)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Transport Details (Itinerary) -->
+                <div class="form-section">
+                    <h4>Transport Details & Route</h4>
+                    
+                    <div class="form-group">
+                        <label>Route Steps</label>
+                        <div id="itinerarySteps">
+                            <div class="itinerary-step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <input type="text" placeholder="Step title (e.g., Departure from Baku)" class="step-title">
+                                    <textarea placeholder="Step description" class="step-description" rows="2"></textarea>
+                                    <input type="text" placeholder="Duration & transport details (e.g., 30 minutes • Transfer included)" class="step-details">
+                                </div>
+                                <button type="button" class="remove-step" onclick="removeItineraryStep(this)">×</button>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-secondary btn-sm" onclick="addItineraryStep()">
+                            <i class="fas fa-plus"></i> Add Route Step
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Meeting and Pickup Information -->
+                <div class="form-section">
+                    <h4>Meeting and Pickup Information</h4>
+                    
+                    <div class="form-group">
+                        <label for="tourMeetingPoint">Meeting Point</label>
+                        <input type="text" id="tourMeetingPoint" placeholder="e.g., Fountain Square, Baku">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tourPickupLocations">Pickup Locations</label>
+                        <div id="pickupLocations">
+                            <div class="pickup-location-item">
+                                <input type="text" placeholder="e.g., Hotel pickup (city center)" class="pickup-location-input">
+                                <button type="button" class="remove-pickup-location" onclick="removePickupLocation(this)">×</button>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-secondary btn-sm" onclick="addPickupLocation()">
+                            <i class="fas fa-plus"></i> Add Pickup Location
+                        </button>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tourMeetingTime">Meeting Time</label>
+                        <input type="text" id="tourMeetingTime" placeholder="e.g., 15 minutes before departure">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tourPickupContact">Pickup Contact</label>
+                        <input type="text" id="tourPickupContact" placeholder="e.g., +994 50 444 12 34 (WhatsApp)">
+                    </div>
+                </div>
+
+                <!-- Contact Information -->
+                <div class="form-section">
+                    <h4>Contact Information</h4>
+                    
+                    <div class="form-group">
+                        <label for="tourPhone">Phone Number</label>
+                        <input type="tel" id="tourPhone" placeholder="+994 50 444 12 34">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tourEmail">Email</label>
+                        <input type="email" id="tourEmail" placeholder="info@oldcitytours.az">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tourWorkingHours">Working Hours</label>
+                        <input type="text" id="tourWorkingHours" placeholder="Daily 9:00-20:00">
+                    </div>
+                </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeModal('tourModal')">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="saveTour()">Save Tour</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Booking Modal -->
+    <div id="bookingModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add New Booking</h2>
+                <button class="modal-close" onclick="closeModal('bookingModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="bookingForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="bookingCustomerName">Customer Name *</label>
+                            <input type="text" id="bookingCustomerName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="bookingCustomerEmail">Email *</label>
+                            <input type="email" id="bookingCustomerEmail" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="bookingCustomerPhone">Phone *</label>
+                            <input type="tel" id="bookingCustomerPhone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="bookingTour">Tour *</label>
+                            <select id="bookingTour" required>
+                                <option value="">Select Tour</option>
+                                <!-- Tours will be populated by JavaScript -->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="bookingDate">Tour Date *</label>
+                            <input type="date" id="bookingDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="bookingTime">Tour Time</label>
+                            <select id="bookingTime">
+                                <option value="09:00">09:00</option>
+                                <option value="10:00">10:00</option>
+                                <option value="11:00">11:00</option>
+                                <option value="12:00">12:00</option>
+                                <option value="13:00">13:00</option>
+                                <option value="14:00">14:00</option>
+                                <option value="15:00">15:00</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="bookingAdults">Adults *</label>
+                            <input type="number" id="bookingAdults" min="1" value="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="bookingChildren">Children</label>
+                            <input type="number" id="bookingChildren" min="0" value="0">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="bookingStatus">Status</label>
+                        <select id="bookingStatus">
+                            <option value="pending">Pending</option>
+                            <option value="confirmed">Confirmed</option>
+                            <option value="completed">Completed</option>
+                            <option value="cancelled">Cancelled</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="bookingNotes">Notes</label>
+                        <textarea id="bookingNotes" rows="3"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeModal('bookingModal')">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="saveBooking()">Save Booking</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Destination Modal -->
+    <div id="destinationModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="destinationModalTitle">Add New Destination</h2>
+                <button class="modal-close" onclick="closeModal('destinationModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="destinationForm">
+                    <input type="hidden" id="destinationId">
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="destinationName">Destination Name *</label>
+                            <input type="text" id="destinationName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="destinationRegion">Region *</label>
+                            <select id="destinationRegion" required>
+                                <option value="">Select Region</option>
+                                <option value="Baku">Baku</option>
+                                <option value="Gobustan">Gobustan</option>
+                                <option value="Qabala">Qabala</option>
+                                <option value="Shamakhi">Shamakhi</option>
+                                <option value="Quba">Quba</option>
+                                <option value="Sheki">Sheki</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="destinationType">Type *</label>
+                            <select id="destinationType" required>
+                                <option value="">Select Type</option>
+                                <option value="Historical">Historical</option>
+                                <option value="Natural">Natural</option>
+                                <option value="Cultural">Cultural</option>
+                                <option value="Adventure">Adventure</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="destinationDistance">Distance from Baku</label>
+                            <input type="text" id="destinationDistance" placeholder="e.g., 60 km">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="destinationDescription">Description *</label>
+                        <textarea id="destinationDescription" rows="3" required></textarea>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="destinationDuration">Visit Duration</label>
+                            <input type="text" id="destinationDuration" placeholder="e.g., 2-3 hours">
+                        </div>
+                        <div class="form-group">
+                            <label for="destinationBestTime">Best Time to Visit</label>
+                            <input type="text" id="destinationBestTime" placeholder="e.g., Year-round">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="destinationImage">Image URL</label>
+                        <input type="url" id="destinationImage" placeholder="https://example.com/image.jpg">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Highlights</label>
+                        <div id="destinationHighlights">
+                            <div class="highlight-item">
+                                <input type="text" placeholder="e.g., Rock Art" class="highlight-input">
+                                <button type="button" class="remove-highlight" onclick="removeDestinationHighlight(this)">×</button>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-secondary btn-sm" onclick="addDestinationHighlight()">
+                            <i class="fas fa-plus"></i> Add Highlight
+                        </button>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Activities</label>
+                        <div id="destinationActivities">
+                            <div class="activity-item">
+                                <input type="text" placeholder="e.g., Museum Visit" class="activity-input">
+                                <button type="button" class="remove-activity" onclick="removeDestinationActivity(this)">×</button>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-secondary btn-sm" onclick="addDestinationActivity()">
+                            <i class="fas fa-plus"></i> Add Activity
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeModal('destinationModal')">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="saveDestination()">Save Destination</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Promo Code Modal -->
+    <div id="promoCodeModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add New Promo Code</h2>
+                <button class="modal-close" onclick="closeModal('promoCodeModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="promoCodeForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="promoCode">Promo Code *</label>
+                            <input type="text" id="promoCode" placeholder="e.g., WELCOME10" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="promoDiscountType">Discount Type *</label>
+                            <select id="promoDiscountType" required>
+                                <option value="">Select Type</option>
+                                <option value="percentage">Percentage</option>
+                                <option value="fixed">Fixed Amount</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="promoDiscountValue">Discount Value *</label>
+                            <input type="number" id="promoDiscountValue" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="promoUsageLimit">Usage Limit</label>
+                            <input type="number" id="promoUsageLimit" placeholder="Leave empty for unlimited">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="promoStartDate">Start Date</label>
+                            <input type="date" id="promoStartDate">
+                        </div>
+                        <div class="form-group">
+                            <label for="promoEndDate">End Date</label>
+                            <input type="date" id="promoEndDate">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="promoDescription">Description</label>
+                        <textarea id="promoDescription" rows="3"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeModal('promoCodeModal')">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="savePromoCode()">Save Promo Code</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Customer Modal -->
+    <div id="customerModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="customerModalTitle">Add New Customer</h2>
+                <button class="modal-close" onclick="closeModal('customerModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="customerForm">
+                    <input type="hidden" id="customerId">
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="customerFirstName">First Name *</label>
+                            <input type="text" id="customerFirstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="customerLastName">Last Name *</label>
+                            <input type="text" id="customerLastName" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="customerEmail">Email *</label>
+                            <input type="email" id="customerEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="customerPhone">Phone *</label>
+                            <input type="tel" id="customerPhone" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="customerCountry">Country</label>
+                            <input type="text" id="customerCountry" placeholder="e.g., Azerbaijan">
+                        </div>
+                        <div class="form-group">
+                            <label for="customerStatus">Status</label>
+                            <select id="customerStatus">
+                                <option value="active">Active</option>
+                                <option value="inactive">Inactive</option>
+                                <option value="blocked">Blocked</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="customerNotes">Notes</label>
+                        <textarea id="customerNotes" rows="3" placeholder="Additional notes about the customer..."></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeModal('customerModal')">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="saveCustomer()">Save Customer</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Dropdown -->
+    <div id="notificationDropdown" class="notification-dropdown">
+        <div class="notification-header">
+            <h3>Notifications</h3>
+            <button onclick="markAllAsRead()">Mark all as read</button>
+        </div>
+        <div class="notification-list">
+            <div class="notification-item unread">
+                <div class="notification-icon">
+                    <i class="fas fa-calendar-check"></i>
+                </div>
+                <div class="notification-content">
+                    <div class="notification-title">New Booking Received</div>
+                    <div class="notification-text">Sarah Johnson booked Gobustan Group Tour</div>
+                    <div class="notification-time">2 minutes ago</div>
+                </div>
+            </div>
+            <div class="notification-item unread">
+                <div class="notification-icon">
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="notification-content">
+                    <div class="notification-title">New Review Posted</div>
+                    <div class="notification-text">Marco Rossi left a 5-star review</div>
+                    <div class="notification-time">1 hour ago</div>
+                </div>
+            </div>
+            <div class="notification-item">
+                <div class="notification-icon">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <div class="notification-content">
+                    <div class="notification-title">Low Inventory Alert</div>
+                    <div class="notification-text">Private Baku Night Tour has only 2 spots left</div>
+                    <div class="notification-time">3 hours ago</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success/Error Messages -->
+    <div id="messageContainer" class="message-container"></div>
+
+    <!-- Custom Confirmation Modal -->
+    <div id="confirmModal" class="modal">
+        <div class="modal-content confirm-modal">
+            <div class="modal-header">
+                <h2 id="confirmTitle">Confirm Action</h2>
+                <button class="modal-close" onclick="closeConfirmModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="confirm-content">
+                    <div class="confirm-message" id="confirmMessage">
+                        Are you sure you want to perform this action?
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeConfirmModal()">Cancel</button>
+                <button type="button" class="btn btn-danger" id="confirmButton" onclick="executeConfirmAction()">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- XSS Protection: DOMPurify and Sanitization Utilities -->
+    <!-- Suppress harmless CSP source map warnings -->
+    <script>
+        (function() {
+            'use strict';
+            const originalWarn = console.warn;
+            console.warn = function(...args) {
+                const msg = String(args[0] || '');
+                if (msg.includes('Content Security Policy') && (msg.includes('source map') || msg.includes('.map'))) {
+                    return; // Suppress harmless CSP source map warnings
+                }
+                originalWarn.apply(console, args);
+            };
+        })();
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js" crossorigin="anonymous"></script>
+    <script src="src/js/utils/sanitize.js"></script>
+    
+    <!-- Admin Panel Modules - ES6 Module System -->
+    <!-- IMPORTANT: Single entry point - all modules are loaded via admin.index.js -->
+    <!-- admin.index.js handles: importing core, applying mixins, and initialization -->
+    <script type="module" src="src/js/pages/admin/admin.index.js"></script>
+</body>
+</html>

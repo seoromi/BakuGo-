@@ -1,0 +1,61 @@
+// ============================================================================
+// ADMIN VARIABLES
+// ============================================================================
+
+// Colors
+$primary-color: #ffffff;
+$primary-dark: #e0e0e0;
+$secondary-color: #1a1a1a;
+$text-primary: #ffffff;
+$text-secondary: #b0b0b0;
+$text-muted: #808080;
+$bg-primary: #222222;
+$bg-secondary: #1a1a1a;
+$border-color: #333333;
+$border-light: #2a2a2a;
+$success-color: #ffffff;
+$danger-color: #ffffff;
+
+// Spacing
+$border-radius: 8px;
+$border-radius-lg: 12px;
+
+// Shadows
+$shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+$shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+$shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.5);
+
+// Dimensions
+$sidebar-width: 280px;
+$header-height: 70px;
+
+// ============================================================================
+// CSS CUSTOM PROPERTIES (for runtime use in compiled CSS)
+// ============================================================================
+
+:root {
+    --primary-color: #{$primary-color};
+    --primary-dark: #{$primary-dark};
+    --secondary-color: #{$secondary-color};
+    --text-primary: #{$text-primary};
+    --text-secondary: #{$text-secondary};
+    --text-muted: #{$text-muted};
+    --bg-primary: #{$bg-primary};
+    --bg-secondary: #{$bg-secondary};
+    --border-color: #{$border-color};
+    --border-light: #{$border-light};
+    --success-color: #{$success-color};
+    --danger-color: #{$danger-color};
+    --border-radius: #{$border-radius};
+    --border-radius-lg: #{$border-radius-lg};
+    --shadow-sm: #{$shadow-sm};
+    --shadow: #{$shadow};
+    --shadow-lg: #{$shadow-lg};
+    --sidebar-width: #{$sidebar-width};
+    --header-height: #{$header-height};
+    
+    // Additional CSS-only variables used in components
+    --info-color: #17a2b8;
+    --warning-color: #ffc107;
+}
+

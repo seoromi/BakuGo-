@@ -1,0 +1,1369 @@
+// ============================================
+// TOUR PAGE STYLES
+// ============================================
+// NOTE: Base styles (resets, typography, container) are imported
+// via entry-points/page.scss from base/ directory
+//
+// PRODUCTION-GRADE HYBRID SYSTEM:
+// ✅ CSS variables (var(--primary-color)) for design tokens
+// ✅ SCSS variables ($variable) ONLY for logic/calculations
+// ❌ NO SCSS variables for design tokens
+
+// ============================================
+// PAGE-SPECIFIC CSS VARIABLE OVERRIDES
+// ============================================
+// Pages can override global CSS variables for page-specific theming
+
+// Page-specific CSS variable overrides can be added here if needed
+// Example: body.tour-page { --container-max-width: 1400px; }
+
+// ============================================
+// ACCESSIBILITY - REDUCED MOTION
+// ============================================
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+// ============================================
+// PAGE-SPECIFIC STYLES
+// ============================================
+// Note: Base typography is imported from base/_typography.scss
+// Only page-specific overrides here
+
+// Override body padding for tour pages with sticky header
+// Tour pages use <header class="header"> (sticky positioning)
+// Main pages use <header> without class (fixed positioning)
+// This selector targets body when it contains header.header
+// No need for body.tour-page class - works automatically
+body:has(header.header) {
+  // Override padding for tour pages (sticky header, no padding needed)
+  padding-top: 0 !important;
+  overflow-x: hidden;
+}
+
+// Note: :has() selector is well-supported in modern browsers (Chrome 105+, Firefox 121+, Safari 15.4+)
+// This targets tour pages specifically because they use <header class="header">
+// Main pages use <header> without class, so they won't be affected
+
+// ============================================
+// HEADER & NAVIGATION
+// ============================================
+
+.header {
+  background: var(--white);
+  padding: 1.5rem 2.5rem;
+  box-shadow: var(--shadow);
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky, 100);
+  margin-top: 0;
+  display: flex;
+  align-items: center;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--secondary-color);
+  text-decoration: none;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 500;
+  transition: var(--transition);
+
+  &:hover {
+    color: var(--secondary-color);
+  }
+}
+
+// ============================================
+// HERO SECTION
+// ============================================
+
+.hero {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), var(--hero-bg);
+  background-size: cover;
+  background-position: center;
+  height: 50vh;
+  display: flex;
+  align-items: center;
+  color: var(--white);
+  position: relative;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero h1 {
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  margin-bottom: 1rem;
+  font-weight: 700;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  line-height: 1.2;
+}
+
+.hero-price {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--secondary-color);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+// ============================================
+// TOUR BADGES
+// ============================================
+
+.tour-badges {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.tour-badge {
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--primary-color);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  backdrop-filter: blur(10px);
+}
+
+.duration-badge {
+  background: linear-gradient(135deg, var(--secondary-color), #ff9f1a);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 25px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+// ============================================
+// GALLERY SECTION
+// ============================================
+
+.gallery-section {
+  background: var(--white);
+  padding: 3rem 0;
+  box-shadow: var(--shadow);
+
+  .section-title {
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    text-align: center;
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: var(--secondary-color);
+      border-radius: 2px;
+    }
+  }
+}
+
+// ============================================
+// MAIN CONTENT & LAYOUT
+// ============================================
+
+.main-content {
+  padding: 4rem 0;
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 4rem;
+  margin-top: 2rem;
+}
+
+.content-section {
+  background: var(--white);
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 2rem;
+}
+
+.section-title {
+  color: var(--primary-color);
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background: var(--secondary-color);
+    border-radius: 2px;
+  }
+}
+
+// ============================================
+// TOUR DETAILS
+// ============================================
+
+.tour-details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 1rem;
+  background: linear-gradient(135deg, #f8fdff, #fff8f0);
+  border-radius: 10px;
+  border: 1px solid rgba(239, 134, 9, 0.1);
+}
+
+.detail-icon {
+  width: 40px;
+  height: 40px;
+  background: var(--secondary-color);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.2rem;
+}
+
+.detail-text {
+  flex: 1;
+}
+
+.detail-label {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.detail-value {
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+// ============================================
+// HIGHLIGHTS
+// ============================================
+
+.highlights-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.highlight-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border-left: 4px solid var(--secondary-color);
+}
+
+.highlight-icon {
+  color: var(--secondary-color);
+  font-size: 1.2rem;
+  margin-top: 2px;
+}
+
+// ============================================
+// ITINERARY
+// ============================================
+
+.itinerary-item {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #eee;
+
+  &:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+}
+
+.itinerary-number {
+  width: 40px;
+  height: 40px;
+  background: var(--secondary-color);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.itinerary-content h4 {
+  color: var(--primary-color);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+// ============================================
+// SIDEBAR & BOOKING
+// ============================================
+
+.sidebar {
+  position: sticky;
+  top: 80px;
+  height: fit-content;
+}
+
+.booking-card {
+  background: var(--white);
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  text-align: center;
+  max-height: 900px;
+  overflow-y: auto;
+}
+
+.price-section {
+  margin-bottom: 1.5rem;
+}
+
+.price {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--secondary-color);
+  line-height: 1;
+}
+
+.price-note {
+  color: var(--text-light);
+  font-size: 0.85rem;
+  margin-top: 0.3rem;
+}
+
+.book-btn {
+  width: 100%;
+  background: linear-gradient(135deg, var(--secondary-color), #ff9f1a);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  margin-bottom: 1rem;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(239, 134, 9, 0.4);
+  }
+}
+
+.contact-info {
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+  text-align: left;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 0.6rem;
+  color: var(--text-light);
+  font-size: 0.9rem;
+
+  i {
+    color: var(--secondary-color);
+    width: 16px;
+  }
+}
+
+// ============================================
+// FLOATING BOOKING CARD (Mobile)
+// ============================================
+
+.floating-booking-card {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--white);
+  padding: 1rem 1.5rem;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  max-width: calc(100vw - 40px);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(239, 134, 9, 0.2);
+  transition: all 0.3s ease;
+
+  &.show {
+    display: block;
+    animation: slideUpFadeIn 0.3s ease;
+  }
+
+  &.hide {
+    animation: slideDownFadeOut 0.3s ease;
+  }
+}
+
+.floating-booking-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.floating-price {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--secondary-color);
+}
+
+.floating-book-btn {
+  background: linear-gradient(135deg, var(--secondary-color), #ff9f1a);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  white-space: nowrap;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(239, 134, 9, 0.4);
+  }
+}
+
+@keyframes slideUpFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+@keyframes slideDownFadeOut {
+  from {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-50%) translateY(100%);
+  }
+}
+
+// ============================================
+// GALLERY STYLES
+// ============================================
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.gallery-item {
+  aspect-ratio: 4/3;
+  background-size: cover;
+  background-position: center;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(2, 58, 95, 0.7), rgba(239, 134, 9, 0.7));
+    opacity: 0;
+    transition: var(--transition);
+    z-index: 1;
+  }
+
+  &::after {
+    content: '\f00e';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    font-size: 2rem;
+    color: white;
+    z-index: 2;
+    transition: var(--transition);
+  }
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+
+    &::before {
+      opacity: 1;
+    }
+
+    &::after {
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+}
+
+.more-images-card {
+  background-size: cover;
+  background-position: center;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(2, 58, 95, 0.7), rgba(239, 134, 9, 0.7));
+    opacity: 0.8;
+    transition: var(--transition);
+  }
+
+  &::after {
+    content: '\f00e';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    font-size: 2rem;
+    color: white;
+    z-index: 2;
+    transition: var(--transition);
+  }
+
+  &:hover {
+    &::before {
+      opacity: 0.9;
+    }
+
+    &::after {
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+}
+
+.more-count {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  position: relative;
+  z-index: 3;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.more-text {
+  font-size: 0.9rem;
+  font-weight: 500;
+  opacity: 0.9;
+  position: relative;
+  z-index: 3;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+// ============================================
+// TOUR-SPECIFIC GALLERY IMAGES
+// NOTE: Consider moving to data-attributes or backend config
+// for better maintainability in production
+// ============================================
+
+// Colored mountains
+.daily-tour-candymountains .gallery-item {
+  &:nth-child(1) { background-image: url("../../src/assets/img/tour-images/khizi/candy-mountains/candymountains.jpg"); }
+  &:nth-child(2) { background-image: url("../../src/assets/img/tour-images/khizi/candy-mountains/candy-mountains2.jpg"); }
+  &:nth-child(3) { background-image: url("../../src/assets/img/tour-images/khizi/candy-mountains/candymountains3.jpg"); }
+  &:nth-child(4) { background-image: url("../../src/assets/img/tour-images/Quba/five-finger/five-finger-mountain.jpg"); }
+}
+
+// Fireland
+.daily-tour-fire .gallery-item {
+  &:nth-child(1) { background-image: url("../../src/assets/img/tour-images/absheron/fire-Temple/fireland.jpg"); }
+  &:nth-child(2) { background-image: url("../../src/assets/img/tour-images/absheron/fire-Temple/fire-love.jpg"); }
+  &:nth-child(3) { background-image: url("../../src/assets/img/tour-images/absheron/burning-mountain/burning-mountain.jpg"); }
+  &:nth-child(4) { background-image: url("../../src/assets/img/tour-images/absheron/fire-Temple/fire-temple-2.jpg"); }
+}
+
+// Gobustan & mud-volcanoes-fire-temple
+.daily-gobustan-tour .gallery-item {
+  &:nth-child(1) { background-image: url("../../src/assets/img/tour-images/qobustan/mud-volcanoes-5.jpg"); }
+  &:nth-child(2) { background-image: url("../../src/assets/img/tour-images/absheron/fire-Temple/fire-temple-2.jpg"); }
+  &:nth-child(3) { background-image: url("../../src/assets/img/tour-images/qobustan/qobustan-1.jpg"); }
+  &:nth-child(4) { background-image: url("../../src/assets/img/tour-images/qobustan/mud-volcanoes-2.jpg"); }
+}
+
+// Qobustan & mudvolcanoes-group
+.daily-gobustan-tour-vulcanoes .gallery-item {
+  &:nth-child(1) { background-image: url("../../src/assets/img/tour-images/qobustan/mud-volcanoes-2.jpg"); }
+  &:nth-child(2) { background-image: url("../../src/assets/img/tour-images/qobustan/qobustan-1.jpg"); }
+  &:nth-child(3) { background-image: url("../../src/assets/img/tour-images/qobustan/qobustan-2.jpg"); }
+  &:nth-child(4) { background-image: url("../../src/assets/img/tour-images/qobustan/mud-volcanoes-5.jpg"); }
+}
+
+// Baku Night
+.daily-baku-night-tour .gallery-item {
+  &:nth-child(1) { background-image: url("../../src/assets/img/tour-images/baku/city/baku-3.jpg"); }
+  &:nth-child(2) { background-image: url("../../src/assets/img/tour-images/baku/city/baku-6.jpg"); }
+  &:nth-child(3) { background-image: url("../../src/assets/img/tour-images/baku/city/heydar-aliev-center-3.jpg"); }
+  &:nth-child(4) { background-image: url("../../src/assets/img/tour-images/baku/city/heydar-aliev-center-5.jpg"); }
+}
+
+// Icerisheher
+.daily-icerisheher .gallery-item {
+  &:nth-child(1) { background-image: url("../../src/assets/img/tour-images/baku/old-city/icerisheher-1.jpg"); }
+  &:nth-child(2) { background-image: url("../../src/assets/img/tour-images/baku/old-city/icerisheher-2.jpg"); }
+  &:nth-child(3) { background-image: url("../../src/assets/img/tour-images/baku/old-city/icerisheher-3.jpg"); }
+  &:nth-child(4) { background-image: url("../../src/assets/img/tour-images/baku/old-city/icerisheher-5.jpg"); }
+}
+
+// Lankaran Astara
+.daily-lankaran-astara .gallery-item {
+  &:nth-child(1) { background-image: url("../../src/assets/img/tour-images/Lankaran/lankaran-astara-1.jpg"); }
+  &:nth-child(2) { background-image: url("../../src/assets/img/tour-images/Lankaran/lankaran-astara-2.jpg"); }
+  &:nth-child(3) { background-image: url("../../src/assets/img/tour-images/Lankaran/lankaran-astara-4.jpg"); }
+  &:nth-child(4) { background-image: url("../../src/assets/img/tour-images/Lankaran/lankaran-astara-5.jpg"); }
+}
+
+// Shahdag
+.daily-mountain-shahdag .gallery-item {
+  &:nth-child(1) { background-image: url("../../src/assets/img/tour-images/baku/shahdag/shahdag-16.jpg"); }
+  &:nth-child(2) { background-image: url("../../src/assets/img/tour-images/baku/shahdag/shahdag-4.jpg"); }
+  &:nth-child(3) { background-image: url("../../src/assets/img/tour-images/baku/shahdag/shahdag-5.jpg"); }
+  &:nth-child(4) { background-image: url("../../src/assets/img/tour-images/baku/shahdag/shahdag-6.jpg"); }
+}
+
+// Qabala Shamahi
+.daily-qabala-shamahi .gallery-item {
+  &:nth-child(1) { background-image: url("../../src/assets/img/tour-images/qabala-shamakhi/qabala-shamahi-1.jpg"); }
+  &:nth-child(2) { background-image: url("../../src/assets/img/tour-images/qabala-shamakhi/qabala-shamahi-2.jpg"); }
+  &:nth-child(3) { background-image: url("../../src/assets/img/tour-images/qabala-shamakhi/qabala-shamahi-3.jpg"); }
+  &:nth-child(4) { background-image: url("../../src/assets/img/tour-images/qabala-shamakhi/qabala-shamahi-4.jpg"); }
+}
+
+// Island
+.daily-tour-island .gallery-item {
+  &:nth-child(1) { background-image: url("../../src/assets/img/tour-images/baku/island/island-1.jpg"); }
+  &:nth-child(2) { background-image: url("../../src/assets/img/tour-images/baku/island/island-5.jpg"); }
+  &:nth-child(3) { background-image: url("../../src/assets/img/tour-images/baku/island/island-3.jpg"); }
+  &:nth-child(4) { background-image: url("../../src/assets/img/tour-images/baku/island/island-4.jpg"); }
+}
+
+// Only driver qabala-shamahi-khinalig
+.onlydriver-qabala-shamahi-xinalig .gallery-item {
+  &:nth-child(1) { background-image: url("../../src/assets/img/tour-images/khinalig/xinalig-1.jpg"); }
+  &:nth-child(2) { background-image: url("../../src/assets/img/tour-images/khinalig/xinalig-2.jpg"); }
+  &:nth-child(3) { background-image: url("../../src/assets/img/tour-images/khizi/candy-mountains/candymountains.jpg"); }
+  &:nth-child(4) { background-image: url("../../src/assets/img/tour-images/khinalig/xinalig-4.jpg"); }
+}
+
+// Only driver qabala-shamahi
+.onlydriver-qabala-shamahi .gallery-item {
+  &:nth-child(1) { background-image: url("../../src/assets/img/tour-images/qabala-shamakhi/qabala-shamahi-1.jpg"); }
+  &:nth-child(2) { background-image: url("../../src/assets/img/tour-images/qabala-shamakhi/qabala-shamahi-14.jpg"); }
+  &:nth-child(3) { background-image: url("../../src/assets/img/tour-images/qabala-shamakhi/qabala-shamahi-16.jpg"); }
+  &:nth-child(4) { background-image: url("../../src/assets/img/tour-images/qabala-shamakhi/qabala-shamahi-6.jpg"); }
+}
+
+// Only driver qobustan & fire temple
+.onlydriver-qobustan-fire-temple .gallery-item {
+  &:nth-child(1) { background-image: url("../../src/assets/img/tour-images/absheron/fire-Temple/fire-2.jpg"); }
+  &:nth-child(2) { background-image: url("../../src/assets/img/tour-images/qobustan/mud-volcanoes-7.jpg"); }
+  &:nth-child(3) { background-image: url("../../src/assets/img/tour-images/qobustan/qobustan-1.jpg"); }
+  &:nth-child(4) { background-image: url("../../src/assets/img/tour-images/absheron/fire-Temple/fire-temple-5.jpg"); }
+}
+
+// Only driver quba-xinalig-candymountains
+.driver-quba-xinalig-candy .gallery-item {
+  &:nth-child(1) { background-image: url("../../src/assets/img/tour-images/khizi/candy-mountains/candymountains.jpg"); }
+  &:nth-child(2) { background-image: url("../../src/assets/img/tour-images/khizi/candy-mountains/candymountains-8.jpg"); }
+  &:nth-child(3) { background-image: url("../../src/assets/img/tour-images/khizi/candy-mountains/candymountains-9.png"); }
+  &:nth-child(4) { background-image: url("../../src/assets/img/tour-images/baku/city/oil-1.jpeg"); }
+}
+
+// Tour package 2 night 3 days
+.tourpackage-2nights-3days .gallery-item {
+  &:nth-child(1) { background-image: url("../../src/assets/img/tour-images/baku/city/baku-1.jpg"); }
+  &:nth-child(2) { background-image: url("../../src/assets/img/tour-images/baku/city/baku-3.jpg"); }
+  &:nth-child(3) { background-image: url("../../src/assets/img/tour-images/absheron/fire-Temple/fire-2.jpg"); }
+  &:nth-child(4) { background-image: url("../../src/assets/img/tour-images/baku/city/baku-11.jpg"); }
+}
+
+// Tour package 3 night 4 days
+.tourpackage-3nights-4days .gallery-item {
+  &:nth-child(1) { background-image: url("../../src/assets/img/tour-images/baku/city/baku-3.jpg"); }
+  &:nth-child(2) { background-image: url("../../src/assets/img/tour-images/baku/city/heydar-aliev-center-3.jpg"); }
+  &:nth-child(3) { background-image: url("../../src/assets/img/tour-images/khizi/candy-mountains/candymountains-9.png"); }
+  &:nth-child(4) { background-image: url("../../src/assets/img/tour-images/khizi/candy-mountains/candymountains-8.jpg"); }
+}
+
+// Tour package 4 night 5 days
+.tourpackage-4nights-5days .gallery-item {
+  &:nth-child(1) { background-image: url("../../src/assets/img/tour-images/baku/city/baku-3.jpg"); }
+  &:nth-child(2) { background-image: url("../../src/assets/img/tour-images/absheron/fire-Temple/fire-love.jpg"); }
+  &:nth-child(3) { background-image: url("../../src/assets/img/tour-images/qabala-shamakhi/qabala-shamahi-4.jpg"); }
+  &:nth-child(4) { background-image: url("../../src/assets/img/tour-images/baku/old-city/icerisheher-1.jpg"); }
+}
+
+// Tour package 5 night 6 days
+.tourpackage-5nights-6days .gallery-item {
+  &:nth-child(1) { background-image: url("../../src/assets/img/tour-images/baku/city/baku-1.jpg"); }
+  &:nth-child(2) { background-image: url("../../src/assets/img/tour-images/khinalig/xinalig-1.jpg"); }
+  &:nth-child(3) { background-image: url("../../src/assets/img/tour-images/baku/city/baku-22.jpg"); }
+  &:nth-child(4) { background-image: url("../../src/assets/img/tour-images/khinalig/xinalig-2.jpg"); }
+}
+
+// Tour package 6 night 7 days
+.tourpackage-6nights-7days .gallery-item {
+  &:nth-child(1) { background-image: url("../../src/assets/img/tour-images/baku/city/baku-1.jpg"); }
+  &:nth-child(2) { background-image: url("../../src/assets/img/tour-images/qabala-shamakhi/qabala-shamahi-7.jpg"); }
+  &:nth-child(3) { background-image: url("../../src/assets/img/tour-images/baku/city/baku-3.jpg"); }
+  &:nth-child(4) { background-image: url("../../src/assets/img/tour-images/baku/old-city/icerisheher-5.jpg"); }
+}
+
+// Tour package 7 night 8 days
+.tourpackage-7nights-8days .gallery-item {
+  &:nth-child(1) { background-image: url("../../src/assets/img/tour-images/baku/city/baku-6.jpg"); }
+  &:nth-child(2) { background-image: url("../../src/assets/img/tour-images/baku/city/baku-5.jpg"); }
+  &:nth-child(3) { background-image: url("../../src/assets/img/tour-images/qabala-shamakhi/qabala-shamahi-1.jpg"); }
+  &:nth-child(4) { background-image: url("../../src/assets/img/tour-images/baku/old-city/icerisheher-1.jpg"); }
+}
+
+// Tour package 8 night 9 days
+.tourpackage-8nights-9days .gallery-item {
+  &:nth-child(1) { background-image: url("../../src/assets/img/tour-images/baku/city/baku-2.jpg"); }
+  &:nth-child(2) { background-image: url("../../src/assets/img/tour-images/baku/city/baku-5.jpg"); }
+  &:nth-child(3) { background-image: url("../../src/assets/img/tour-images/Lankaran/lankaran-astara-5.jpg"); }
+  &:nth-child(4) { background-image: url("../../src/assets/img/tour-images/Lankaran/lankaran-astara-2.jpg"); }
+}
+
+// Private tours - Baku Night
+.private-baku-night .gallery-item {
+  &:nth-child(1) { background-image: url("../../src/assets/img/tour-images/baku/city/baku-1.jpg"); }
+  &:nth-child(2) { background-image: url("../../src/assets/img/tour-images/baku/city/baku-5.jpg"); }
+  &:nth-child(3) { background-image: url("../../src/assets/img/tour-images/baku/city/baku-21.jpg"); }
+  &:nth-child(4) { background-image: url("../../src/assets/img/tour-images/baku/city/baku-18.jpg"); }
+}
+
+// Gobustan-Mountain-FireTemple
+.private-gobustan-mountain .gallery-item {
+  &:nth-child(1) { background-image: url("../../src/assets/img/tour-images/qobustan/qobustan-7.jpg"); }
+  &:nth-child(2) { background-image: url("../../src/assets/img/tour-images/absheron/burning-mountain/burning-mountain.jpg"); }
+  &:nth-child(3) { background-image: url("../../src/assets/img/tour-images/absheron/fire-Temple/fire-love.jpg"); }
+  &:nth-child(4) { background-image: url("../../src/assets/img/tour-images/qobustan/mud-volcanoes-4.jpg"); }
+}
+
+// Independent
+.private-independent-multiday .gallery-item {
+  &:nth-child(1) { background-image: url("../../src/assets/img/tour-images/qabala-shamakhi/qabala-shamahi-1.jpg"); }
+  &:nth-child(2) { background-image: url("../../src/assets/img/tour-images/qabala-shamakhi/qabala-shamahi-16.jpg"); }
+  &:nth-child(3) { background-image: url("../../src/assets/img/tour-images/qabala-shamakhi/mecid-1.jpg"); }
+  &:nth-child(4) { background-image: url("../../src/assets/img/tour-images/lakhic/lahic-1.jpg"); }
+}
+
+// Icerisheher
+.private-oldcity-tour .gallery-item {
+  &:nth-child(1) { background-image: url("../../src/assets/img/tour-images/baku/old-city/icerisheher-7.jpg"); }
+  &:nth-child(2) { background-image: url("../../src/assets/img/tour-images/baku/old-city/icerisheher-4.jpg"); }
+  &:nth-child(3) { background-image: url("../../src/assets/img/tour-images/baku/old-city/icerisheher-11.jpg"); }
+  &:nth-child(4) { background-image: url("../../src/assets/img/tour-images/baku/old-city/icerisheher-13.jpg"); }
+}
+
+// Shamahi-Lahic
+.private-shamahi-lahic .gallery-item {
+  &:nth-child(1) { background-image: url("../../src/assets/img/tour-images/lakhic/lahic-12.jpg"); }
+  &:nth-child(2) { background-image: url("../../src/assets/img/tour-images/lakhic/lahic-14.jpg"); }
+  &:nth-child(3) { background-image: url("../../src/assets/img/tour-images/lakhic/lahic-19.jpg"); }
+  &:nth-child(4) { background-image: url("../../src/assets/img/tour-images/lakhic/lahic-15.jpg"); }
+}
+
+// Shamahi-Xinalig
+.private-shamahi-xinalig .gallery-item {
+  &:nth-child(1) { background-image: url("../../src/assets/img/tour-images/khinalig/xinalig-1.jpg"); }
+  &:nth-child(2) { background-image: url("../../src/assets/img/tour-images/khinalig/xinalig-3.jpg"); }
+  &:nth-child(3) { background-image: url("../../src/assets/img/tour-images/Quba/quba-3.jpg"); }
+  &:nth-child(4) { background-image: url("../../src/assets/img/tour-images/khizi/candy-mountains/candymountains-8.jpg"); }
+}
+
+// ============================================
+// SLIDESHOW MODAL
+// ============================================
+
+.slideshow-modal {
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.95);
+  animation: fadeIn 0.3s ease;
+  touch-action: manipulation;
+
+  &.active {
+    display: block;
+  }
+}
+
+.slideshow-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slide {
+  display: none;
+  width: 90%;
+  max-width: 800px;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: 8px;
+  animation: slideIn 0.5s ease;
+
+  &.active {
+    display: block;
+  }
+}
+
+.slide-counter {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-weight: 500;
+}
+
+.close-slideshow {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  color: white;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: var(--transition);
+  z-index: 3;
+
+  &:hover {
+    color: var(--secondary-color);
+    transform: scale(1.1);
+  }
+}
+
+.prev,
+.next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: none;
+  font-size: 24px;
+  padding: 15px 20px;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: var(--transition);
+  backdrop-filter: blur(10px);
+
+  &:hover {
+    background: rgba(239, 134, 9, 0.8);
+    transform: translateY(-50%) scale(1.1);
+  }
+}
+
+.prev {
+  left: 30px;
+}
+
+.next {
+  right: 30px;
+}
+
+.thumbnail-strip {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 15px;
+  border-radius: 25px;
+  max-width: 90%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  cursor: grab;
+  scroll-behavior: smooth;
+  user-select: none;
+  -webkit-overflow-scrolling: touch;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  &:active {
+    cursor: grabbing;
+  }
+}
+
+.thumbnail {
+  width: 60px;
+  height: 45px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 6px;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  flex-shrink: 0;
+  pointer-events: auto;
+  -webkit-user-drag: none;
+
+  &:hover,
+  &.active {
+    opacity: 1;
+    border-color: var(--secondary-color);
+    transform: scale(1.05);
+  }
+
+  &.active {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(239, 134, 9, 0.5);
+  }
+}
+
+// ============================================
+// REVIEWS SECTION
+// ============================================
+
+.reviews-section {
+  background: var(--white);
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 2rem;
+}
+
+.rating-summary {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #f8fdff, #fff8f0);
+  border-radius: 10px;
+}
+
+.rating-score {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--secondary-color);
+}
+
+.rating-info {
+  h3 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+  }
+}
+
+.stars {
+  color: #ffd700;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.review-item {
+  padding: 1.5rem;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.reviewer-name {
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-bottom: 0.2rem;
+}
+
+.review-date {
+  font-size: 0.9rem;
+  color: var(--text-light);
+}
+
+.review-stars {
+  color: #ffd700;
+}
+
+.review-text {
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+// ============================================
+// RECOMMENDED TOURS
+// ============================================
+
+.recommended-tours {
+  background: var(--bg-light);
+  padding: 4rem 0;
+  margin-top: 4rem;
+}
+
+.tours-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.tour-card {
+  background: var(--white);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+    text-decoration: none;
+    color: inherit;
+  }
+}
+
+.tour-card-image {
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.tour-card-badge {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--primary-color);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.tour-card-duration {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: linear-gradient(135deg, var(--secondary-color), #ff9f1a);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.tour-card-content {
+  padding: 1.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.tour-card {
+  h3 {
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+  }
+
+  p {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    flex: 1;
+    margin-bottom: 1.5rem;
+  }
+}
+
+.tour-card-price {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--secondary-color);
+  text-align: center;
+  padding: 12px 0;
+  border-top: 1px solid #f0f0f0;
+  background: linear-gradient(135deg, rgba(239, 134, 9, 0.05), rgba(15, 158, 198, 0.05));
+  margin: 0 -1.5rem -1.5rem;
+  border-radius: 0 0 var(--border-radius) var(--border-radius);
+}
+
+// ============================================
+// ANIMATION KEYFRAMES
+// ============================================
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+// ============================================
+// RESPONSIVE DESIGN
+// ============================================
+
+// Consolidated mobile sidebar reset mixin
+@mixin reset-sidebar-mobile {
+  position: static !important;
+  top: auto !important;
+  height: auto !important;
+}
+
+@media (max-width: 768px) {
+  .content-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    gap: 2rem;
+  }
+
+  .sidebar {
+    @include reset-sidebar-mobile;
+    grid-row: 1;
+    margin-top: 0.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .left-content {
+    grid-row: 2;
+  }
+
+  .hero h1 {
+    font-size: 1.5rem;
+  }
+
+  .content-section {
+    padding: 1.5rem;
+  }
+
+  .tour-details {
+    grid-template-columns: 1fr;
+  }
+
+  .highlights-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .floating-booking-card {
+    display: block;
+  }
+
+  .tours-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .rating-summary {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .gallery {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
+
+    &-item:nth-child(3) {
+      grid-column: 1 / -1;
+    }
+  }
+
+  .more-images-card {
+    grid-column: 1 / -1;
+  }
+
+  .prev,
+  .next {
+    font-size: 18px;
+    padding: 10px 15px;
+  }
+
+  .prev {
+    left: 10px;
+  }
+
+  .next {
+    right: 10px;
+  }
+
+  .thumbnail-strip {
+    bottom: 20px;
+    padding: 10px;
+    max-width: 95%;
+  }
+
+  .thumbnail {
+    width: 50px;
+    height: 35px;
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery {
+    grid-template-columns: 1fr 1fr;
+
+    &-item:nth-child(3) {
+      grid-column: span 1;
+    }
+  }
+
+  .more-images-card {
+    grid-column: span 1;
+  }
+
+  .sidebar {
+    @include reset-sidebar-mobile;
+    margin-top: -4rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .floating-booking-card {
+    display: block;
+    bottom: 15px;
+    padding: 0.8rem 1.2rem;
+  }
+
+  .floating-booking-content {
+    gap: 0.8rem;
+  }
+
+  .floating-price {
+    font-size: 1.1rem;
+  }
+
+  .floating-book-btn {
+    padding: 8px 16px;
+    font-size: 0.85rem;
+  }
+
+  .thumbnail-strip {
+    bottom: 15px;
+    padding: 8px;
+    gap: 8px;
+  }
+
+  .thumbnail {
+    width: 45px;
+    height: 32px;
+  }
+}

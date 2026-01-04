@@ -1,0 +1,17 @@
+// =====================================================
+// DESTINATION.SCSS - Destination Page Entry Point
+// Compiles to: css/destination.css
+// Used in: destination detail pages (ateshgah.html, gobustan.html, etc.)
+// =====================================================
+
+// Abstracts (variables and mixins)
+@import '../abstracts/variables';
+@import '../abstracts/mixins';
+
+// Base (resets and typography)
+@import '../base/resets';
+@import '../base/typography';
+
+// Pages (destination-specific styles)
+@import '../pages/destination';
+

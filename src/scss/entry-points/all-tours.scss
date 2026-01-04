@@ -1,0 +1,25 @@
+// =====================================================
+// ALL-TOURS.SCSS - All Tours Page Entry Point
+// Compiles to: css/all-tours.css
+// Used in: all-tours.html
+// =====================================================
+
+// Abstracts
+@import '../abstracts/variables';
+@import '../abstracts/mixins';
+@import '../abstracts/functions';
+
+// Base
+@import '../base/resets';
+@import '../base/typography';
+
+// Layout
+@import '../layout/nav';
+
+// Pages
+@import '../pages/all-tours';
+
+// Responsive
+@import '../responsive/responsive';
+
+

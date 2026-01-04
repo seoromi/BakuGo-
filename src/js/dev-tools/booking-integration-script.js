@@ -1,0 +1,237 @@
+// Batch script to add booking modal to all tour pages
+// This script will be used to add the booking modal HTML and JavaScript to all tour pages
+
+const bookingModalHTML = `
+    <!-- Enhanced Booking Modal -->
+    <div id="bookingModal" class="booking-modal" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
+        <div class="booking-modal-content">
+            <button class="booking-modal-close" id="modalClose" aria-label="Закрыть модальное окно">&times;</button>
+            
+            <div class="booking-header">
+                <h2 id="modal-title">Бронирование тура</h2>
+                <div class="tour-info">
+                    <h3 id="selectedTour"></h3>
+                    <p id="selectedPrice"></p>
+                </div>
+            </div>
+
+            <div class="booking-body">
+                <div class="booking-left">
+                    <form id="bookingForm" novalidate>
+                        <!-- Personal Information -->
+                        <div class="form-section">
+                            <h4>Личная информация</h4>
+                            <div class="form-group">
+                                <label for="customerName">Имя и фамилия *</label>
+                                <input type="text" id="customerName" name="customerName" required
+                                    placeholder="Введите ваше полное имя" aria-describedby="name-error">
+                                <div class="error-message" id="name-error"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="customerEmail">Email *</label>
+                                <input type="email" id="customerEmail" name="customerEmail" required
+                                    placeholder="example@email.com" aria-describedby="email-error">
+                                <div class="error-message" id="email-error"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="customerPhone">Телефон *</label>
+                                <input type="tel" id="customerPhone" name="customerPhone" required
+                                    placeholder="+994 50 123 45 67" aria-describedby="phone-error">
+                                <div class="error-message" id="phone-error"></div>
+                            </div>
+                        </div>
+
+                        <!-- Tour Details -->
+                        <div class="form-section">
+                            <h4>Детали тура</h4>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="tourDate">Дата тура *</label>
+                                    <input type="date" id="tourDate" name="tourDate" required
+                                        aria-describedby="tour-date-error">
+                                    <div class="error-message" id="tour-date-error"></div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="tourTime">Время начала</label>
+                                    <select id="tourTime" name="tourTime">
+                                        <option value="09:00">09:00</option>
+                                        <option value="10:00">10:00</option>
+                                        <option value="11:00">11:00</option>
+                                        <option value="12:00">12:00</option>
+                                        <option value="13:00">13:00</option>
+                                        <option value="14:00">14:00</option>
+                                        <option value="15:00">15:00</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ticket Selection -->
+                        <div class="form-section">
+                            <h4>Выберите билеты</h4>
+                            <div class="ticket-selector">
+                                <div class="ticket-type">
+                                    <div class="ticket-info">
+                                        <h5>Взрослые</h5>
+                                        <p class="ticket-price">$<span id="adultPrice">49</span></p>
+                                    </div>
+                                    <div class="ticket-controls">
+                                        <button type="button" class="ticket-btn minus" data-type="adult">-</button>
+                                        <span class="ticket-count" id="adultCount">1</span>
+                                        <button type="button" class="ticket-btn plus" data-type="adult">+</button>
+                                    </div>
+                                </div>
+
+                                <div class="ticket-type">
+                                    <div class="ticket-info">
+                                        <h5>Дети (до 12 лет)</h5>
+                                        <p class="ticket-price">$<span id="childPrice">25</span></p>
+                                    </div>
+                                    <div class="ticket-controls">
+                                        <button type="button" class="ticket-btn minus" data-type="child">-</button>
+                                        <span class="ticket-count" id="childCount">0</span>
+                                        <button type="button" class="ticket-btn plus" data-type="child">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Promo Code -->
+                        <div class="form-section">
+                            <h4>Промокод</h4>
+                            <div class="promo-section">
+                                <div class="form-group">
+                                    <input type="text" id="promoCode" name="promoCode" placeholder="Введите промокод">
+                                    <button type="button" id="applyPromo" class="promo-btn">Применить</button>
+                                </div>
+                                <div id="promoMessage" class="promo-message"></div>
+                            </div>
+                        </div>
+
+                        <!-- Special Requests -->
+                        <div class="form-section">
+                            <h4>Особые пожелания</h4>
+                            <div class="form-group">
+                                <textarea id="specialRequests" name="specialRequests" rows="3"
+                                    placeholder="Расскажите о ваших особых пожеланиях или требованиях..."></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Booking Summary -->
+                <div class="booking-right">
+                    <div class="booking-summary">
+                        <h4>Сводка бронирования</h4>
+                        
+                        <div class="summary-item">
+                            <span>Взрослые x<span id="summaryAdultCount">1</span></span>
+                            <span>$<span id="summaryAdultTotal">49</span></span>
+                        </div>
+                        
+                        <div class="summary-item" id="childSummaryItem" style="display: none;">
+                            <span>Дети x<span id="summaryChildCount">0</span></span>
+                            <span>$<span id="summaryChildTotal">0</span></span>
+                        </div>
+
+                        <div class="summary-item" id="promoSummaryItem" style="display: none;">
+                            <span>Скидка</span>
+                            <span class="discount">-$<span id="promoDiscount">0</span></span>
+                        </div>
+
+                        <div class="summary-divider"></div>
+                        
+                        <div class="summary-total">
+                            <span>Итого</span>
+                            <span class="total-price">$<span id="totalPrice">49</span></span>
+                        </div>
+                    </div>
+
+                    <div class="booking-actions">
+                        <button type="button" id="cancelBooking" class="btn-cancel">
+                            Отмена
+                        </button>
+                        <button type="submit" id="submitBooking" class="btn-book">
+                            Забронировать тур
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Popup -->
+    <div id="successPopup" class="success-popup" role="dialog" aria-labelledby="success-title" aria-hidden="true">
+        <div class="success-popup-content">
+            <div class="success-icon">🎉</div>
+            <h2 id="success-title">Бронирование отправлено!</h2>
+            <p>Ваша заявка успешно отправлена. Мы получили всю информацию и свяжемся з вами в ближайшее время.</p>
+
+            <div class="booking-details" id="bookingDetailsDisplay">
+                <h3>Детали вашего бронирования</h3>
+                <div id="bookingDetailsContent"></div>
+            </div>
+
+            <div class="gmail-info">
+                <h4>📧 Что дальше?</h4>
+                <p><strong>Подтверждение:</strong> Мы отправили подтверждение на ваш email</p>
+                <p><strong>Связь:</strong> Наш менеджер свяжется с вами в течение 30 минут</p>
+                <p><strong>Оплата:</strong> Детали оплаты будут отправлены отдельным письмом</p>
+                <p><strong>Вопросы?</strong> Звоните: <strong>+994 50 444 12 34</strong></p>
+            </div>
+
+            <div class="success-buttons">
+                <a href="mailto:info@oldcitytours.az?subject=Вопрос по бронированию" class="btn-primary">
+                    📧 Написать нам
+                </a>
+                <button id="closeSuccessPopup" class="btn-secondary">Закрыть</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading State -->
+    <div id="loadingState" class="loading-state" role="dialog" aria-labelledby="loading-title" aria-hidden="true">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <h3 id="loading-title">Отправляем вашу заявку...</h3>
+            <p>Пожалуйста, подождите несколько секунд</p>
+        </div>
+    </div>`;
+
+const bookingModalJS = `
+    <script src="../../js/booking-modal.js"></script>`;
+
+// List of all tour pages that need the booking modal
+const tourPages = [
+    'page/dailytours/fire.html',
+    'page/dailytours/tourtoisland.html',
+    'page/dailytours/qabalashamaha.html',
+    'page/dailytours/grouptourbakungiht1.html',
+    'page/dailytours/icherisheher.html',
+    'page/dailytours/lankaranastara.html',
+    'page/dailytours/mountainsshahdag.html',
+    'page/dailytours/gobustanvulcangroup.html',
+    'page/privatetours/bakunight.html',
+    'page/privatetours/gobustanmountain.html',
+    'page/privatetours/independentmultiday.html',
+    'page/privatetours/oldcity.html',
+    'page/privatetours/shamahi&lagic.html',
+    'page/privatetours/shamahixinaliggabala.html',
+    'page/onlydriver/qabala-shamahi.html',
+    'page/onlydriver/qabala-shamahi-xinaliq.html',
+    'page/onlydriver/qobustan-fire.html',
+    'page/onlydriver/quba-xinalig-candymountain.html',
+    'page/tourpackage/az3nights4days.html',
+    'page/tourpackage/az4nights5days.html',
+    'page/tourpackage/az5nights6days.html',
+    'page/tourpackage/az6nights7days.html',
+    'page/tourpackage/az7nights8days.html',
+    'page/tourpackage/az8nights9days.html',
+    'page/tourpackage/baku2nights3days.html'
+];
+
+
+

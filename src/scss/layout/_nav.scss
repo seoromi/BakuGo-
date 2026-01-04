@@ -1,0 +1,989 @@
+/* =====================================================
+    HEADER STYLES - Clean & Responsive
+    ===================================================== */
+// NOTE: Layout tokens (navbar-height, logo-width, container-padding)
+// are defined in abstracts/_variables.scss as global design tokens.
+// This file only contains nav-specific component styles.
+
+// =====================================================
+// HEADER
+// =====================================================
+header {
+    background: var(--white);
+    color: var(--white);
+    padding: 1rem 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: var(--z-sticky, 100);
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+// =====================================================
+// NAVIGATION CONTAINER
+// =====================================================
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    position: relative;
+    width: 100%;
+    min-height: 0px;
+}
+
+// =====================================================
+// DESKTOP NAVBAR (Default - 1025px and up)
+// =====================================================
+
+// Hamburger Menu - LEFT
+.hamburger {
+    order: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    transition: var(--transition);
+    background: rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    border: none;
+    background-color: transparent;
+
+    i {
+        font-size: 1.5rem;
+        color: var(--text-dark, #333);
+        transition: var(--transition);
+    }
+
+    &:hover {
+        background: rgba(239, 134, 9, 0.1);
+        transform: scale(1.05);
+
+        i {
+            color: var(--secondary-color, #ef8609);
+        }
+    }
+
+    &.active i {
+        transform: rotate(180deg);
+        color: var(--secondary-color, #ef8609);
+    }
+}
+
+// Logo
+// NOTE: Logo positioning uses absolute positioning with left percentages
+// to center it between hamburger menu and nav links. This creates a responsive
+// centering that adapts to different screen sizes.
+// TODO: Consider refactoring to flexbox/grid-based centering for better maintainability
+.logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    text-decoration: none;
+    z-index: 5;
+    order: 2;
+    max-width: calc(100% - 300px);
+
+    img {
+        height: 62px;
+        width: var(--logo-width-desktop);
+        object-fit: contain;
+        transition: var(--transition);
+        display: block;
+        margin-right: -140px;
+    }
+
+    &:hover img {
+        transform: scale(1.05);
+    }
+}
+
+// Navigation Links
+.nav-links {
+    order: 3;
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+    flex-shrink: 0;
+
+    li.explorebtn {
+        display: flex;
+        align-items: center;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    a:not(.explorebtn) {
+        color: var(--primary-color, #0f9ec6);
+        text-decoration: none;
+        transition: var(--transition);
+        font-weight: 500;
+        padding: 8px 16px;
+        border-radius: 8px;
+        position: relative;
+
+        &:hover,
+        &:focus {
+            color: var(--secondary-color, #ef8609);
+            background: rgba(239, 134, 9, 0.1);
+            outline: none;
+        }
+    }
+}
+
+// =====================================================
+// EXPLORE BUTTON
+// =====================================================
+.explorebtn,
+.nav-links li.explorebtn a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 20px;
+    background: linear-gradient(45deg, #ff6b35, #ff8c42, #ff6b35);
+    background-size: 200% 200%;
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    border-radius: 25px;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 8px 32px rgba(255, 107, 53, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    font-family: "Inter", sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    white-space: nowrap;
+    height: 45px;
+    width: 190px;
+    flex-shrink: 0;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    line-height: 1.2;
+    letter-spacing: 0.5px;
+    position: relative;
+    overflow: hidden;
+    animation: glow-pulse 2s ease-in-out infinite alternate;
+
+    &:hover {
+        transform: translateY(-3px) scale(1.05);
+        animation: none, sparkle-glow 0.6s ease-in-out;
+        background-position: 100% 100%;
+        box-shadow: 0 12px 40px #ff6b3599,
+            inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        letter-spacing: 1px;
+        border-radius: 30px;
+    }
+
+    &:active {
+        transform: translateY(-1px) scale(1.02);
+        transition: all 0.1s ease;
+    }
+
+    &:focus {
+        outline: none;
+        box-shadow: 0 8px 32px rgba(255, 107, 53, 0.6),
+            inset 0 1px 0 rgba(255, 255, 255, 0.3),
+            0 0 0 3px rgba(255, 255, 255, 0.3);
+    }
+}
+
+// Pulsing Glow Animation
+@keyframes glow-pulse {
+    0% {
+        box-shadow: 0 8px 32px rgba(255, 107, 53, 0.4),
+            inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+
+    100% {
+        box-shadow: 0 8px 32px rgba(255, 107, 53, 0.6),
+            inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    }
+}
+
+// Sparkle Animation for the ✨ emoji
+@keyframes sparkle-glow {
+    0%,
+    100% {
+        text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+    }
+
+    50% {
+        text-shadow: 0 0 20px rgba(255, 255, 255, 1), 0 0 30px rgba(255, 107, 53, 0.5);
+    }
+}
+
+// =====================================================
+// RESPONSIVE BREAKPOINTS
+// =====================================================
+
+// Tablet Styles (769px to 1024px)
+@media (min-width: 769px) and (max-width: 1024px) {
+    nav,
+    nav.container {
+        min-height: var(--navbar-height-tablet);
+        padding: 0 var(--container-padding-tablet);
+    }
+
+    .hamburger {
+        width: 42px;
+        height: 42px;
+        margin: 0;
+    }
+
+    .logo {
+        left: 50%;
+
+        img {
+            max-width: var(--logo-width-tablet) !important;
+            max-height: 65px !important;
+        }
+    }
+
+    .explorebtn,
+    .nav-links li.explorebtn a {
+        padding: 16px 28px;
+        font-size: 15px;
+        max-width: 190px;
+        height: 40px;
+        margin: 0;
+    }
+}
+
+// Mobile Landscape and Portrait (481px to 768px)
+@media (min-width: 481px) and (max-width: 768px) {
+    nav,
+    nav.container {
+        min-height: var(--navbar-height-mobile);
+        padding: 0 var(--container-padding-mobile);
+    }
+
+    .hamburger {
+        width: 40px;
+        height: 40px;
+        margin: 0;
+    }
+
+    .logo {
+        left: 50%;
+        max-width: calc(100% - 250px);
+
+        img {
+            max-width: var(--logo-width-mobile) !important;
+            max-height: 70px !important;
+        }
+    }
+
+    .explorebtn,
+    .nav-links li.explorebtn a {
+        padding: 12px 16px;
+        font-size: 14px;
+        max-width: 140px;
+        height: 40px;
+        margin: 0;
+    }
+
+    .nav-links {
+        gap: 0.8rem;
+    }
+}
+
+// Small Mobile Screens (up to 480px)
+@media (max-width: 480px) {
+    nav,
+    nav.container {
+        min-height: var(--navbar-height-small);
+        padding: 0 var(--container-padding-small);
+    }
+
+    .hamburger {
+        width: 36px;
+        height: 36px;
+        margin: 0;
+        margin-left: 20px;
+    }
+
+    .logo {
+        left: 45%;
+        max-width: calc(100% - 200px);
+
+        img {
+            max-width: var(--logo-width-small) !important;
+            max-height: 55px !important;
+            margin-right: -90px;
+        }
+    }
+
+    .explorebtn,
+    .nav-links li.explorebtn a {
+        padding: 8px 12px;
+        font-size: 13px;
+        max-width: 110px;
+        height: 40px;
+        margin: 0;
+    }
+
+    .nav-links {
+        gap: 0.5rem;
+    }
+}
+
+// =====================================================
+// SIDE MENU STYLES
+// =====================================================
+
+// Side Menu
+.side-menu {
+    position: fixed;
+    top: 0;
+    left: -380px;
+    width: 380px;
+    height: 100vh;
+    background: #ffffff;
+    z-index: var(--z-modal, 1000);
+    transition: left 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid rgba(0, 0, 0, 0.05);
+    max-height: 100vh;
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 transparent;
+
+    &.open {
+        left: 0;
+    }
+
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 3px;
+
+        &:hover {
+            background: #94a3b8;
+        }
+    }
+}
+
+// Prevent body scroll when menu is open
+body.menu-open {
+    overflow: hidden;
+    height: 100vh;
+}
+
+// Side Menu Header
+.side-menu-header {
+    padding: 2.5rem 2rem 2rem 2rem;
+    background: transparent;
+    border-bottom: none;
+    position: relative;
+    flex-shrink: 0;
+
+    h2 {
+        color: #2c3e50;
+        margin: 0;
+        font-size: 1.6rem;
+        font-weight: 700;
+        text-align: center;
+        letter-spacing: -0.5px;
+    }
+
+    p {
+        color: #64748b;
+        margin: 0.75rem 0 0 0;
+        font-size: 0.95rem;
+        text-align: center;
+        font-weight: 400;
+        line-height: 1.5;
+    }
+}
+
+// Side Menu Close Button
+.side-menu-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #f1f5f9;
+    border: none;
+    color: #64748b;
+    font-size: 1.3rem;
+    cursor: pointer;
+    padding: 0;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    z-index: var(--z-modal-close, 1001);
+
+    &:hover,
+    &:focus {
+        background: #e2e8f0;
+        color: #334155;
+        outline: none;
+        transform: scale(1.05);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+}
+
+// Side Menu Items
+.side-menu-items {
+    padding: 1.5rem 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: calc(100vh - 200px);
+}
+
+.side-menu-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem 2rem;
+    color: #475569;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-left: 3px solid transparent;
+    font-size: 1rem;
+    line-height: 1.4;
+    white-space: nowrap;
+    font-weight: 500;
+    margin: 0 1rem;
+    border-radius: 12px;
+    position: relative;
+
+    &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 4px;
+        background: linear-gradient(135deg, #3b82f6, #6366f1);
+        border-radius: 0 4px 4px 0;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    &:hover,
+    &:focus {
+        background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+        color: #1e293b;
+        outline: none;
+        transform: translateX(8px);
+        border-left: none;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+
+        &::before {
+            opacity: 1;
+        }
+
+        i {
+            color: #3b82f6;
+            transform: scale(1.1);
+        }
+    }
+
+    &.active {
+        background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+        color: #1e40af;
+        font-weight: 600;
+
+        &::before {
+            opacity: 1;
+        }
+
+        i {
+            color: #3b82f6;
+        }
+    }
+
+    i {
+        margin-right: 1rem;
+        width: 20px;
+        text-align: center;
+        color: #64748b;
+        flex-shrink: 0;
+        transition: all 0.3s ease;
+        font-size: 1.1rem;
+    }
+}
+
+// Menu Section Dividers
+.side-menu-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #e2e8f0, transparent);
+    margin: 1rem 2rem;
+    opacity: 0.6;
+}
+
+// Menu Section Headers
+.side-menu-section {
+    padding: 1rem 2rem 0.5rem 2rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 1rem;
+
+    h3 {
+        color: var(--white);
+        font-size: 16px;
+        font-weight: 600;
+        margin: 0 0 8px 0;
+        opacity: 0.9;
+    }
+}
+
+// Menu Overlay
+.menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(15, 23, 42, 0.4);
+    z-index: var(--z-overlay, 999);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+
+    &.active {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+// =====================================================
+// SIDE MENU BOTTOM SECTION
+// =====================================================
+.side-menu-bottom {
+    margin-top: auto;
+    padding: 1.5rem 2rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+// Social Media Icons
+.side-menu-social-icons {
+    display: flex;
+    gap: 12px;
+}
+
+.social-icon {
+    width: 44px;
+    height: 44px;
+    background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+
+    &:hover {
+        transform: translateY(-2px) scale(1.05);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+
+        i.fa-facebook-f {
+            color: #1877f2;
+        }
+
+        i.fa-instagram {
+            color: #e4405f;
+        }
+    }
+
+    i {
+        font-size: 18px;
+        color: #64748b;
+        transition: all 0.3s ease;
+    }
+}
+
+// =====================================================
+// LANGUAGE DROPDOWN
+// =====================================================
+.side-menu-language {
+    position: relative;
+}
+
+.language-dropdown-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #334155;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    min-width: 80px;
+    justify-content: center;
+
+    &:hover {
+        background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    &:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+    }
+
+    &.active i {
+        transform: rotate(180deg);
+    }
+
+    i {
+        font-size: 12px;
+        transition: transform 0.3s ease;
+    }
+}
+
+.current-lang {
+    font-weight: 700;
+    color: #1e293b;
+}
+
+.language-dropdown-menu {
+    position: absolute;
+    bottom: 100%;
+    right: 0;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    backdrop-filter: blur(20px);
+    min-width: 140px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    z-index: var(--z-modal, 1000);
+    margin-bottom: 8px;
+    overflow: hidden;
+
+    &.active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+}
+
+.lang-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 12px 16px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+    color: #334155;
+    text-align: left;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+
+    &:last-child {
+        border-bottom: none;
+    }
+
+    &:hover {
+        background: rgba(59, 130, 246, 0.1);
+        color: #1e40af;
+    }
+
+    &[data-active="true"] {
+        background: rgba(59, 130, 246, 0.15);
+        color: #1e40af;
+        font-weight: 600;
+
+        &::after {
+            content: "✓";
+            margin-left: auto;
+            color: #1e40af;
+            font-weight: bold;
+        }
+    }
+}
+
+.lang-flag {
+    font-size: 16px;
+    line-height: 1;
+}
+
+.lang-name {
+    font-weight: 500;
+}
+
+// Side Menu Language Options
+.side-menu-language-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.side-menu-lang-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 12px 16px;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+    color: var(--white);
+    text-align: left;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    &[data-active="true"] {
+        background: rgba(239, 134, 9, 0.2);
+        border-color: var(--secondary-color, #ef8609);
+        color: var(--secondary-color, #ef8609);
+        font-weight: 600;
+
+        &::after {
+            content: "✓";
+            margin-left: auto;
+            color: var(--secondary-color, #ef8609);
+            font-weight: bold;
+        }
+    }
+}
+
+// =====================================================
+// UTILITY CLASSES
+// =====================================================
+
+// Force proper layout
+nav.container,
+header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+// =====================================================
+// VISIBILITY OVERRIDES
+// =====================================================
+// WARNING: Forced visibility with !important indicates style conflicts
+// This is a temporary patch to ensure nav elements are always visible.
+// Root cause: Other stylesheets may be hiding these elements.
+// TODO: Investigate and fix the root cause to remove !important
+// Acceptable for production as defensive CSS, but should be addressed in refactor
+.hamburger,
+.logo,
+.nav-links,
+.nav-links li.explorebtn,
+.nav-links li.explorebtn a,
+.explorebtn {
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+// =====================================================
+// RESPONSIVE - SIDE MENU
+// =====================================================
+@media (max-width: 480px) {
+    .side-menu {
+        width: 100vw;
+        left: -100vw;
+    }
+
+    .side-menu-header {
+        padding: 2rem 1.5rem 1.5rem 1.5rem;
+    }
+
+    .side-menu-items {
+        padding: 1rem 0;
+    }
+
+    .side-menu-item {
+        margin: 0 0.5rem;
+        padding: 1rem 1.5rem;
+    }
+
+    .side-menu-bottom {
+        padding: 1rem 1.5rem;
+        gap: 0.5rem;
+    }
+
+    .social-icon {
+        width: 40px;
+        height: 40px;
+
+        i {
+            font-size: 16px;
+        }
+    }
+
+    .language-dropdown-btn {
+        padding: 8px 12px;
+        font-size: 13px;
+        min-width: 70px;
+    }
+
+    .language-dropdown-menu {
+        min-width: 120px;
+    }
+
+    .lang-option {
+        padding: 10px 14px;
+        font-size: 13px;
+    }
+}
+
+// =====================================================
+// LANGUAGE SWITCHER RESPONSIVE ADJUSTMENTS
+// =====================================================
+@media (min-width: 769px) and (max-width: 1024px) {
+    .language-btn {
+        padding: 6px 10px;
+        font-size: 13px;
+        min-width: 55px;
+    }
+    
+    .language-dropdown {
+        min-width: 130px;
+    }
+    
+    .lang-option {
+        padding: 10px 14px;
+        font-size: 13px;
+    }
+
+    .logo {
+        left: 42%;
+        transform: translateX(-50%);
+    }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+    .language-btn {
+        padding: 6px 8px;
+        font-size: 12px;
+        min-width: 50px;
+    }
+    
+    .language-dropdown {
+        min-width: 120px;
+    }
+    
+    .lang-option {
+        padding: 8px 12px;
+        font-size: 12px;
+        gap: 8px;
+    }
+    
+    .lang-flag {
+        font-size: 14px;
+    }
+
+    .logo {
+        left: 40%;
+        transform: translateX(-50%);
+    }
+}
+
+@media (max-width: 480px) {
+    .language-btn {
+        padding: 6px 8px;
+        font-size: 12px;
+        min-width: 45px;
+    }
+    
+    .language-dropdown {
+        min-width: 110px;
+        right: -10px;
+    }
+    
+    .lang-option {
+        padding: 8px 10px;
+        font-size: 12px;
+        gap: 6px;
+    }
+    
+    .lang-flag {
+        font-size: 14px;
+    }
+    
+    .lang-name {
+        font-size: 11px;
+    }
+
+    .logo {
+        left: 35%;
+        transform: translateX(-50%);
+    }
+}
+
+// Update navbar layout to accommodate language switcher
+// NOTE: Logo positioning adjustments across breakpoints
+// This pattern works but is fragile - consider flexbox/grid refactor
+@media (min-width: 1025px) {
+    .logo {
+        left: 45%;
+        transform: translateX(-50%);
+    }
+    
+    .nav-links {
+        margin-left: auto;
+    }
+}

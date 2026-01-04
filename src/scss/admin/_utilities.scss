@@ -1,0 +1,361 @@
+﻿// ============================================================================
+// ADMIN UTILITIES
+// ============================================================================
+
+@import 'variables';
+
+// ============================================================================
+// RESPONSIVE DESIGN
+// ============================================================================
+
+@media (max-width: 1024px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .analytics-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .settings-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+        position: fixed;
+        z-index: 1000;
+
+        &.active {
+            transform: translateX(0);
+        }
+
+        &.collapsed {
+            transform: translateX(-100%);
+        }
+
+        &.active+.main-content::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 999;
+            pointer-events: none;
+        }
+    }
+
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+        transition: all 0.3s ease;
+    }
+
+    .mobile-menu-toggle {
+        display: block;
+        position: relative;
+        z-index: 1001;
+        visibility: visible;
+        opacity: 1;
+        transform: none;
+        left: auto;
+        right: auto;
+        top: auto;
+        bottom: auto;
+    }
+
+    .sidebar-toggle {
+        display: none;
+    }
+
+    .header {
+        padding: 0 1rem;
+        position: relative;
+        z-index: 1000;
+    }
+
+    .content-area {
+        padding: 1rem;
+    }
+
+    .search-box input {
+        width: 200px;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .filter-bar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+        padding: 1rem;
+    }
+
+    .filter-group {
+        flex-direction: column;
+        align-items: stretch;
+        min-width: auto;
+
+        select,
+        input {
+            width: 100%;
+            min-width: auto;
+        }
+    }
+
+    .filter-actions {
+        margin-left: 0;
+        justify-content: stretch;
+
+        .btn {
+            flex: 1;
+        }
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .table-container {
+        overflow-x: auto;
+    }
+
+    .data-table {
+        min-width: 600px;
+    }
+
+    .promo-codes-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .modal-content {
+        width: 95%;
+        margin: 1rem;
+    }
+
+    .message-container {
+        top: 1rem;
+        right: 1rem;
+        left: 1rem;
+    }
+
+    .included-item,
+    .not-included-item,
+    .start-time-item {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .remove-included,
+    .remove-not-included,
+    .remove-start-time {
+        align-self: flex-end;
+        margin-top: 0.5rem;
+    }
+
+    .dynamic-list-item {
+        flex-direction: column;
+        align-items: stretch;
+
+        input {
+            margin-bottom: 0.5rem;
+        }
+    }
+
+    .language-checkboxes {
+        grid-template-columns: 1fr;
+    }
+
+    .destinations-checkboxes {
+        grid-template-columns: 1fr;
+    }
+
+    .itinerary-step {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .step-number {
+        align-self: flex-start;
+    }
+
+    .remove-step {
+        align-self: flex-end;
+        margin-top: 0.5rem;
+    }
+
+    .preview-step {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .preview-step-number {
+        align-self: flex-start;
+    }
+
+    .image-preview {
+        height: 150px;
+    }
+}
+
+@media (max-width: 480px) {
+    .section-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+    }
+
+    .section-actions {
+        justify-content: stretch;
+    }
+
+    .btn {
+        flex: 1;
+        justify-content: center;
+    }
+
+    .notification-dropdown {
+        width: calc(100vw - 2rem);
+        right: 1rem;
+    }
+
+    .user-menu-dropdown {
+        width: calc(100vw - 2rem);
+        right: 1rem;
+    }
+}
+
+// ============================================================================
+// UTILITY CLASSES
+// ============================================================================
+
+.text-center {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.mb-0 {
+    margin-bottom: 0;
+}
+
+.mb-1 {
+    margin-bottom: 0.5rem;
+}
+
+.mb-2 {
+    margin-bottom: 1rem;
+}
+
+.mb-3 {
+    margin-bottom: 1.5rem;
+}
+
+.mb-4 {
+    margin-bottom: 2rem;
+}
+
+.mt-0 {
+    margin-top: 0;
+}
+
+.mt-1 {
+    margin-top: 0.5rem;
+}
+
+.mt-2 {
+    margin-top: 1rem;
+}
+
+.mt-3 {
+    margin-top: 1.5rem;
+}
+
+.mt-4 {
+    margin-top: 2rem;
+}
+
+.p-0 {
+    padding: 0;
+}
+
+.p-1 {
+    padding: 0.5rem;
+}
+
+.p-2 {
+    padding: 1rem;
+}
+
+.p-3 {
+    padding: 1.5rem;
+}
+
+.p-4 {
+    padding: 2rem;
+}
+
+.d-none {
+    display: none;
+}
+
+.d-block {
+    display: block;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.d-grid {
+    display: grid;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.h-100 {
+    height: 100%;
+}
+
+.flex-1 {
+    flex: 1;
+}
+
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.user-select-none {
+    user-select: none;
+}
+

@@ -1,0 +1,13 @@
+{
+  "name": "bakugo-tour",
+  "version": "1.0.0",
+  "description": "BakuGo Tour - Azerbaijan Travel Tours Website",
+  "scripts": {
+    "compile-scss": "powershell -ExecutionPolicy Bypass -File ./scripts/compile-scss.ps1",
+    "watch-scss": "powershell -ExecutionPolicy Bypass -File ./scripts/watch-scss.ps1",
+    "build": "npm run compile-scss"
+  },
+  "devDependencies": {
+    "sass": "^1.69.5"
+  }
+}

@@ -1,0 +1,30 @@
+{
+    "name": "BakuGo Tour - Azerbaijan Travel Tours",
+    "short_name": "BakuGo Tour",
+    "description": "Discover Azerbaijan with BakuGo Tour - Best tours in Baku, Azerbaijan",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#023a5f",
+    "orientation": "portrait-primary",
+    "icons": [
+        {
+            "src": "/logo/favicon-96x96.png",
+            "sizes": "96x96",
+            "type": "image/png"
+        },
+        {
+            "src": "/logo/apple-touch-icon.png",
+            "sizes": "180x180",
+            "type": "image/png"
+        },
+        {
+            "src": "/logo/favicon.svg",
+            "sizes": "any",
+            "type": "image/svg+xml"
+        }
+    ]
+}
+
+
+

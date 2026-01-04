@@ -1,0 +1,20 @@
+// =====================================================
+// FUNCTIONS - Reusable SCSS Functions
+// =====================================================
+// Add commonly used functions here
+
+// Convert px to rem
+@function rem($pixels) {
+    @return ($pixels / 16) * 1rem;
+}
+
+// Darken a color by percentage
+@function shade($color, $percentage) {
+    @return mix(black, $color, $percentage);
+}
+
+// Lighten a color by percentage
+@function tint($color, $percentage) {
+    @return mix(white, $color, $percentage);
+}
+

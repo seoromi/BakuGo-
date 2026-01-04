@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BakuGo tour - Лучшие туры в Баку Азербайджан | Экскурсии по Старому городу</title>
+    <meta name="description"
+        content="Откройте для себя красоту Баку с BakuGo tour! Групповые и частные экскурсии по Старому городу, Гобустану, Шемахи, Габала. Профессиональные гиды, низкие цены, гарантия качества.">
+    <meta name="keywords"
+        content="туры баку, экскурсии азербайджан, старый город баку, гобустан, шемахи, габала, частные туры">
+    <meta name="author" content="BakuGo tour">
+
+    <!-- Content Security Policy (CSP) - XSS Protection -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https:; object-src 'none'; base-uri 'self';">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://oldcitytours.az/">
+    <meta property="og:title" content="BakuGo tour - Лучшие туры в Баку Азербайджан">
+    <meta property="og:description"
+        content="Откройте для себя красоту Баку с профессиональными гидами. Групповые и частные экскурсии по всему Азербайджану.">
+    <meta property="og:image"
+        content="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://oldcitytours.az/">
+    <meta property="twitter:title" content="BakuGo tour - Лучшие туры в Баку Азербайджан">
+    <meta property="twitter:description"
+        content="Откройте для себя красоту Баку с профессиональными гидами. Групповые и частные экскурсии по всему Азербайджану.">
+    <meta property="twitter:image"
+        content="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80">
+    <!--icon -->
+    <link rel="icon" type="image/png" href="/logo/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/logo/favicon.svg" />
+  
+    <link rel="apple-touch-icon" sizes="180x180" href="/logo/apple-touch-icon.png" />
+    <link rel="manifest" href="/logo/site.webmanifest" />
+    <link rel="stylesheet" href="dist/css/responsive.css">
+    <link rel="stylesheet" href="dist/css/nav.css">
+    <link rel="stylesheet" href="dist/css/search.css">
+    <link rel="stylesheet" href="dist/css/main.css">
+    <link rel="stylesheet" href="dist/css/slider.css">
+    <link rel="stylesheet" href="dist/css/booking-modal.css">
+    <!-- <link rel="stylesheet" href="dist/css/multitourslide.css"> -->
+    <link rel="stylesheet" href="dist/css/footer.css">
+    
+    <!--font-->
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+        as="style" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Compiled SCSS -->
+</head>
+
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner"></div>
+    </div>
+    <header>
+        <nav class="container">
+            <button class="hamburger" id="hamburger" aria-label="Открыть меню" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <a href="#home" class="logo">
+                <img src="src/assets/img/ui/logo/logo (2).png" alt="BakuGo Tour Logo" loading="lazy"></a>
+
+            <!-- Language Switcher -->
+            <!-- <div class="language-switcher">
+                <button class="language-btn" id="languageBtn" aria-label="Выбрать язык" aria-expanded="false">
+                    <span class="current-lang">RU</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="language-dropdown" id="languageDropdown">
+                    <button class="lang-option" data-lang="ru" data-active="true">
+                        <span class="lang-flag">🇷🇺</span>
+                        <span class="lang-name">Русский</span>
+                    </button>
+                    <button class="lang-option" data-lang="en" data-active="false">
+                        <span class="lang-flag">🇺🇸</span>
+                        <span class="lang-name">English</span>
+                    </button>
+                </div>
+            </div> -->
+
+            <ul class="nav-links">
+                <!-- <li><a href="#home">Главная</a></li>
+                        <li><a href="#tours">Туры</a></li>
+                        <li><a href="#testimonials">Отзывы</a></li> -->
+                <!-- <li><a href="#contact">Контакты</a></li> -->
+                <li><a href="explore.html" class="explorebtn" data-translate="explore-btn">Explore✨</a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+    <!-- Side Menu -->
+    <div class="menu-overlay" id="menuOverlay" role="dialog" aria-hidden="true"></div>
+    <nav class="side-menu" id="sideMenu" role="navigation" aria-label="Боковое меню">
+        <button class="side-menu-close" id="menuClose" aria-label="Закрыть меню">&times;</button>
+        <div class="side-menu-header">
+            <h2>Меню</h2>
+            <p>Выберите тип тура</p>
+        </div>
+        <div class="side-menu-items">
+            <!-- <a href="#popular-tours" class="side-menu-item" tabindex="-1">
+                    <i aria-hidden="true">🌟</i>
+                    Популярные туры
+                </a> -->
+            <a href="all-tours.html?type=group" class="side-menu-item" tabindex="-1">
+                <i aria-hidden="true">👥</i>
+                Групповые Туры
+            </a>
+            <a href="all-tours.html?type=private" class="side-menu-item" tabindex="-1">
+                <i aria-hidden="true">🚗</i>
+                Частные туры
+            </a>
+            <a href="all-tours.html?type=driver" class="side-menu-item" tabindex="-1">
+                <i aria-hidden="true">🚙</i>
+                Туры только с водителем
+            </a>
+            <!-- <a href="#holiday-packages" class="side-menu-item" tabindex="-1">
+                    <i aria-hidden="true">🎉</i>
+                    Праздничные пакеты
+                </a> -->
+            <!-- <a href="#custom-request" class="side-menu-item" tabindex="-1">
+                    <i aria-hidden="true">✨</i>
+                    Запросите свой пакет
+                </a> -->
+            <a href="#contact" class="side-menu-item" tabindex="-1">
+                <i aria-hidden="true">📞</i>
+                Свяжитесь с нами
+            </a>
+
+            <!-- Bottom Section: Social Media Icons + Language Dropdown -->
+            <div class="side-menu-bottom">
+                <div class="side-menu-social-icons">
+                    <a href="https://tripadvisor.com/bakugotour" class="social-icon" target="_blank"
+                        rel="noopener noreferrer" tabindex="-1">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </a>
+                    <a href="https://instagram.com/bakugotour" class="social-icon" target="_blank"
+                        rel="noopener noreferrer" tabindex="-1">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+
+                <div class="side-menu-language">
+                    <button class="language-dropdown-btn" id="sideLanguageBtn" tabindex="-1">
+                        <span class="current-lang">RU</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="language-dropdown-menu" id="sideLanguageDropdown">
+                        <button class="lang-option" data-lang="ru" data-active="true">
+                            <span class="lang-flag">🇷🇺</span>
+                            <span class="lang-name">Русский</span>
+                        </button>
+                        <button class="lang-option" data-lang="en" data-active="false">
+                            <span class="lang-flag">🇺🇸</span>
+                            <span class="lang-name">English</span>
+                        </button>
+                        <button class="lang-option" data-lang="tr" data-active="false">
+                            <span class="lang-flag">🇹🇷</span>
+                            <span class="lang-name">Türkçe</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Language Switcher in Side Menu -->
+            <!-- <div class="side-menu-divider"></div>
+            <div class="side-menu-section">
+                <h3>🌐 Язык / Language</h3>
+                <div class="side-menu-language-options">
+                    <button class="side-menu-lang-option" data-lang="ru" data-active="true">
+                        <span class="lang-flag">🇷🇺</span>
+                        <span class="lang-name">Русский</span>
+                    </button>
+                    <button class="side-menu-lang-option" data-lang="en" data-active="false">
+                        <span class="lang-flag">🇺🇸</span>
+                        <span class="lang-name">English</span>
+                    </button>
+                </div>
+            </div> -->
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero" id="home">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 data-translate="hero-title">Лучшие туры в<br>
+                        Баку Азербайджан</h1>
+                    <!-- <p data-translate="hero-subtitle">Откройте для себя красоту и культуру древнего города с нашими профессиональными гидами</p> -->
+
+                    <div class="search-container" id="searchContainer">
+                        <h3 class="search-title" data-translate="search-title">Find Your Perfect Tour</h3>
+
+                        <div class="search-box-input">
+                            <input type="text" class="search-input"
+                                placeholder="Search destinations, tours, or activities..." id="searchInput"
+                                data-translate="search-placeholder">
+                            <div class="search-icon">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <!-- SEARCH RESULTS DROPDOWN -->
+                            <div class="search-results" id="searchResults">
+                                <!-- Results will be populated here by JavaScript -->
+                            </div>
+                            <!-- SUGGESTIONS DROPDOWN -->
+                            <div class="suggestions" id="suggestions">
+                                <div class="suggestion-item">
+                                    <div class="suggestion-icon">🏔️</div>
+                                    <div class="suggestion-text">
+                                        <div class="suggestion-name">Mountain Adventures</div>
+                                        <div class="suggestion-description">Hiking, climbing, and scenic mountain tours
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="suggestion-item">
+                                    <div class="suggestion-icon">🏖️</div>
+                                    <div class="suggestion-text">
+                                        <div class="suggestion-name">Beach Getaways</div>
+                                        <div class="suggestion-description">Relaxing coastal destinations and water
+                                            activities</div>
+                                    </div>
+                                </div>
+                                <div class="suggestion-item">
+                                    <div class="suggestion-icon">🏛️</div>
+                                    <div class="suggestion-text">
+                                        <div class="suggestion-name">Cultural Tours</div>
+                                        <div class="suggestion-description">Historic sites, museums, and local
+                                            experiences</div>
+                                    </div>
+                                </div>
+                                <div class="suggestion-item">
+                                    <div class="suggestion-icon">🌃</div>
+                                    <div class="suggestion-text">
+                                        <div class="suggestion-name">City Breaks</div>
+                                        <div class="suggestion-description">Urban exploration and metropolitan
+                                            adventures</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- QUICK ACTIONS -->
+                        <div class="quick-actions">
+                            <!-- <button class="quick-action-btn"
+                                    onclick="window.location='destinations/sheki.html'">Sheki</button> -->
+
+                            <button class="quick-action-btn"
+                                onclick="window.location='destinations/html-pages/quba.html'">Quba</button>
+                            <button class="quick-action-btn"
+                                onclick="window.location='destinations/html-pages/ateshgah.html'">Fire
+                                Temple</button>
+                            <button class="quick-action-btn"
+                                onclick="window.location='destinations/html-pages/qabala.html'">Qabala</button>
+                            <button class="quick-action-btn"
+                                onclick="window.location='destinations/html-pages/gobustan.html'">Qobustan</button>
+                            <button class="quick-action-btn"
+                                onclick="window.location='destinations/html-pages/shamahi.html'">Shamahi</button>
+                        </div>
+                    </div>
+        </section>
+
+        <section class="features">
+            <div class="container">
+                <div class="features-grid">
+                    <div class="feature-card" data-aos="fade-up">
+                        <div class="feature-icon" aria-hidden="true">
+                            <i class="fas fa-smile"></i>
+                        </div>
+                        <h3>Гарантия довольства</h3>
+                    </div>
+                    <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="feature-icon" aria-hidden="true">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <h3>Профессиональные тур-гиды</h3>
+                    </div>
+                    <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="feature-icon" aria-hidden="true">
+                            <i class="fas fa-tag"></i>
+                        </div>
+                        <h3>Гарантия самой низкой цены</h3>
+                    </div>
+                    <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="feature-icon" aria-hidden="true">
+                            <i class="fas fa-undo"></i>
+                        </div>
+                        <h3>Бесплатная отмена</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- 1. DAILY TOURS SLIDER - ALL CONVERTED TO LINKS -->
+        <section class="unified-slider-section daily-tours" id="daily-tours">
+            <div class="container">
+                <h2 class="section-title">Ежедневные групповые туры</h2>
+
+                <div class="unified-slider-wrapper">
+                    <div class="unified-slider-container" id="toursSlider">
+                        <!-- Slider content will be loaded dynamically by JavaScript -->
+                            </div>
+                </div>
+
+                <div class="slider-show-more">
+                    <a href="all-tours.html?type=group" class="slider-show-more-btn" data-section="daily-tours">
+                        Все групповые туры
+                        <div class="show-more-arrow"></div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Baku Section -->
+        <section class="about-baku">
+            <div class="container">
+                <div class="about-baku-content">
+                    <div class="about-baku-image">
+                        <img src="src/assets/img/tour-images/baku/city/baku-3.jpg" alt="Beautiful Baku cityscape" loading="lazy">
+                    </div>
+                    <div class="about-baku-text">
+                        <h2>Discover the Magic of Baku</h2>
+                        <p>Baku, the capital of Azerbaijan, is a fascinating city where ancient history meets modern
+                            innovation. Known as the "City of Winds," Baku offers visitors an extraordinary blend of
+                            medieval architecture, futuristic skyscrapers, and rich cultural heritage.</p>
+
+                        <p>From the UNESCO World Heritage-listed Old City (Icherisheher) with its ancient Maiden Tower
+                            and Palace of the Shirvanshahs, to the modern Flame Towers that light up the night sky, Baku
+                            presents a unique contrast of old and new.</p>
+
+                        <p>Experience the warmth of Azerbaijani hospitality, savor delicious local cuisine, and explore
+                            the city's vibrant arts scene. Whether you're wandering through narrow cobblestone streets
+                            or admiring contemporary architecture, Baku promises unforgettable memories.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. PACKAGES SLIDER - ALL CONVERTED TO LINKS -->
+        <section class="unified-slider-section packages-new" id="packages-new">
+            <div class="container">
+                <h2 class="section-title">Турпакеты в Азербайджан</h2>
+
+                <div class="unified-slider-wrapper">
+                    <div class="unified-slider-container" id="packagesNewSlider">
+                        <!-- Slider content will be loaded dynamically by JavaScript -->
+                            </div>
+                </div>
+
+                <div class="slider-show-more">
+                    <a href="all-tours.html?type=package" class="slider-show-more-btn" data-section="packages">
+                        Все турпакеты
+                        <div class="show-more-arrow"></div>
+                    </a>
+                </div>
+            </div>
+        </section>
+        <!-- 3. PRIVATE TOURS SLIDER - ALL CONVERTED TO LINKS -->
+        <section class="unified-slider-section private-new" id="private-new">
+            <div class="container">
+                <h2 class="section-title">Частные туры из Баку</h2>
+
+                <div class="unified-slider-wrapper">
+                    <div class="unified-slider-container" id="privateNewSlider">
+                        <!-- Slider content will be loaded dynamically by JavaScript -->
+                            </div>
+                </div>
+
+                <div class="slider-show-more">
+                    <a href="all-tours.html?type=private    " class="slider-show-more-btn" data-section="private">
+                        Все частные туры
+                        <div class="show-more-arrow"></div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- 4. DRIVER TOURS SLIDER - ALL CONVERTED TO LINKS -->
+        <section class="unified-slider-section driver-new" id="driver-new">
+            <div class="container">
+                <h2 class="section-title">Туры в Азербайджане только с водителем</h2>
+
+                <div class="unified-slider-wrapper">
+                    <div class="unified-slider-container" id="driverNewSlider">
+                        <!-- Slider content will be loaded dynamically by JavaScript -->
+                            </div>
+                </div>
+
+                <div class="slider-show-more">
+                    <a href="all-tours.html?type=driver" class="slider-show-more-btn" data-section="driver">
+                        Все туры с водителем
+                        <div class="show-more-arrow"></div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="tours" id="tours">
+            <div class="container">
+                <h2 class="section-title">Все туры</h2>
+                <div class="tours-grid" id="homeToursGrid">
+                    <!-- Tours will be loaded dynamically by JavaScript -->
+                </div>
+
+                <!-- Main Show All Tours Button -->
+                <div class="show-all-tours">
+                    <a href="all-tours.html" class="show-all-tours-btn">
+                        Посмотреть все туры
+                        <div class="arrow-right"></div>
+                    </a>
+                </div>
+        </section>
+
+        <section class="testimonials" id="testimonials">
+            <div class="container">
+                <h2 class="section-title">Что о нас говорят люди</h2>
+                <div class="testimonials-grid">
+                    <article class="testimonial-card" data-aos="fade-up">
+                        <div class="testimonial-content">
+                            <div class="stars" aria-label="5 звезд">⭐⭐⭐⭐⭐</div>
+                            <p>"Невероятный тур по Старому городу! Гид был очень знающим и дружелюбным. Узнали много
+                                интересного об истории Баку. Обязательно вернемся за новыми впечатлениями!"</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-info">
+                                <h4>Анна Петрова</h4>
+                                <span>Москва, Россия</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="testimonial-content">
+                            <div class="stars" aria-label="5 звезд">⭐⭐⭐⭐⭐</div>
+                            <p>"Поездка в Гобустан превзошла все ожидания! Организация на высшем уровне, комфортабельный
+                                транспорт, вкусный обед. Грязевые вулканы - это что-то невероятное!"</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-info">
+                                <h4>Марк Джонсон</h4>
+                                <span>Лондон, Великобритания</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="testimonial-content">
+                            <div class="stars" aria-label="5 звезд">⭐⭐⭐⭐⭐</div>
+                            <p>"Частный тур по Шеки был просто великолепен! Индивидуальный подход, гибкий график, и мы
+                                увидели все, что хотели. Дворец Шекинских ханов поразил своей красотой."</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-info">
+                                <h4>Елена Козлова</h4>
+                                <span>Санкт-Петербург, Россия</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="testimonial-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="testimonial-content">
+                            <div class="stars" aria-label="5 звезд">⭐⭐⭐⭐⭐</div>
+                            <p>"Профессиональная команда и отличный сервис! Тур в Габалу с семьей прошел идеально. Дети
+                                были в восторге от канатной дороги, а взрослые - от природы."</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-info">
+                                <h4>Ахмед Алиев</h4>
+                                <span>Тбилиси, Грузия</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="testimonial-card" data-aos="fade-up" data-aos-delay="400">
+                        <div class="testimonial-content">
+                            <div class="stars" aria-label="5 звезд">⭐⭐⭐⭐⭐</div>
+                            <p>"Лучшее турагентство в Баку! Цены справедливые, качество на высоте. Особенно понравился
+                                вечерний тур - виды на Пламенные башни незабываемые!"</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-info">
+                                <h4>Дэвид Смит</h4>
+                                <span>Нью-Йорк, США</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="testimonial-card" data-aos="fade-up" data-aos-delay="500">
+                        <div class="testimonial-content">
+                            <div class="stars" aria-label="5 звезд">⭐⭐⭐⭐⭐</div>
+                            <p>"Гарантия самой низкой цены работает! Нашли тур дешевле в другом месте, и они вернули
+                                разницу. Честная компания с отличным сервисом."</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-info">
+                                <h4>Фатима Мамедова</h4>
+                                <span>Стамбул, Турция</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Review Section -->
+        <section class="review-section">
+            <div class="container">
+                <h2 class="section-title">Поделитесь своим опытом</h2>
+                <p class="review-subtitle">Ваши отзывы помогают другим путешественникам выбрать лучшие туры</p>
+
+                <div class="review-platforms">
+                    <div class="review-platform">
+                        <div class="platform-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h3>Наш сайт</h3>
+                        <p>Поделитесь своим опытом прямо на нашем сайте</p>
+                        <button class="review-btn website-btn" onclick="openReviewModal()">
+                            <i class="fas fa-pen"></i>
+                            Написать отзыв на сайте
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="back-to-top-section">
+            <div class="back-to-top-container">
+                <div class="back-to-top-content">
+                    <h3>Готовы начать новое путешествие?</h3>
+                    <p>Вернитесь к началу и выберите свой идеальный тур</p>
+                </div>
+                <button class="back-to-top-btn" onclick="scrollToTop()">
+                    <span class="icon">🏠</span>
+                    <span>Вернуться к началу</span>
+                </button>
+            </div>
+        </div>
+        <section class="contact-info" id="contact">
+            <div class="container">
+                <h2 class="section-title" style="color: white;">Свяжитесь с нами</h2>
+                <p style="font-size: 1.1rem; margin-bottom: 2rem;">Готовы к незабываемому путешествию? Мы здесь, чтобы
+                    помочь!</p>
+
+                <div class="contact-grid">
+                    <div class="contact-item">
+                        <div class="icon" aria-hidden="true">📞</div>
+                        <h3>Телефон</h3>
+                        <a href="tel:+994504441234" aria-label="Позвонить по номеру +994 50 444 12 34">+994 50 444 12
+                            34</a>
+                        <a href="tel:+994554441234" aria-label="Позвонить по номеру +994 55 444 12 34">+994 55 444 12
+                            34</a>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="icon" aria-hidden="true">📧</div>
+                        <h3>Email</h3>
+                        <a href="mailto:info@oldcitytours.az"
+                            aria-label="Отправить email на info@oldcitytours.az">info@oldcitytours.az</a>
+                        <a href="mailto:booking@oldcitytours.az"
+                            aria-label="Отправить email для бронирования">booking@oldcitytours.az</a>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="icon" aria-hidden="true">📍</div>
+                        <h3>Адрес</h3>
+                        <address style="font-style: normal;">
+                            ул. Низами, 42<br>
+                            Баку, AZ1005<br>
+                            Азербайджан
+                        </address>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="icon" aria-hidden="true">🕒</div>
+                        <h3>Часы работы</h3>
+                        <p>Пн-Вс: 9:00 - 20:00<br>
+                            Экстренная связь: 24/7</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Туры</h3>
+                    <ul>
+                        <li><a href="#daily-tours">Групповые туры</a></li>
+                        <li><a href="#private-tours">Частные туры</a></li>
+                        <li><a href="#holiday-packages">Турпакеты</a></li>
+                        <li><a href="all-tours.html?type=driver">Туры с водителем</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Направления</h3>
+                    <ul>
+                        <li><a href="#baku-old-city">Старый город Баку</a></li>
+                        <li><a href="#shirvanshah-palace">Дворец Ширваншахов</a></li>
+                        <li><a href="#maiden-tower">Девичья башня</a></li>
+                        <li><a href="#flame-towers">Пламенные башни</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Компания</h3>
+                    <ul>
+                        <li><a href="#about">О нас</a></li>
+                        <li><a href="#testimonials">Отзывы</a></li>
+                        <li><a href="#contact">Контакты</a></li>
+                        <li><a href="#blog">Блог</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Поддержка</h3>
+                    <ul>
+                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="#cancellation-policy">Политика отмены</a></li>
+                        <li><a href="#terms">Условия использования</a></li>
+                        <li><a href="#privacy">Конфиденциальность</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 BakuGo tour. Все права защищены. | <a href="#privacy" style="color: #95a5a6;">Политика
+                        конфиденциальности</a> | <a href="#terms" style="color: #95a5a6;">Условия использования</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Success Popup -->
+    <div id="successPopup" class="success-popup" role="dialog" aria-labelledby="success-title" aria-hidden="true">
+        <div class="success-popup-content">
+            <div class="success-icon">🎉</div>
+            <h2 id="success-title">Бронирование отправлено!</h2>
+            <p>Ваша заявка успешно отправлена. Мы получили всю информацию и свяжемся з вами в ближайшее время.</p>
+
+            <div class="booking-details" id="bookingDetailsDisplay">
+                <h3>Детали вашего бронирования</h3>
+                <div id="bookingDetailsContent"></div>
+            </div>
+
+            <div class="gmail-info">
+                <h4>📧 Что дальше?</h4>
+                <p><strong>Подтверждение:</strong> Мы отправили подтверждение на ваш email</p>
+                <p><strong>Связь:</strong> Наш менеджер свяжется с вами в течение 30 минут</p>
+                <p><strong>Оплата:</strong> Детали оплаты будут отправлены отдельным письмом</p>
+                <p><strong>Вопросы?</strong> Звоните: <strong>+994 50 444 12 34</strong></p>
+            </div>
+
+            <div class="success-buttons">
+                <a href="mailto:info@oldcitytours.az?subject=Вопрос по бронированию" class="btn-primary">
+                    📧 Написать нам
+                </a>
+                <button id="closeSuccessPopup" class="btn-secondary">Закрыть</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading State -->
+    <div id="loadingState" class="loading-state" role="dialog" aria-labelledby="loading-title" aria-hidden="true">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <h3 id="loading-title">Отправляем вашу заявку...</h3>
+            <p>Пожалуйста, подождите несколько секунд</p>
+        </div>
+    </div>
+
+    <!-- Enhanced Booking Modal -->
+    <div id="bookingModal" class="booking-modal" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
+        <div class="booking-modal-content">
+            <button class="booking-modal-close" id="modalClose" aria-label="Закрыть модальное окно">&times;</button>
+
+            <div class="booking-header">
+                <h2 id="modal-title">Бронирование тура</h2>
+                <div class="tour-info">
+                    <h3 id="selectedTour"></h3>
+                    <p id="selectedPrice"></p>
+                </div>
+            </div>
+
+            <div class="booking-body">
+                <div class="booking-left">
+                    <form id="bookingForm" novalidate>
+                        <!-- Personal Information -->
+                        <div class="form-section">
+                            <h4>Личная информация</h4>
+                            <div class="form-group">
+                                <label for="customerName">Имя и фамилия *</label>
+                                <input type="text" id="customerName" name="customerName" required
+                                    placeholder="Введите ваше полное имя" aria-describedby="name-error">
+                                <div class="error-message" id="name-error"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="customerEmail">Email *</label>
+                                <input type="email" id="customerEmail" name="customerEmail" required
+                                    placeholder="example@email.com" aria-describedby="email-error">
+                                <div class="error-message" id="email-error"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="customerPhone">Телефон *</label>
+                                <input type="tel" id="customerPhone" name="customerPhone" required
+                                    placeholder="+994 50 123 45 67" aria-describedby="phone-error">
+                                <div class="error-message" id="phone-error"></div>
+                            </div>
+                        </div>
+
+                        <!-- Tour Details -->
+                        <div class="form-section">
+                            <h4>Детали тура</h4>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="tourDate">Дата тура *</label>
+                                    <input type="date" id="tourDate" name="tourDate" required
+                                        aria-describedby="tour-date-error">
+                                    <div class="error-message" id="tour-date-error"></div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="tourTime">Время начала</label>
+                                    <select id="tourTime" name="tourTime">
+                                        <option value="09:00">09:00</option>
+                                        <option value="10:00">10:00</option>
+                                        <option value="11:00">11:00</option>
+                                        <option value="12:00">12:00</option>
+                                        <option value="13:00">13:00</option>
+                                        <option value="14:00">14:00</option>
+                                        <option value="15:00">15:00</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ticket Selection -->
+                        <div class="form-section">
+                            <h4>Выберите билеты</h4>
+                            <div class="ticket-selector">
+                                <div class="ticket-type">
+                                    <div class="ticket-info">
+                                        <h5>Взрослые</h5>
+                                        <p class="ticket-price">$<span id="adultPrice">49</span></p>
+                                    </div>
+                                    <div class="ticket-controls">
+                                        <button type="button" class="ticket-btn minus" data-type="adult">-</button>
+                                        <span class="ticket-count" id="adultCount">1</span>
+                                        <button type="button" class="ticket-btn plus" data-type="adult">+</button>
+                                    </div>
+                                </div>
+
+                                <div class="ticket-type">
+                                    <div class="ticket-info">
+                                        <h5>Дети (до 12 лет)</h5>
+                                        <p class="ticket-price">$<span id="childPrice">25</span></p>
+                                    </div>
+                                    <div class="ticket-controls">
+                                        <button type="button" class="ticket-btn minus" data-type="child">-</button>
+                                        <span class="ticket-count" id="childCount">0</span>
+                                        <button type="button" class="ticket-btn plus" data-type="child">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Promo Code -->
+                        <div class="form-section">
+                            <h4>Промокод</h4>
+                            <div class="promo-section">
+                                <div class="form-group">
+                                    <input type="text" id="promoCode" name="promoCode" placeholder="Введите промокод">
+                                    <button type="button" id="applyPromo" class="promo-btn">Применить</button>
+                                </div>
+                                <div id="promoMessage" class="promo-message"></div>
+                            </div>
+                        </div>
+
+                        <!-- Special Requests -->
+                        <div class="form-section">
+                            <h4>Особые пожелания</h4>
+                            <div class="form-group">
+                                <textarea id="specialRequests" name="specialRequests" rows="3"
+                                    placeholder="Расскажите о ваших особых пожеланиях или требованиях..."></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Booking Actions inside form -->
+                        <div class="booking-actions">
+                            <button type="button" id="cancelBooking" class="btn-cancel">
+                                Отмена
+                            </button>
+                            <button type="submit" id="submitBooking" class="btn-book">
+                                Забронировать тур
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Booking Summary -->
+                <div class="booking-right">
+                    <div class="booking-summary">
+                        <h4>Сводка бронирования</h4>
+
+                        <div class="summary-item">
+                            <span>Взрослые x<span id="summaryAdultCount">1</span></span>
+                            <span>$<span id="summaryAdultTotal">49</span></span>
+                        </div>
+
+                        <div class="summary-item" id="childSummaryItem" style="display: none;">
+                            <span>Дети x<span id="summaryChildCount">0</span></span>
+                            <span>$<span id="summaryChildTotal">0</span></span>
+                        </div>
+
+                        <div class="summary-item" id="promoSummaryItem" style="display: none;">
+                            <span>Скидка</span>
+                            <span class="discount">-$<span id="promoDiscount">0</span></span>
+                        </div>
+
+                        <div class="summary-divider"></div>
+
+                        <div class="summary-total">
+                            <span>Итого</span>
+                            <span class="total-price">$<span id="totalPrice">49</span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Review Modal -->
+    <div id="reviewModal" class="review-modal" role="dialog" aria-labelledby="review-modal-title" aria-hidden="true">
+        <div class="review-modal-content">
+            <button class="review-modal-close" id="reviewModalClose"
+                aria-label="Закрыть модальное окно">&times;</button>
+
+            <!-- Initial Experience Selection -->
+            <div class="review-screen active" id="experienceSelection">
+                <div class="review-header">
+                    <h2 id="review-modal-title">Поделитесь своим опытом</h2>
+                    <p>Ваше мнение помогает нам улучшать сервис</p>
+                </div>
+
+                <div class="experience-buttons">
+                    <button class="experience-btn like-btn" onclick="showLikeOptions()">
+                        <span class="experience-icon">👍</span>
+                        <span class="experience-text">Мне понравилось</span>
+                        <span class="experience-subtitle">Поделитесь с другими</span>
+                    </button>
+                    <button class="experience-btn feedback-btn" onclick="showFeedbackForm()">
+                        <span class="experience-icon">💬</span>
+                        <span class="experience-text">Есть предложения</span>
+                        <span class="experience-subtitle">Помогите нам улучшиться</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Like Options Screen -->
+            <div class="review-screen" id="likeOptions">
+                <div class="review-header">
+                    <h2>Спасибо за положительный отзыв!</h2>
+                    <p>Поделитесь своим опытом на вашей любимой платформе</p>
+                </div>
+
+                <div class="platform-selection">
+                    <button class="platform-btn" onclick="openTripadvisorReview()">
+                        <div class="platform-icon">🗺️</div>
+                        <div class="platform-info">
+                            <h3>TripAdvisor</h3>
+                            <p>Помогите другим путешественникам</p>
+                        </div>
+                        <div class="platform-arrow">→</div>
+                    </button>
+
+                    <button class="platform-btn" onclick="openGoogleReview()">
+                        <div class="platform-icon">🔍</div>
+                        <div class="platform-info">
+                            <h3>Google Reviews</h3>
+                            <p>Оставьте отзыв в Google</p>
+                        </div>
+                        <div class="platform-arrow">→</div>
+                    </button>
+                </div>
+
+                <div class="review-navigation">
+                    <button class="back-btn" onclick="showExperienceSelection()">
+                        ← Назад
+                    </button>
+                </div>
+            </div>
+
+            <!-- Feedback Form Screen -->
+            <div class="review-screen" id="feedbackForm">
+                <div class="review-header">
+                    <h2>Мы ценим ваше мнение</h2>
+                    <p>Помогите нам стать лучше</p>
+                </div>
+
+                <div class="review-body">
+                    <form id="reviewForm" novalidate>
+                        <!-- Personal Information -->
+                        <div class="form-section">
+                            <h4>Ваша информация</h4>
+                            <div class="form-group">
+                                <label for="reviewerName">Имя *</label>
+                                <input type="text" id="reviewerName" name="reviewerName" required
+                                    placeholder="Введите ваше имя" aria-describedby="reviewer-name-error">
+                                <div class="error-message" id="reviewer-name-error"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="reviewerEmail">Email *</label>
+                                <input type="email" id="reviewerEmail" name="reviewerEmail" required
+                                    placeholder="example@email.com" aria-describedby="reviewer-email-error">
+                                <div class="error-message" id="reviewer-email-error"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="reviewerLocation">Город, страна</label>
+                                <input type="text" id="reviewerLocation" name="reviewerLocation"
+                                    placeholder="Москва, Россия">
+                            </div>
+                        </div>
+
+                        <!-- Tour Information -->
+                        <div class="form-section">
+                            <h4>Информация о туре</h4>
+                            <div class="form-group">
+                                <label for="reviewTour">Название тура *</label>
+                                <select id="reviewTour" name="reviewTour" required aria-describedby="review-tour-error">
+                                    <option value="">Выберите тур</option>
+                                    <option value="gobustan-group">Гобустан, Грязевые вулканы, Храм Огня, Пылающая гора
+                                    </option>
+                                    <option value="old-city-group">Тур по Старому городу ГРУППОВОЙ (пеший)</option>
+                                    <option value="qabala-shamahi-group">Габала и Шамаха групповой тур</option>
+                                    <option value="colored-mountains">Групповой тур в Разноцветные горы</option>
+                                    <option value="baku-night-group">Групповой Ночной Тур Baku Lights</option>
+                                    <option value="islands-tour">Тур по островам Баку</option>
+                                    <option value="lankaran-astara">Ленкорань и Астара частный тур</option>
+                                    <option value="shahdag-mountains">Групповой тур в горы Шахдаг</option>
+                                    <option value="fire-temple">Храм Огня, Пылающая гора</option>
+                                    <option value="gobustan-volcanoes">Групповой тур по Гобустану и грязевым вулканам
+                                    </option>
+                                    <option value="other">Другой тур</option>
+                                </select>
+                                <div class="error-message" id="review-tour-error"></div>
+                            </div>
+
+                            <div class="form-group" id="customTourGroup" style="display: none;">
+                                <label for="customTourName">Название тура</label>
+                                <input type="text" id="customTourName" name="customTourName"
+                                    placeholder="Введите название тура">
+                            </div>
+                        </div>
+
+                        <!-- Rating -->
+                        <div class="form-section">
+                            <h4>Оценка</h4>
+                            <div class="rating-section">
+                                <div class="rating-stars" id="ratingStars">
+                                    <span class="star" data-rating="1">★</span>
+                                    <span class="star" data-rating="2">★</span>
+                                    <span class="star" data-rating="3">★</span>
+                                    <span class="star" data-rating="4">★</span>
+                                    <span class="star" data-rating="5">★</span>
+                                </div>
+                                <input type="hidden" id="rating" name="rating" required>
+                                <div class="rating-text" id="ratingText">Выберите оценку</div>
+                            </div>
+                        </div>
+
+                        <!-- Review Content -->
+                        <div class="form-section">
+                            <h4>Ваш отзыв</h4>
+                            <div class="form-group">
+                                <label for="reviewTitle">Заголовок отзыва *</label>
+                                <input type="text" id="reviewTitle" name="reviewTitle" required
+                                    placeholder="Кратко опишите ваш опыт" aria-describedby="review-title-error">
+                                <div class="error-message" id="review-title-error"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="reviewContent">Подробный отзыв *</label>
+                                <textarea id="reviewContent" name="reviewContent" rows="5" required
+                                    placeholder="Расскажите подробно о вашем опыте: что понравилось, что можно улучшить, общие впечатления..."
+                                    aria-describedby="review-content-error"></textarea>
+                                <div class="error-message" id="review-content-error"></div>
+                            </div>
+                        </div>
+
+                        <!-- Review Actions -->
+                        <div class="review-actions">
+                            <button type="button" id="cancelReview" class="btn-cancel">
+                                Отмена
+                            </button>
+                            <button type="submit" id="submitReview" class="btn-submit">
+                                Отправить отзыв
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="review-navigation">
+                    <button class="back-btn" onclick="showExperienceSelection()">
+                        ← Назад
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- XSS Protection: DOMPurify and Sanitization Utilities -->
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"></script>
+    
+    <!-- Configuration (must load before modules) -->
+    <script src="src/js/config/env.js"></script>
+    
+    <!-- Main Application Entry Point (ES Module) -->
+    <script type="module" src="src/js/main.js"></script>
+    
+    <!-- Link to external JavaScript file -->
+    <script src="src/js/pages/home/main.js" defer></script>
+    <script type="module" src="src/js/pages/home/home-sliders.js" defer></script>
+    <script src="src/js/core/navigation.js" defer></script>
+    <script src="src/js/pages/home/mainsearch.js" defer></script>
+    <script src="src/js/ui/featuresmobile.js" defer></script>
+    <script src="src/js/search/search.js" defer></script>
+    <script src="src/js/core/language-switcher.js" defer></script>
+    <script src="src/js/core/slider.js" defer></script>
+    <script type="module" src="src/js/pages/tour/booking-modal.js" defer></script>
+    <script src="src/js/utils/utils.js" defer></script>
+    <script src="src/js/ui/review-modal.js" defer></script>
+
+    <!-- Schema.org structured data for SEO -->
+    <script type="application/ld+json">
+            {
+            "@context": "https://schema.org",
+            "@type": "TouristInformationCenter",
+            "name": "BakuGo tour",
+            "description": "Лучшие туры по Баку и Азербайджану с профессиональными гидами",
+            "url": "https://bakugotour.az",
+            "telephone": "+994504441234",
+            "email": "info@bakugotour.az",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "ул. Низами, 42",
+                "addressLocality": "Баку",
+                "postalCode": "AZ1005",
+                "addressCountry": "AZ"
+            },
+            "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 40.3777,
+                "longitude": 49.8920
+            },
+            "openingHours": "Mo-Su 09:00-20:00",
+            "priceRange": "₼₼",
+            "hasOfferCatalog": {
+                "@type": "OfferCatalog",
+                "name": "Azerbaijan Tours",
+                "itemListElement": [
+                    {
+                        "@type": "Offer",
+                        "itemOffered": {
+                            "@type": "TouristTrip",
+                            "name": "Экскурсия по Старому городу Баку",
+                            "description": "Дворец Ширваншахов, Девичья башня, Мечеть Мухаммеда"
+                        },
+                        "price": "25",
+                        "priceCurrency": "AZN"
+                    },
+                    {
+                        "@type": "Offer",
+                        "itemOffered": {
+                            "@type": "TouristTrip",
+                            "name": "Гобустан и Грязевые вулканы",
+                            "description": "Национальный парк Гобустан, наскальные рисунки, грязевые вулканы"
+                        },
+                        "price": "45",
+                        "priceCurrency": "AZN"
+                    },
+                    {
+                        "@type": "Offer",
+                        "itemOffered": {
+                            "@type": "TouristTrip",
+                            "name": "Габала и Водопад Семь красавиц",
+                            "description": "Канатная дорога Туфандаг, водопад, озеро Нохур"
+                        },
+                        "price": "75",
+                        "priceCurrency": "AZN"
+                    }
+                ]
+            },
+            "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "5",
+                "reviewCount": "150"
+            }
+        }
+            </script>
+</body>
+
+</html>

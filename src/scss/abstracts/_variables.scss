@@ -1,0 +1,102 @@
+// =====================================================
+// BASE CSS VARIABLES - Must come FIRST before any styles
+// =====================================================
+// These variables are used by layout/nav, components, etc.
+// They MUST be defined before any styles that use them.
+
+:root {
+    // =====================================================
+    // BASE COLORS & THEME
+    // =====================================================
+    --primary-color: #023a5f;
+    --secondary-color: #ef8609;
+    --accent-color: #0f9ec6;
+    --text-dark: #333;
+    --text-light: #666;
+    --bg-light: #f8f9fa;
+    --white: #ffffff;
+    --border-color: #dee2e6;
+    --text-color: #333;
+    --light-gray: #f8f9fa;
+    
+    // =====================================================
+    // ORANGE THEME COLORS
+    // =====================================================
+    --primary-orange: #ff9900;
+    --primary-blue: #109fc7;
+    --dark-blue: #043762;
+    --light-cream: #fcf9f4;
+    --white-explore: #fcf9f4;
+    --orange-hover: #ff8000;
+    --orange-light: rgba(255, 153, 0, 0.18);
+    --orange-border: rgba(255, 153, 0, 0.45);
+    --orange-bright: #ffbb33;
+    --orange-glow: rgba(255, 153, 0, 0.35);
+    --orange-super-light: #fff2e6;
+    
+    // =====================================================
+    // DESTINATION PAGE DESIGN TOKENS
+    // =====================================================
+    // Destination-specific color values (slightly muted theme)
+    // These override the default orange theme on destination pages
+    --destination-primary-orange: #f0870a;
+    --destination-dark-blue: #06375e;
+    --destination-orange-hover: #d67309;
+    --rating-gold: #ffd700;
+    --highlight-bg: #f0f8ff;
+    --gradient-light: linear-gradient(135deg, #f8f9fa 0%, #e3f2fd 100%);
+    --gradient-cream: linear-gradient(135deg, #fff 0%, #fff8f0 100%);
+    --gradient-orange: linear-gradient(135deg, #ef8609, #ff9f1a);
+    
+    // =====================================================
+    // SHADOWS & EFFECTS
+    // =====================================================
+    --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    --shadow-hover: 0 10px 30px rgba(0, 0, 0, 0.15);
+    
+    // =====================================================
+    // LAYOUT & SPACING
+    // =====================================================
+    --border-radius: 10px;
+    --transition: all 0.3s ease;
+    --container-max-width: 1200px;
+    --container-max-width-wide: 1400px;
+    
+    // =====================================================
+    // NAVBAR LAYOUT TOKENS
+    // =====================================================
+    // These are global layout tokens, not nav-specific
+    // Used across multiple components and pages
+    --navbar-height-desktop: 80px;
+    --navbar-height-tablet: 75px;
+    --navbar-height-mobile: 80px;
+    --navbar-height-small: 75px;
+    --logo-width-desktop: 320px;
+    --logo-width-tablet: 280px;
+    --logo-width-mobile: 300px;
+    --logo-width-small: 280px;
+    --container-padding-desktop: 40px;
+    --container-padding-tablet: 20px;
+    --container-padding-mobile: 15px;
+    --container-padding-small: 10px;
+    
+    // =====================================================
+    // Z-INDEX LAYERS
+    // =====================================================
+    --z-overlay: 999;
+    --z-modal: 1000;
+    --z-modal-close: 1001;
+    --z-sticky: 100;
+    
+    // =====================================================
+    // GRADIENTS
+    // =====================================================
+    --gradient-primary-hover: linear-gradient(135deg, #d4710a, #e67e00);
+    
+    // =====================================================
+    // FOOTER DESIGN TOKENS
+    // =====================================================
+    --footer-link-color: #bdc3c7;
+    --footer-border-color: #002a4a;
+    --footer-text-muted: #95a5a6;
+}

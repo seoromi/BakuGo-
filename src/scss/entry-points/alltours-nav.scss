@@ -1,0 +1,14 @@
+// =====================================================
+// ALLTOURS-NAV.SCSS - All Tours Navigation Entry Point
+// Compiles to: css/alltours-nav.css
+// Used in: all-tours.html
+// =====================================================
+
+// Abstracts
+@import '../abstracts/variables';
+@import '../abstracts/mixins';
+
+// Layout (may need specific nav variant for all-tours)
+@import '../layout/nav';
+
+

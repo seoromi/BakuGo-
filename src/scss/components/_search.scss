@@ -1,0 +1,359 @@
+// =====================================================
+// VARIABLES - Only frequently used values
+// =====================================================
+$primary-color: #023a5f;
+$secondary-color: #ef8609;
+$white: #ffffff;
+$transition-base: 0.3s ease;
+
+// Keep :root for CSS variable compatibility
+:root {
+  --primary-color: #{$primary-color};
+  --secondary-color: #{$secondary-color};
+  --accent-color: #0f9ec6;
+  --text-dark: #333;
+  --text-light: #666;
+  --bg-light: #f8f9fa;
+  --white: #{$white};
+  --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  --shadow-hover: 0 10px 30px rgba(0, 0, 0, 0.15);
+  --border-radius: 10px;
+  --transition: all #{$transition-base};
+  --border-color: #dee2e6;
+  --text-color: #333;
+  --light-gray: #f8f9fa;
+  --container-max-width: 1200px;
+}
+
+// =====================================================
+// KEYFRAME ANIMATIONS
+// =====================================================
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// =====================================================
+// SEARCH CONTAINER
+// =====================================================
+.search-container {
+  background: none;
+  backdrop-filter: none;
+  border-radius: 0;
+  padding: 0;
+  margin: 2rem auto;
+  box-shadow: none;
+  border: none;
+  max-width: 1200px;
+  position: relative;
+  opacity: 1;
+  transform: translateY(0);
+  animation: fadeInUp 0.6s ease forwards;
+  z-index: 10;
+  overflow: visible;
+
+  &::before {
+    display: none;
+  }
+
+  &.hidden {
+    transform: translateY(-100%);
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+.search-title {
+  display: none;
+}
+
+// =====================================================
+// SEARCH INPUT BOX
+// =====================================================
+.search-box-input {
+  position: relative;
+  margin-bottom: 20px;
+  z-index: 10;
+}
+
+.search-input {
+  width: 100%;
+  padding: 18px 70px 18px 25px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 35px;
+  font-size: 17px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  color: var(--primary-color);
+  transition: border-color $transition-base, box-shadow $transition-base, transform $transition-base, background $transition-base;
+  outline: none;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  font-weight: 500;
+  box-sizing: border-box;
+
+  &::placeholder {
+    color: rgba(2, 58, 95, 0.6);
+    font-weight: 400;
+  }
+
+  &:focus {
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 4px rgba(239, 134, 9, 0.2), 0 15px 40px rgba(0, 0, 0, 0.2);
+    transform: translateY(-3px);
+    background: rgb(255, 255, 255);
+  }
+}
+
+// =====================================================
+// SEARCH ICON
+// =====================================================
+.search-icon {
+  position: absolute;
+  right: 25px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 45px;
+  height: 45px;
+  background: linear-gradient(135deg, var(--secondary-color), #ff9f1a);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: white;
+  cursor: pointer;
+  transition: transform $transition-base, box-shadow $transition-base;
+  box-shadow: 0 6px 20px rgba(239, 134, 9, 0.4);
+
+  &:hover {
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 8px 25px rgba(239, 134, 9, 0.5);
+  }
+}
+
+// =====================================================
+// SUGGESTIONS DROPDOWN
+// =====================================================
+.suggestions {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(25px);
+  border-radius: 20px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  display: none;
+  max-height: 350px;
+  min-height: auto;
+  overflow-y: auto;
+  z-index: 1000;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  width: 100%;
+  scrollbar-width: thin;
+  scrollbar-color: var(--secondary-color) rgba(239, 134, 9, 0.1);
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: linear-gradient(180deg, rgba(239, 134, 9, 0.05) 0%, rgba(15, 158, 198, 0.05) 100%);
+    border-radius: 10px;
+    margin: 5px 0;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--secondary-color);
+    border-radius: 10px;
+  }
+
+  &.show {
+    display: block;
+    animation: slideDown 0.3s ease-out;
+  }
+}
+
+// =====================================================
+// SUGGESTION ITEMS
+// =====================================================
+.suggestion-item {
+  padding: 18px 25px;
+  cursor: pointer;
+  transition: background $transition-base, color $transition-base, transform $transition-base;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover {
+    background: linear-gradient(135deg, var(--secondary-color) 0%, #ff9f1a 100%);
+    color: white;
+    transform: translateX(8px);
+
+    .suggestion-icon {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+    }
+
+    .suggestion-name {
+      color: white;
+    }
+
+    .suggestion-description {
+      color: rgba(255, 255, 255, 0.9);
+    }
+  }
+}
+
+.suggestion-icon {
+  width: 35px;
+  height: 35px;
+  background: rgba(239, 134, 9, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: var(--secondary-color);
+  transition: background $transition-base, color $transition-base;
+  flex-shrink: 0;
+}
+
+.suggestion-text {
+  flex: 1;
+}
+
+.suggestion-name {
+  font-weight: 600;
+  margin-bottom: 3px;
+  color: var(--primary-color);
+  font-size: 16px;
+}
+
+.suggestion-description {
+  font-size: 14px;
+  opacity: 0.8;
+  color: #666;
+  line-height: 1.4;
+}
+
+.no-results {
+  padding: 20px;
+  text-align: center;
+  color: #666;
+  font-style: italic;
+}
+
+// =====================================================
+// QUICK ACTIONS
+// =====================================================
+.quick-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.quick-action-btn {
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(15px);
+  color: var(--primary-color);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 25px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background $transition-base, color $transition-base, transform $transition-base, box-shadow $transition-base, border-color $transition-base;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    background: var(--secondary-color);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(239, 134, 9, 0.3);
+    border-color: var(--secondary-color);
+  }
+}
+
+// =====================================================
+// RESPONSIVE DESIGN
+// =====================================================
+@media (max-width: 768px) {
+  .search-container {
+    margin: 1rem;
+    max-width: calc(100% - 2rem);
+  }
+
+  .search-input {
+    font-size: 16px;
+    padding: 15px 60px 15px 20px;
+  }
+
+  .search-icon {
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+  }
+
+  .suggestions {
+    max-height: 300px;
+    border-radius: 15px;
+  }
+
+  .suggestion-item {
+    padding: 15px 20px;
+    gap: 12px;
+  }
+
+  .suggestion-icon {
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+  }
+
+  .suggestion-name {
+    font-size: 15px;
+  }
+
+  .suggestion-description {
+    font-size: 13px;
+  }
+
+  .quick-actions {
+    gap: 8px;
+    margin-top: 15px;
+  }
+
+  .quick-action-btn {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+}

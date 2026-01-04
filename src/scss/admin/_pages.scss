@@ -1,0 +1,424 @@
+// ============================================================================
+// ADMIN PAGES
+// ============================================================================
+
+@import 'variables';
+
+// ============================================================================
+// DESTINATIONS GRID STYLES
+// ============================================================================
+
+.destinations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.destination-card {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+
+        .destination-image img {
+            transform: scale(1.05);
+        }
+    }
+}
+
+.destination-image {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+}
+
+.destination-badge {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    background: #000000;
+    color: #ffffff;
+    padding: 0.25rem 0.5rem;
+    border-radius: var(--border-radius);
+    font-size: 0.75rem;
+    font-weight: 600;
+    border: 1px solid #333333;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+}
+
+.destination-content {
+    padding: 1.5rem;
+
+    h3 {
+        color: var(--text-primary);
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+}
+
+.destination-region {
+    color: var(--primary-color);
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+}
+
+.destination-description {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.destination-meta {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.destination-distance,
+.destination-duration {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.destination-distance::before {
+    content: "📍";
+}
+
+.destination-duration::before {
+    content: "⏱️";
+}
+
+.destination-actions {
+    display: flex;
+    gap: 0.5rem;
+
+    .btn {
+        flex: 1;
+        font-size: 0.8rem;
+        padding: 0.5rem 0.75rem;
+        background: #2563eb;
+        color: white;
+        border: 1px solid #2563eb;
+        box-shadow: 0 1px 3px rgba(37, 99, 235, 0.2);
+        transition: all 0.2s ease;
+        font-weight: 500;
+
+        &:hover {
+            background: #1d4ed8;
+            border-color: #1d4ed8;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 6px rgba(37, 99, 235, 0.3);
+        }
+
+        &.btn-secondary {
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+            color: var(--text-primary);
+            border: 2px solid var(--border-color);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+            &:hover {
+                background: linear-gradient(135deg, var(--bg-primary) 0%, rgba(102, 126, 234, 0.1) 100%);
+                color: var(--text-primary);
+                border-color: #667eea;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+            }
+        }
+    }
+}
+
+// ============================================================================
+// DESTINATION MODAL STYLES
+// ============================================================================
+
+.highlight-item,
+.activity-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.highlight-input,
+.activity-input {
+    flex: 1;
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+.remove-highlight,
+.remove-activity {
+    background: #ef4444;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: all 0.2s ease;
+    font-weight: bold;
+    box-shadow: 0 1px 3px rgba(239, 68, 68, 0.3);
+
+    &:hover {
+        background: #dc2626;
+        transform: scale(1.1);
+        box-shadow: 0 2px 6px rgba(239, 68, 68, 0.4);
+    }
+}
+
+// ============================================================================
+// CONTENT TABLE STYLES
+// ============================================================================
+
+.content-title {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+
+    strong {
+        color: var(--text-primary);
+        font-weight: 600;
+    }
+
+    small {
+        color: var(--text-secondary);
+        font-size: 0.8rem;
+    }
+}
+
+.content-type-badge {
+    padding: 0.25rem 0.5rem;
+    border-radius: var(--border-radius);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: capitalize;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+
+    &.page {
+        background: #2563eb;
+        border-color: rgba(37, 99, 235, 0.3);
+    }
+
+    &.blog {
+        background: #7c3aed;
+        border-color: rgba(124, 58, 237, 0.3);
+    }
+
+    &.news {
+        background: #059669;
+        border-color: rgba(5, 150, 105, 0.3);
+    }
+
+    &.announcement {
+        background: #d97706;
+        border-color: rgba(217, 119, 6, 0.3);
+    }
+}
+
+// Note: .status-badge is already defined in components, adding only new variants
+.status-badge {
+    &.published {
+        background: #e8f5e8;
+        color: #388e3c;
+    }
+
+    &.draft {
+        background: #fff3e0;
+        color: #f57c00;
+    }
+
+    &.archived {
+        background: #ffebee;
+        color: #d32f2f;
+    }
+}
+
+// ============================================================================
+// CUSTOM CONFIRMATION MODAL
+// ============================================================================
+
+.confirm-modal {
+    max-width: 420px;
+    text-align: center;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+
+    .modal-header {
+        background: white;
+        border-bottom: none;
+        padding: 1.5rem 1.5rem 0 1.5rem;
+
+        h2 {
+            color: #000;
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin: 0;
+        }
+    }
+
+    .modal-close {
+        color: #000;
+        opacity: 0.6;
+        transition: all 0.2s ease;
+
+        &:hover {
+            background: none;
+            opacity: 1;
+            transform: scale(1.1);
+        }
+    }
+
+    .modal-footer {
+        justify-content: center;
+        gap: 1rem;
+        background: white;
+        border-top: none;
+        padding: 0 1.5rem 1.5rem 1.5rem;
+    }
+
+    .btn {
+        min-width: 120px;
+        padding: 12px 24px;
+        font-weight: 500;
+        font-size: 0.95rem;
+        border-radius: 8px;
+        transition: all 0.2s ease;
+        border: 2px solid;
+    }
+
+    .btn-secondary {
+        background: white;
+        color: #000;
+        border-color: #000;
+
+        &:hover {
+            background: #000;
+            color: white;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+    }
+
+    .btn-danger {
+        background: #000;
+        color: white;
+        border-color: #000;
+
+        &:hover {
+            background: white;
+            color: #000;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+    }
+}
+
+.confirm-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 2rem 1.5rem;
+}
+
+.confirm-message {
+    font-size: 1.1rem;
+    color: #000;
+    line-height: 1.6;
+    font-weight: 400;
+    margin: 0;
+}
+
+// ============================================================================
+// DARK THEME SUPPORT FOR CONFIRMATION MODAL
+// ============================================================================
+
+@media (prefers-color-scheme: dark) {
+    .confirm-modal {
+        background: #000;
+        box-shadow: 0 20px 40px rgba(255, 255, 255, 0.1);
+
+        .modal-header {
+            background: #000;
+
+            h2 {
+                color: white;
+            }
+        }
+
+        .modal-close {
+            color: white;
+
+            &:hover {
+                background: none;
+            }
+        }
+
+        .modal-footer {
+            background: #000;
+        }
+
+        .btn-secondary {
+            background: #000;
+            color: white;
+            border-color: white;
+
+            &:hover {
+                background: white;
+                color: #000;
+            }
+        }
+
+        .btn-danger {
+            background: white;
+            color: #000;
+            border-color: white;
+
+            &:hover {
+                background: #000;
+                color: white;
+            }
+        }
+    }
+
+    .confirm-message {
+        color: white;
+    }
+}
+

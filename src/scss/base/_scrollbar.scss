@@ -1,0 +1,36 @@
+// =====================================================
+// CUSTOM SCROLLBAR - Orange Theme
+// =====================================================
+
+// Webkit Browsers (Chrome, Safari, Edge)
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, var(--primary-orange) 0%, var(--orange-bright) 100%);
+    border-radius: 10px;
+    border: 2px solid #f1f1f1;
+    transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, var(--orange-hover) 0%, var(--primary-orange) 100%);
+    box-shadow: 0 2px 8px rgba(255, 153, 0, 0.3);
+    transform: scale(1.05);
+}
+
+::-webkit-scrollbar-corner {
+    background: #f1f1f1;
+}
+
+// Firefox Scrollbar
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-orange) #f1f1f1;
+}

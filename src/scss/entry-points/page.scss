@@ -1,0 +1,26 @@
+// =====================================================
+// PAGE.SCSS - Tour Detail Page Entry Point
+// Compiles to: css/page.css
+// Used in: tour detail pages
+// =====================================================
+
+// Abstracts
+@import '../abstracts/variables';
+@import '../abstracts/mixins';
+@import '../abstracts/functions';
+
+// Base
+@import '../base/resets';
+@import '../base/typography';
+
+// Layout
+@import '../layout/nav';
+@import '../layout/footer';
+
+// Pages
+@import '../pages/page';
+
+// Responsive
+@import '../responsive/responsive';
+
+

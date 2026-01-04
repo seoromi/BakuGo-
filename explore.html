@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Azerbaijan - Land of Fire</title>
+    <link rel="icon" type="image/png" href="/logo/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/logo/favicon.svg" />
+    <link rel="shortcut icon" href="/logo/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/logo/apple-touch-icon.png" />
+    <link rel="manifest" href="/logo/site.webmanifest" />
+    <!-- Compiled SCSS -->
+    <link rel="stylesheet" href="dist/css/nav.css">
+    <link rel="stylesheet" href="dist/css/explore.css">
+    <link rel="stylesheet" href="dist/css/footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+       
+    </style>
+</head>
+
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner"></div>
+    </div>
+
+    <div class="scroll-indicator" id="scrollIndicator"></div>
+
+    <header>
+        <nav class="container">
+            <button class="hamburger" id="hamburger" aria-label="Открыть меню" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <a href="index.html" class="logo">
+                <img src="src/assets/img/ui/logo/logo (2).png" alt="Logo (2)" loading="lazy"></a>
+            </a>
+
+            <!-- Language Switcher -->
+            <!-- <div class="language-switcher">
+                <button class="language-btn" id="languageBtn" aria-label="Выбрать язык" aria-expanded="false">
+                    <span class="current-lang">RU</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="language-dropdown" id="languageDropdown">
+                    <button class="lang-option" data-lang="ru" data-active="true">
+                        <span class="lang-flag">🇷🇺</span>
+                        <span class="lang-name">Русский</span>
+                    </button>
+                    <button class="lang-option" data-lang="en" data-active="false">
+                        <span class="lang-flag">🇺🇸</span>
+                        <span class="lang-name">English</span>
+                    </button>
+                </div>
+            </div> -->
+
+            <ul class="nav-links">
+                <li><a href="index.html" class="back-to-tours-btn">
+                    <i class="fas fa-arrow-left"></i>
+                    <span class="btn-text">Back to Tours</span>
+                </a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Side Menu -->
+    <div class="menu-overlay" id="menuOverlay" role="dialog" aria-hidden="true"></div>
+    <nav class="side-menu" id="sideMenu" role="navigation" aria-label="Боковое меню">
+        <button class="side-menu-close" id="menuClose" aria-label="Закрыть меню">&times;</button>
+        <div class="side-menu-header">
+            <h2>Меню</h2>
+            <p>Выберите тип тура</p>
+        </div>
+        <div class="side-menu-items">
+            <a href="all-tours.html?type=group" class="side-menu-item" tabindex="-1">
+                <i aria-hidden="true">👥</i>
+                Групповые Туры
+            </a>
+            <a href="all-tours.html?type=private" class="side-menu-item" tabindex="-1">
+                <i aria-hidden="true">🚗</i>
+                Частные туры
+            </a>
+            <a href="all-tours.html?type=driver" class="side-menu-item" tabindex="-1">
+                <i aria-hidden="true">🚙</i>
+                Туры только с водителем
+            </a>
+            <a href="index.html" class="side-menu-item" tabindex="-1">
+                <i aria-hidden="true">🏠</i>
+                Главная страница
+            </a>
+            <a href="#contact" class="side-menu-item" tabindex="-1">
+                <i aria-hidden="true">📞</i>
+                Свяжитесь с нами
+            </a>
+            
+            <!-- Bottom Section: Social Media Icons + Language Dropdown -->
+            <div class="side-menu-bottom">
+                <div class="side-menu-social-icons">
+                    <a href="https://facebook.com/bakugotour" class="social-icon" target="_blank" rel="noopener noreferrer" tabindex="-1">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://instagram.com/bakugotour" class="social-icon" target="_blank" rel="noopener noreferrer" tabindex="-1">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+                
+                <div class="side-menu-language">
+                    <button class="language-dropdown-btn" id="sideLanguageBtn" tabindex="-1">
+                        <span class="current-lang">RU</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="language-dropdown-menu" id="sideLanguageDropdown">
+                        <button class="lang-option" data-lang="ru" data-active="true">
+                            <span class="lang-flag">🇷🇺</span>
+                            <span class="lang-name">Русский</span>
+                        </button>
+                        <button class="lang-option" data-lang="en" data-active="false">
+                            <span class="lang-flag">🇺🇸</span>
+                            <span class="lang-name">English</span>
+                        </button>
+                        <button class="lang-option" data-lang="tr" data-active="false">
+                            <span class="lang-flag">🇹🇷</span>
+                            <span class="lang-name">Türkçe</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Discover Azerbaijan</h1>
+            <p>The Land of Fire awaits your exploration - from ancient temples to modern marvels</p>
+            <a href="#places" class="cta-button">Start Your Journey</a>
+        </div>
+    </section>
+
+    <section id="places" class="places">
+        <div class="container">
+            <h2 class="section-title">Incredible Destinations</h2>
+            <p class="section-subtitle">Explore the most breathtaking places Azerbaijan has to offer, from ancient
+                temples to modern architectural marvels</p>
+
+            <div class="places-grid" id="destinationsContainer">
+                <!-- Destinations will be dynamically loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <section id="tips" class="tips-section">
+        <div class="container">
+            <h2 class="section-title">Essential Travel Tips</h2>
+            <p class="section-subtitle">Make the most of your Azerbaijan adventure with these insider tips and local
+                knowledge</p>
+
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <div class="tip-icon">💰</div>
+                    <h3 class="tip-title">Currency & Costs</h3>
+                    <p class="tip-desc">The currency is Azerbaijani Manat (AZN). Azerbaijan offers excellent value for
+                        money with affordable food, transport, and accommodation options.</p>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-icon">🌤️</div>
+                    <h3 class="tip-title">Best Time to Visit</h3>
+                    <p class="tip-desc">April-June and September-November offer pleasant weather. Summer can be hot in
+                        Baku, while winter is mild but sometimes rainy.</p>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-icon">🗣️</div>
+                    <h3 class="tip-title">Language Tips</h3>
+                    <p class="tip-desc">Azerbaijani is official, Russian widely spoken. English is common in tourist
+                        areas. Learning basic greetings will be appreciated.</p>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-icon">🚗</div>
+                    <h3 class="tip-title">Transportation</h3>
+                    <p class="tip-desc">Baku has efficient metro and bus systems. For exploring regions, consider guided
+                        tours or car rentals for maximum flexibility.</p>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-icon">🍽️</div>
+                    <h3 class="tip-title">Food Culture</h3>
+                    <p class="tip-desc">Try plov, dolma, and kebabs. Tea culture is central - accept offered tea as it's
+                        a sign of warm Azerbaijani hospitality.</p>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-icon">🎭</div>
+                    <h3 class="tip-title">Cultural Etiquette</h3>
+                    <p class="tip-desc">Azerbaijanis are very hospitable. Dress modestly at religious sites, remove
+                        shoes when entering homes, and respect local customs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="src/assets/img/background-img/azerbaijan2.jpg" alt="Beautiful Azerbaijan landscape">
+                </div>
+                <div class="about-text">
+                    <h2>Welcome to Azerbaijan</h2>
+                    <p>Azerbaijan, known as the "Land of Fire," is a captivating country where ancient traditions meet
+                        modern innovation. Located at the crossroads of Europe and Asia, this remarkable nation offers
+                        visitors an extraordinary blend of historical treasures and contemporary marvels.</p>
+                    <p>From the eternal flames of Yanardag to the futuristic architecture of the Heydar Aliyev Center, from
+                        ancient petroglyphs in Gobustan to the medieval charm of Sheki, Azerbaijan provides unforgettable
+                        experiences for every traveler.</p>
+                    <p>Discover a land where fire temples tell stories of ancient civilizations, where mud volcanoes create
+                        otherworldly landscapes, and where warm hospitality makes every visitor feel at home.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="footer-placeholder"></div>
+    
+    <!-- Navigation Scripts -->
+    <script src="src/js/pages/explore/destinations-renderer.js" defer></script>
+    <script src="src/js/pages/explore/explore.js" defer></script>
+    <script src="src/js/core/navigation.js" defer></script>
+    <script src="src/js/core/language-switcher.js" defer></script>
+    
+    <script>
+        fetch('/footer.html')
+          .then(response => response.text())
+          .then(data => {
+            document.getElementById('footer-placeholder').innerHTML = data;
+          });
+    </script>
+</body>
+</html>

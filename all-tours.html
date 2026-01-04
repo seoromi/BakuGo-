@@ -1,0 +1,517 @@
+    <!DOCTYPE html>
+    <html lang="ru">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Все туры по Азербайджану | BakuGo tour</title>
+        <meta name="description"
+            content="Все туры по Азербайджану: групповые, частные, с водителем, турпакеты. Фильтры по цене, направлению, продолжительности. Лучшие предложения от BakuGo tour.">
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link rel="icon" type="image/png" href="/logo/favicon-96x96.png" sizes="96x96" />
+        <link rel="icon" type="image/svg+xml" href="/logo/favicon.svg" />
+        <link rel="shortcut icon" href="/logo/favicon.ico" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/logo/apple-touch-icon.png" />
+        <link rel="manifest" href="/logo/site.webmanifest" />
+        <!-- Compiled SCSS - All Tours Page Only -->
+        <link rel="stylesheet" href="dist/css/all-tours.css">
+        <link rel="stylesheet" href="dist/css/alltours-nav.css">
+    </head>
+
+    <body>
+        <!-- Header -->
+        <header>
+            <nav class="container">
+              <button class="hamburger" id="hamburger" aria-label="Открыть меню" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+              </button>
+          
+              <a href="index.html" class="logo">
+                <img src="assets/img/ui/logo/logo (2).png" alt="Logo (2)" loading="lazy"></a>
+              </a>
+          
+              <ul class="nav-links">
+                <li><a href="explore.html" class="explorebtn" data-translate="explore-btn">Explore✨</a></li>
+              </ul>
+            </nav>
+          </header>
+
+        <!-- Side Menu -->
+        <div class="menu-overlay" id="menuOverlay" role="dialog" aria-hidden="true"></div>
+        <nav class="side-menu" id="sideMenu" role="navigation" aria-label="Боковое меню">
+            <button class="side-menu-close" id="menuClose" aria-label="Закрыть меню">&times;</button>
+            <div class="side-menu-header">
+                <h2>Меню</h2>
+                <p>Выберите тип тура</p>
+            </div>
+            <div class="side-menu-items">
+                <a href="all-tours.html?type=group" class="side-menu-item" tabindex="-1">
+                    <i aria-hidden="true">👥</i>
+                    Групповые Туры
+                </a>
+                <a href="all-tours.html?type=private" class="side-menu-item" tabindex="-1">
+                    <i aria-hidden="true">🚗</i>
+                    Частные туры
+                </a>
+                <a href="#all-tours.html?type=driver" class="side-menu-item" tabindex="-1">
+                    <i aria-hidden="true">🚙</i>
+                    Туры только с водителем
+                </a>
+                <a href="#contact" class="side-menu-item" tabindex="-1">
+                    <i aria-hidden="true">📞</i>
+                    Свяжитесь с нами
+                </a>
+                
+                <!-- Bottom Section: Social Media Icons + Language Dropdown -->
+                <div class="side-menu-bottom">
+                    <div class="side-menu-social-icons">
+                        <a href="https://facebook.com/bakugotour" class="social-icon" target="_blank" rel="noopener noreferrer" tabindex="-1">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://instagram.com/bakugotour" class="social-icon" target="_blank" rel="noopener noreferrer" tabindex="-1">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                    
+                    <div class="side-menu-language">
+                        <button class="language-dropdown-btn" id="sideLanguageBtn" tabindex="-1">
+                            <span class="current-lang">RU</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="language-dropdown-menu" id="sideLanguageDropdown">
+                            <button class="lang-option" data-lang="ru" data-active="true">
+                                <span class="lang-flag">🇷🇺</span>
+                                <span class="lang-name">Русский</span>
+                            </button>
+                            <button class="lang-option" data-lang="en" data-active="false">
+                                <span class="lang-flag">🇺🇸</span>
+                                <span class="lang-name">English</span>
+                            </button>
+                            <button class="lang-option" data-lang="tr" data-active="false">
+                                <span class="lang-flag">🇹🇷</span>
+                                <span class="lang-name">Türkçe</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+
+        <!-- Page Header -->
+        <section class="page-header">
+            <div class="container">
+                <h1 class="page-title">Все туры по Азербайджану</h1>
+                <p class="page-subtitle">Найдите идеальный тур среди более чем 50 направлений. Групповые экскурсии, частные
+                    туры, турпакеты и поездки с водителем</p>
+            </div>
+        </section>
+
+        <!-- Mobile Filter Modal -->
+        <div class="mobile-filter-modal" id="mobileFilterModal" role="dialog" aria-modal="true"
+            aria-labelledby="mobileFilterTitle">
+            <div class="mobile-filter-content">
+                <div class="mobile-filter-header">
+                    <h2 class="mobile-filter-title" id="mobileFilterTitle">
+                        <i class="fas fa-filter"></i>
+                        Фильтры туров
+                    </h2>
+                    <button class="mobile-filter-close" id="mobileFilterClose" aria-label="Закрыть фильтры">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+
+                <div class="mobile-filter-body">
+                    <!-- Search -->
+                    <div class="filter-group">
+                        <label class="filter-label" for="mobileSearchInput">Поиск по направлению</label>
+                        <input type="text" class="search-input" id="mobileSearchInput"
+                            placeholder="Введите название места..." aria-describedby="mobile-search-help">
+                        <small id="mobile-search-help"
+                            style="font-size: 0.8rem; color: #666; margin-top: 0.25rem; display: block;">
+                            Например: Баку, Гобустан, Габала
+                        </small>
+                    </div>
+
+                    <!-- Tour Type -->
+                    <div class="filter-group">
+                        <label class="filter-label">Тип тура</label>
+                        <div class="filter-checkboxes" role="group" aria-label="Типы туров">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="mobile-type-group" value="group">
+                                <label for="mobile-type-group">Групповые туры</label>
+                                <span class="checkbox-count" id="mobile-count-group">18</span>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="mobile-type-private" value="private">
+                                <label for="mobile-type-private">Частные туры</label>
+                                <span class="checkbox-count" id="mobile-count-private">12</span>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="mobile-type-driver" value="driver">
+                                <label for="mobile-type-driver">Только с водителем</label>
+                                <span class="checkbox-count" id="mobile-count-driver">8</span>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="mobile-type-package" value="package">
+                                <label for="mobile-type-package">Турпакеты</label>
+                                <span class="checkbox-count" id="mobile-count-package">15</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Destinations -->
+                    <div class="filter-group">
+                        <label class="filter-label">Направления</label>
+                        <div class="filter-checkboxes" role="group" aria-label="Направления">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="mobile-dest-baku" value="baku">
+                                <label for="mobile-dest-baku">Баку</label>
+                                <span class="checkbox-count">8</span>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="mobile-dest-gobustan" value="gobustan">
+                                <label for="mobile-dest-gobustan">Гобустан</label>
+                                <span class="checkbox-count">6</span>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="mobile-dest-gabala" value="gabala">
+                                <label for="mobile-dest-gabala">Габала</label>
+                                <span class="checkbox-count">7</span>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="mobile-dest-shamakhi" value="shamakhi">
+                                <label for="mobile-dest-shamakhi">Шамахи</label>
+                                <span class="checkbox-count">5</span>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="mobile-dest-quba" value="quba">
+                                <label for="mobile-dest-quba">Губа</label>
+                                <span class="checkbox-count">4</span>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="mobile-dest-sheki" value="sheki">
+                                <label for="mobile-dest-sheki">Шеки</label>
+                                <span class="checkbox-count">3</span>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="mobile-dest-lankaran" value="lankaran">
+                                <label for="mobile-dest-lankaran">Ленкорань</label>
+                                <span class="checkbox-count">2</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Duration -->
+                    <div class="filter-group">
+                        <label class="filter-label">Продолжительность</label>
+                        <div class="filter-checkboxes" role="group" aria-label="Продолжительность">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="mobile-duration-2h" value="2-4h">
+                                <label for="mobile-duration-2h">2-4 часа</label>
+                                <span class="checkbox-count">5</span>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="mobile-duration-day" value="1day">
+                                <label for="mobile-duration-day">Целый день</label>
+                                <span class="checkbox-count">28</span>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="mobile-duration-2-3" value="2-3days">
+                                <label for="mobile-duration-2-3">2-3 дня</label>
+                                <span class="checkbox-count">8</span>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="mobile-duration-4plus" value="4plus">
+                                <label for="mobile-duration-4plus">4+ дней</label>
+                                <span class="checkbox-count">12</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Price Range -->
+                    <div class="filter-group">
+                        <label class="filter-label">Цена (USD)</label>
+                        <div class="price-range">
+                            <div class="double-range-slider-container">
+                                <div class="double-range-slider">
+                                    <div class="slider-track"></div>
+                                    <div class="slider-range"></div>
+                                    <div class="slider-thumb slider-thumb-min" data-thumb="min">
+                                        <div class="thumb-tooltip" id="mobileMinTooltip">$0</div>
+                                    </div>
+                                    <div class="slider-thumb slider-thumb-max" data-thumb="max">
+                                        <div class="thumb-tooltip" id="mobileMaxTooltip">$600</div>
+                                    </div>
+                                </div>
+                                <div class="slider-labels">
+                                    <span class="slider-label">$0</span>
+                                    <span class="slider-label">$600</span>
+                                </div>
+                            </div>
+                            <div class="price-display">
+                                <div class="price-display-item">
+                                    <span class="price-display-label">MIN</span>
+                                    <span class="price-display-value" id="mobilePriceMinDisplay">$0</span>
+                                </div>
+                                <span class="price-display-separator">–</span>
+                                <div class="price-display-item">
+                                    <span class="price-display-label">MAX</span>
+                                    <span class="price-display-value" id="mobilePriceMaxDisplay">$600</span>
+                                </div>
+                            </div>
+                            <!-- Hidden inputs for form submission -->
+                            <div class="price-inputs">
+                                <input type="number" id="mobilePriceMin" placeholder="0" min="0" max="600" step="1"
+                                    aria-label="Минимальная цена">
+                                <input type="number" id="mobilePriceMax" placeholder="600" min="0" max="600" step="1"
+                                    aria-label="Максимальная цена">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mobile-filter-footer">
+                    <button class="filter-action-btn filter-clear-btn" onclick="clearMobileFilters()">
+                        <i class="fas fa-undo"></i> Очистить
+                    </button>
+                    <button class="filter-action-btn filter-apply-btn" onclick="applyMobileFilters()">
+                        <i class="fas fa-check"></i> Применить
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="container">
+                <button class="mobile-filter-toggle" onclick="openMobileFilters()" aria-expanded="false">
+                    <i class="fas fa-filter"></i> Фильтры и поиск
+                </button>
+
+                <div class="content-wrapper">
+                    <!-- Filters Sidebar (Desktop) -->
+                    <aside class="filters-sidebar" id="filtersSidebar" role="region" aria-label="Фильтры туров">
+                        <div class="filters-header">
+                            <h3 class="filters-title">Фильтры</h3>
+                            <button class="clear-filters" onclick="clearAllFilters()">Очистить все</button>
+                        </div>
+
+                        <!-- Search -->
+                        <div class="filter-group">
+                            <label class="filter-label" for="searchInput">Поиск по направлению</label>
+                            <input type="text" class="search-input" id="searchInput" placeholder="Введите название места..."
+                                onkeyup="filterTours()" aria-describedby="search-help">
+                            <small id="search-help"
+                                style="font-size: 0.8rem; color: #666; margin-top: 0.25rem; display: block;">
+                                Например: Баку, Гобустан, Габала
+                            </small>
+                        </div>
+
+                        <!-- Tour Type -->
+                        <div class="filter-group">
+                            <label class="filter-label">Тип тура</label>
+                            <div class="filter-checkboxes" role="group" aria-label="Типы туров">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="type-group" value="group" onchange="filterTours()">
+                                    <label for="type-group">Групповые туры</label>
+                                    <span class="checkbox-count" id="count-group">18</span>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="type-private" value="private" onchange="filterTours()">
+                                    <label for="type-private">Частные туры</label>
+                                    <span class="checkbox-count" id="count-private">12</span>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="type-driver" value="driver" onchange="filterTours()">
+                                    <label for="type-driver">Только с водителем</label>
+                                    <span class="checkbox-count" id="count-driver">8</span>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="type-package" value="package" onchange="filterTours()">
+                                    <label for="type-package">Турпакеты</label>
+                                    <span class="checkbox-count" id="count-package">15</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Destinations -->
+                        <div class="filter-group">
+                            <label class="filter-label">Направления</label>
+                            <div class="filter-checkboxes" role="group" aria-label="Направления">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="dest-baku" value="baku" onchange="filterTours()">
+                                    <label for="dest-baku">Баку</label>
+                                    <span class="checkbox-count">8</span>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="dest-gobustan" value="gobustan" onchange="filterTours()">
+                                    <label for="dest-gobustan">Гобустан</label>
+                                    <span class="checkbox-count">6</span>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="dest-gabala" value="gabala" onchange="filterTours()">
+                                    <label for="dest-gabala">Габала</label>
+                                    <span class="checkbox-count">7</span>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="dest-shamakhi" value="shamakhi" onchange="filterTours()">
+                                    <label for="dest-shamakhi">Шамахи</label>
+                                    <span class="checkbox-count">5</span>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="dest-quba" value="quba" onchange="filterTours()">
+                                    <label for="dest-quba">Губа</label>
+                                    <span class="checkbox-count">4</span>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="dest-sheki" value="sheki" onchange="filterTours()">
+                                    <label for="dest-sheki">Шеки</label>
+                                    <span class="checkbox-count">3</span>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="dest-lankaran" value="lankaran" onchange="filterTours()">
+                                    <label for="dest-lankaran">Ленкорань</label>
+                                    <span class="checkbox-count">2</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Duration -->
+                        <div class="filter-group">
+                            <label class="filter-label">Продолжительность</label>
+                            <div class="filter-checkboxes" role="group" aria-label="Продолжительность">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="duration-2h" value="2-4h" onchange="filterTours()">
+                                    <label for="duration-2h">2-4 часа</label>
+                                    <span class="checkbox-count">5</span>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="duration-day" value="1day" onchange="filterTours()">
+                                    <label for="duration-day">Целый день</label>
+                                    <span class="checkbox-count">28</span>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="duration-2-3" value="2-3days" onchange="filterTours()">
+                                    <label for="duration-2-3">2-3 дня</label>
+                                    <span class="checkbox-count">8</span>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="duration-4plus" value="4plus" onchange="filterTours()">
+                                    <label for="duration-4plus">4+ дней</label>
+                                    <span class="checkbox-count">12</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Price Range -->
+                        <div class="filter-group">
+                            <label class="filter-label">Цена (USD)</label>
+                            <div class="price-range">
+                                <div class="double-range-slider-container">
+                                    <div class="double-range-slider">
+                                        <div class="slider-track"></div>
+                                        <div class="slider-range"></div>
+                                        <div class="slider-thumb slider-thumb-min" data-thumb="min">
+                                            <div class="thumb-tooltip" id="minTooltip">$0</div>
+                                        </div>
+                                        <div class="slider-thumb slider-thumb-max" data-thumb="max">
+                                            <div class="thumb-tooltip" id="maxTooltip">$600</div>
+                                        </div>
+                                    </div>
+                                    <div class="slider-labels">
+                                        <span class="slider-label">$0</span>
+                                        <span class="slider-label">$600</span>
+                                    </div>
+                                </div>
+                                <div class="price-display">
+                                    <div class="price-display-item">
+                                        <span class="price-display-label">MIN</span>
+                                        <span class="price-display-value" id="priceMinDisplay">$0</span>
+                                    </div>
+                                    <span class="price-display-separator">–</span>
+                                    <div class="price-display-item">
+                                        <span class="price-display-label">MAX</span>
+                                        <span class="price-display-value" id="priceMaxDisplay">$600</span>
+                                    </div>
+                                </div>
+                                <!-- Hidden inputs for form submission -->
+                                <div class="price-inputs">
+                                    <input type="number" id="priceMin" placeholder="0" min="0" max="600" step="1" onchange="filterTours()"
+                                        aria-label="Минимальная цена">
+                                    <input type="number" id="priceMax" placeholder="600" min="0" max="600" step="1" onchange="filterTours()"
+                                        aria-label="Максимальная цена">
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
+
+                    <!-- Tours Section -->
+                    <section class="tours-section">
+                        <div class="section-header">
+                            <div class="results-info">
+                                <div class="results-count" id="resultsCount">Показано 27 туров</div>
+                                <div class="view-toggle" role="group" aria-label="Переключить вид">
+                                    <button class="view-btn active" onclick="switchView('grid')" data-view="grid"
+                                        aria-label="Сетка" title="Показать в виде сетки">
+                                        <i class="fas fa-th"></i>
+                                    </button>
+                                    <button class="view-btn" onclick="switchView('list')" data-view="list"
+                                        aria-label="Список" title="Показать в виде списка">
+                                        <i class="fas fa-list"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="sort-controls">
+                                <select class="sort-select" id="sortSelect" onchange="sortTours()"
+                                    aria-label="Сортировать туры">
+                                    <option value="default">Сортировать по</option>
+                                    <option value="price-low">Цена: по возрастанию</option>
+                                    <option value="price-high">Цена: по убыванию</option>
+                                    <option value="duration">Продолжительность</option>
+                                    <option value="rating">Рейтинг</option>
+                                    <option value="popular">Популярность</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Tours Grid -->
+                        <div class="tours-grid" id="toursGrid" role="main" aria-label="Список туров">
+                            <!-- Tours will be loaded here by JavaScript -->
+                            <div class="loading" id="loadingSpinner" aria-live="polite">
+                                <i class="fas fa-spinner"></i>
+                                <p>Загружаем туры...</p>
+                            </div>
+                        </div>
+
+                        <!-- Pagination -->
+                        <nav class="pagination" id="pagination" role="navigation" aria-label="Пагинация">
+                            <!-- Pagination will be generated by js -->
+                        </nav>
+                    </section>
+                </div>
+            </div>
+        </main>
+        <div id="footer-placeholder"></div>
+        <script>
+        fetch('/footer.html')
+          .then(response => response.text())
+          .then(data => {
+            // Safe: footer.html is a static file, but sanitize anyway for security
+            const footerEl = document.getElementById('footer-placeholder');
+            if (footerEl && window.Sanitize) {
+              window.Sanitize.setSafeHtml(footerEl, data);
+            } else if (footerEl) {
+              footerEl.innerHTML = data; // Will be sanitized by safe-innerhtml.js if loaded
+            }
+          });
+        </script>
+        <!-- XSS Protection: DOMPurify and Sanitization Utilities -->
+        <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"></script>
+        <script src="src/js/utils/sanitize.js"></script>
+        <script src="src/js/core/navigation.js" defer></script>
+        <script src="src/js/core/language-switcher.js" defer></script>
+        <script type="module" src="src/js/pages/all-tours-page/all-tours.js" defer></script>
+    </body>
+    </html>

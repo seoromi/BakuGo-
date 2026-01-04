@@ -1,0 +1,32 @@
+// =====================================================
+// MAIN.SCSS - Homepage Entry Point
+// Compiles to: css/main.css
+// Used in: index.html
+// =====================================================
+
+// Abstracts (must come first)
+@import '../abstracts/variables';
+@import '../abstracts/mixins';
+@import '../abstracts/functions';
+
+// Base
+@import '../base/resets';
+@import '../base/typography';
+@import '../base/utilities';
+
+// Layout
+@import '../layout/nav';
+@import '../layout/footer';
+
+// Components
+@import '../components/search';
+@import '../components/slider';
+@import '../components/booking-modal';
+
+// Pages
+@import '../pages/home';
+
+// Responsive
+@import '../responsive/responsive';
+
+

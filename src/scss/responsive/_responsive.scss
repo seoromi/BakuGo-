@@ -1,0 +1,1279 @@
+/* =====================================================
+   RESPONSIVE STYLES - Mobile & Tablet Optimization
+   REFACTORED VERSION - Reduced Duplication & Improved Maintainability
+   ===================================================== */
+
+// =====================================================
+// SCSS VARIABLES (replacing CSS variables where not needed by JS)
+// =====================================================
+
+$container-padding-desktop: 40px;
+$container-padding-tablet: 20px;
+$container-padding-mobile: 15px;
+$container-padding-small: 10px;
+
+// Keep these as CSS custom properties ONLY if JavaScript needs to read them
+:root {
+  // Only include if JS reads these values - otherwise remove
+  // --container-padding-desktop: 40px;
+  // --container-padding-tablet: 20px;
+  // --container-padding-mobile: 15px;
+  // --container-padding-small: 10px;
+}
+
+// =====================================================
+// MIXINS - Reduce Duplication
+// =====================================================
+
+@mixin container-padding($padding) {
+  padding: 0 $padding;
+}
+
+@mixin prevent-overflow {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+@mixin flex-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: auto;
+  min-height: auto;
+}
+
+@mixin card-base {
+  background: var(--white);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+  border: 1px solid var(--border-color);
+  text-align: center;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+  }
+}
+
+@mixin slider-arrow-base {
+  display: flex;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: var(--z-modal, 1000);
+  transition: all 0.3s ease;
+  opacity: 1;
+  pointer-events: auto;
+
+  &.prev { left: 10px; }
+  &.next { right: 10px; }
+
+  &:hover {
+    background: var(--secondary-color);
+    color: white;
+    transform: translateY(-50%) scale(1.1);
+  }
+
+  // Smart hide when disabled
+  &:disabled,
+  &[style*="opacity: 0.5"],
+  &[data-hidden="true"] {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-50%) scale(0.8);
+  }
+}
+
+@mixin search-container-base {
+  position: static;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  transform: translateY(0);
+  transition: none;
+  order: -1;
+  max-width: calc(100% - 16px);
+
+  &.hidden {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@mixin feature-card-slider {
+  @include flex-card;
+  @include card-base;
+  scroll-snap-align: center;
+  margin: 0;
+  padding: 1.2rem 1rem;
+}
+
+@mixin features-grid-slider($padding) {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  width: 100vw;
+  max-width: 100vw;
+  padding: 1rem $padding;
+  margin: 2rem calc(-1 * #{$padding}) 0;
+  gap: 1rem;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+// =====================================================
+// BASE STYLES - Overflow Prevention
+// =====================================================
+
+html,
+body {
+  @include prevent-overflow;
+}
+
+.container {
+  max-width: 100%;
+  @include container-padding($container-padding-mobile);
+  margin: 0 auto;
+}
+
+// Target known overflow culprits instead of global *
+img,
+video,
+iframe,
+.tour-slide,
+.feature-card,
+.features-grid {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+// =====================================================
+// DESKTOP STYLES (1025px and up)
+// =====================================================
+
+@media (min-width: 1025px) {
+  .container {
+    @include container-padding($container-padding-desktop);
+  }
+}
+
+// =====================================================
+// TABLET STYLES (769px to 1024px)
+// =====================================================
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  body {
+    @include prevent-overflow;
+  }
+
+  .container {
+    @include container-padding($container-padding-tablet);
+    @include prevent-overflow;
+  }
+
+  .tour-slide {
+    min-width: calc(50% - 1rem);
+    max-width: calc(50% - 1rem);
+  }
+
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 100%;
+    margin-top: 1rem;
+  }
+
+  .feature-card {
+    @include flex-card;
+    padding: 1.2rem 0.8rem;
+
+    h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.8rem;
+      line-height: 1.3;
+    }
+
+    p {
+      font-size: 0.9rem;
+      line-height: 1.4;
+      margin: 0;
+      flex-grow: 0;
+    }
+  }
+
+  .feature-icon {
+    width: 65px;
+    height: 65px;
+    margin: 0 auto 1rem;
+  }
+
+  .search-container {
+    max-width: 700px;
+    padding: 1.8rem;
+  }
+
+  .search-title {
+    font-size: 24px;
+  }
+
+  .unified-slider-btn {
+    @include slider-arrow-base;
+    width: 48px;
+    height: 48px;
+    font-size: 1.4rem;
+  }
+}
+
+// =====================================================
+// MOBILE LANDSCAPE & PORTRAIT (481px to 768px)
+// =====================================================
+
+@media (min-width: 481px) and (max-width: 768px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  .container {
+    @include container-padding($container-padding-mobile);
+    max-width: 100%;
+  }
+
+  // Hero Section
+  .hero {
+    background-attachment: scroll;
+    height: 60vh;
+    max-height: 500px;
+    padding: 0 $container-padding-mobile;
+
+    &-content {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+
+      h1 {
+        font-size: 1.8rem;
+        margin-bottom: 0.8rem;
+      }
+
+      p {
+        font-size: 1rem;
+        margin-bottom: 1.2rem;
+      }
+    }
+  }
+
+  // Search Container
+  .search-container {
+    @include search-container-base;
+    border-radius: 15px;
+    padding: 1rem 1.2rem;
+    margin: 0.8rem 8px 1.5rem 8px;
+  }
+
+  .search-title {
+    font-size: 18px;
+    margin-bottom: 12px;
+  }
+
+  .search-input {
+    padding: 12px 50px 12px 16px;
+    font-size: 15px;
+    border-radius: 20px;
+  }
+
+  .search-icon {
+    width: 35px;
+    height: 35px;
+    right: 16px;
+    font-size: 16px;
+  }
+
+  .suggestions {
+    top: calc(100% + 8px);
+    bottom: auto;
+    max-height: 200px;
+    border-radius: 12px;
+  }
+
+  .suggestion-item {
+    padding: 12px 16px;
+  }
+
+  .suggestion-icon {
+    width: 28px;
+    height: 28px;
+    font-size: 13px;
+  }
+
+  .quick-actions {
+    gap: 6px;
+    margin-top: 10px;
+    justify-content: center;
+  }
+
+  .quick-action-btn {
+    padding: 4px 10px;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
+  // Features Grid as Slider
+  .features {
+    position: relative;
+    padding-bottom: 4rem;
+    padding-top: 6rem;
+    margin-top: 2rem;
+
+    &::after {
+      display: none;
+    }
+  }
+
+  .features-grid {
+    @include features-grid-slider($container-padding-mobile);
+  }
+
+  .feature-card {
+    @include feature-card-slider;
+    flex: 0 0 280px;
+    max-width: 280px;
+    min-width: 280px;
+
+    h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.8rem;
+      line-height: 1.3;
+      flex-shrink: 0;
+    }
+
+    p {
+      font-size: 0.9rem;
+      line-height: 1.4;
+      margin: 0;
+      flex-grow: 0;
+    }
+  }
+
+  .feature-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+    margin: 0 auto 1rem;
+    flex-shrink: 0;
+  }
+
+  // Features navigation dots
+  .features-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 2rem;
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .features-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--border-color);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+
+    &.active {
+      background: var(--secondary-color);
+      transform: scale(1.2);
+      box-shadow: 0 2px 8px rgba(239, 134, 9, 0.3);
+    }
+
+    &:hover {
+      background: var(--secondary-color);
+      transform: scale(1.1);
+    }
+  }
+
+  // Grid layouts - consolidated
+  .tours-list,
+  .testimonials-grid,
+  .tours .tours-grid,
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .tours .tours-grid {
+    padding: 0 $container-padding-mobile;
+  }
+
+  .contact-grid {
+    gap: 2rem;
+  }
+
+  .side-menu {
+    width: 100%;
+    left: -100%;
+
+    &.open {
+      left: 0;
+    }
+  }
+
+  .tour-slide {
+    min-width: calc(100% - 1rem);
+    max-width: calc(100% - 1rem);
+  }
+
+  .tours-slider-container {
+    gap: 1rem;
+    padding: 0 $container-padding-mobile;
+  }
+
+  .tours-slider-wrapper {
+    overflow-x: auto;
+    padding: 0 $container-padding-mobile;
+    margin: 0 calc(-1 * #{$container-padding-mobile});
+  }
+
+  .slider-btn {
+    display: none;
+  }
+
+  .section-title {
+    font-size: 1.8rem;
+    padding: 0 $container-padding-mobile;
+  }
+
+  .tour-content {
+    padding: 1.2rem;
+  }
+
+  .show-more-btn {
+    padding: 10px 20px;
+    font-size: 0.85rem;
+    width: 100%;
+    margin: 1rem 0;
+  }
+
+  .show-all-tours {
+    margin-left: 0;
+    text-align: center;
+    margin-top: 2rem;
+  }
+
+  .show-all-tours-btn {
+    padding: 14px 28px;
+    font-size: 1rem;
+    margin: 0 $container-padding-mobile;
+  }
+
+  .tour-category,
+  .testimonial-card {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  // Mobile filter modal - consolidated styles
+  .mobile-filter-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: var(--z-modal, 1000);
+    display: none;
+  }
+
+  .mobile-filter-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: white;
+    border-radius: 20px 20px 0 0;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  .mobile-filter-toggle {
+    width: 100%;
+    padding: 15px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .filters-sidebar {
+    display: none;
+  }
+
+  .content-wrapper {
+    display: block;
+  }
+
+  .tours-section {
+    width: 100%;
+  }
+
+  .section-header {
+    flex-direction: column;
+    gap: 15px;
+    align-items: stretch;
+  }
+
+  .results-info {
+    flex-direction: column;
+    gap: 10px;
+    align-items: stretch;
+  }
+
+  .view-toggle {
+    justify-content: center;
+  }
+
+  .sort-controls {
+    width: 100%;
+  }
+
+  .sort-select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+  }
+
+  .tours-grid.list-view {
+    grid-template-columns: 1fr;
+  }
+
+  .tour-card {
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+
+    &-image {
+      height: 200px;
+      position: relative;
+    }
+
+    &-content {
+      padding: 20px;
+    }
+
+    &-title {
+      font-size: 18px;
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+
+    &-description {
+      font-size: 14px;
+      line-height: 1.5;
+      margin-bottom: 15px;
+    }
+
+    &-price {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--primary-color);
+    }
+
+    &-button {
+      padding: 10px 20px;
+      background: var(--secondary-color);
+      color: white;
+      border: none;
+      border-radius: 25px;
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background: var(--primary-color);
+        transform: translateY(-2px);
+      }
+    }
+  }
+
+  .pagination {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    flex-wrap: wrap;
+
+    button {
+      padding: 10px 15px;
+      border: 1px solid var(--border-color);
+      background: white;
+      border-radius: 8px;
+      font-size: 14px;
+      min-width: 44px;
+      height: 44px;
+
+      &.active {
+        background: var(--primary-color);
+        color: white;
+        border-color: var(--primary-color);
+      }
+    }
+  }
+
+  .loading {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-light);
+
+    i {
+      font-size: 32px;
+      margin-bottom: 15px;
+      animation: spin 1s linear infinite;
+    }
+  }
+
+  .unified-slider-btn {
+    @include slider-arrow-base;
+    width: 44px;
+    height: 44px;
+    font-size: 1.2rem;
+    background: rgba(255, 255, 255, 0.95);
+    border: 2px solid rgba(239, 134, 9, 0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+    &.prev { left: 8px; }
+    &.next { right: 8px; }
+  }
+}
+
+// =====================================================
+// SMALL MOBILE SCREENS (up to 480px)
+// =====================================================
+
+@media (max-width: 480px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  .container {
+    @include container-padding($container-padding-small);
+  }
+
+  // Hero
+  .hero {
+    height: 50vh;
+    max-height: 450px;
+    padding: 0 $container-padding-small;
+
+    &-content {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      p {
+        font-size: 0.9rem;
+      }
+    }
+  }
+
+  // Search
+  .search-container {
+    @include search-container-base;
+    padding: 0.8rem 1rem;
+    margin: 0.5rem 4px 1.2rem 4px;
+    border-radius: 12px;
+    max-width: calc(100% - 8px);
+  }
+
+  .search-title {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+  .search-input {
+    padding: 10px 45px 10px 14px;
+    font-size: 14px;
+    border-radius: 18px;
+  }
+
+  .search-icon {
+    width: 32px;
+    height: 32px;
+    right: 14px;
+    font-size: 15px;
+  }
+
+  .quick-action-btn {
+    padding: 3px 8px;
+    font-size: 11px;
+  }
+
+  .quick-actions {
+    margin-top: 8px;
+    gap: 4px;
+    justify-content: center;
+  }
+
+  .suggestions {
+    top: calc(100% + 8px);
+    bottom: auto;
+    max-height: 200px;
+    border-radius: 12px;
+    font-size: 14px;
+  }
+
+  .suggestion-item {
+    padding: 12px 16px;
+  }
+
+  .suggestion-icon {
+    width: 28px;
+    height: 28px;
+    font-size: 13px;
+  }
+
+  // Features Section
+  .features {
+    padding-bottom: 3rem;
+    padding-top: 5rem;
+    margin-top: 2rem;
+    position: relative;
+
+    &::after {
+      display: none;
+    }
+  }
+
+  .features-grid {
+    @include features-grid-slider($container-padding-small);
+    margin: 1.5rem calc(-1 * #{$container-padding-small}) 0;
+    gap: 0.8rem;
+  }
+
+  .feature-card {
+    @include feature-card-slider;
+    flex: 0 0 250px;
+    max-width: 250px;
+    min-width: 250px;
+    padding: 1rem 0.8rem;
+
+    h3 {
+      font-size: 1rem;
+      margin-bottom: 0.6rem;
+      line-height: 1.2;
+      flex-shrink: 0;
+    }
+
+    p {
+      font-size: 0.85rem;
+      line-height: 1.3;
+      margin: 0;
+      flex-grow: 0;
+    }
+  }
+
+  .feature-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 1.3rem;
+    margin: 0 auto 0.8rem;
+    flex-shrink: 0;
+  }
+
+  .features-dots {
+    gap: 6px;
+    margin-top: 1.5rem;
+    bottom: 0.5rem;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .features-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--border-color);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+
+    &.active {
+      background: var(--secondary-color);
+      transform: scale(1.2);
+      box-shadow: 0 2px 8px rgba(239, 134, 9, 0.3);
+    }
+
+    &:hover {
+      background: var(--secondary-color);
+      transform: scale(1.1);
+    }
+  }
+
+  // Cards and Content
+  .tour-card-content,
+  .tour-content {
+    padding: 1rem;
+  }
+
+  .modal-content {
+    padding: 1.5rem;
+    margin: 1rem;
+    max-width: calc(100% - 2rem);
+  }
+
+  .tour-slide {
+    min-width: calc(100% - 0.5rem);
+    max-width: calc(100% - 0.5rem);
+  }
+
+  .tours-slider-container {
+    gap: 0.5rem;
+    padding: 0 $container-padding-small;
+  }
+
+  .tours-slider-wrapper {
+    padding: 0 $container-padding-small;
+    margin: 0 calc(-1 * #{$container-padding-small});
+    overflow-x: auto;
+  }
+
+  .tour-content {
+    padding: 0.8rem;
+  }
+
+  .tour-title {
+    font-size: 0.9rem;
+    min-height: 3.6rem;
+  }
+
+  // Buttons
+  .show-more-btn {
+    width: 100%;
+    justify-content: center;
+    margin: 1rem 0;
+    padding: 12px 20px;
+    font-size: 0.9rem;
+  }
+
+  .show-all-tours {
+    margin-left: 0;
+    text-align: center;
+    margin-top: 2rem;
+  }
+
+  .show-all-tours-btn {
+    margin: 0 $container-padding-small;
+    padding: 12px 20px;
+    font-size: 0.9rem;
+  }
+
+  // Section Titles
+  .section-title {
+    font-size: 1.5rem;
+    padding: 0 $container-padding-small;
+    margin-bottom: 2rem;
+  }
+
+  // Grids - consolidated
+  .tours-grid,
+  .testimonials-grid,
+  .contact-grid {
+    gap: 1rem;
+    padding: 0 $container-padding-small;
+    grid-template-columns: 1fr;
+  }
+
+  .contact-grid {
+    gap: 1.5rem;
+  }
+
+  .tours-grid.list-view {
+    grid-template-columns: 1fr;
+  }
+
+  // Testimonials
+  .testimonial-card {
+    padding: 1.5rem;
+    margin: 0 auto;
+    max-width: 100%;
+  }
+
+  // Tours
+  .tour-category {
+    margin: 0 auto;
+    max-width: 100%;
+  }
+
+  // All Tours Page - consolidated with 481-768px
+  .mobile-filter-toggle {
+    padding: 12px;
+    font-size: 15px;
+    width: 100%;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .mobile-filter-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: var(--z-modal, 1000);
+    display: none;
+  }
+
+  .mobile-filter-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: white;
+    border-radius: 20px 20px 0 0;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  .filters-sidebar {
+    display: none;
+  }
+
+  .content-wrapper {
+    display: block;
+  }
+
+  .tours-section {
+    width: 100%;
+  }
+
+  .section-header {
+    flex-direction: column;
+    gap: 15px;
+    align-items: stretch;
+  }
+
+  .results-info {
+    flex-direction: column;
+    gap: 10px;
+    align-items: stretch;
+  }
+
+  .view-toggle {
+    justify-content: center;
+  }
+
+  .sort-controls {
+    width: 100%;
+  }
+
+  .sort-select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+  }
+
+  .tour-card {
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+
+    &-image {
+      height: 200px;
+      position: relative;
+    }
+
+    &-content {
+      padding: 15px;
+    }
+
+    &-title {
+      font-size: 16px;
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+
+    &-description {
+      font-size: 13px;
+      line-height: 1.5;
+      margin-bottom: 15px;
+    }
+
+    &-price {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--primary-color);
+    }
+
+    &-button {
+      padding: 8px 16px;
+      background: var(--secondary-color);
+      color: white;
+      border: none;
+      border-radius: 25px;
+      font-size: 13px;
+      font-weight: 500;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background: var(--primary-color);
+        transform: translateY(-2px);
+      }
+    }
+  }
+
+  .pagination {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    flex-wrap: wrap;
+
+    button {
+      padding: 8px 12px;
+      border: 1px solid var(--border-color);
+      background: white;
+      border-radius: 8px;
+      font-size: 13px;
+      min-width: 40px;
+      height: 40px;
+
+      &.active {
+        background: var(--primary-color);
+        color: white;
+        border-color: var(--primary-color);
+      }
+    }
+  }
+
+  .loading {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-light);
+
+    i {
+      font-size: 32px;
+      margin-bottom: 15px;
+      animation: spin 1s linear infinite;
+    }
+  }
+
+  .side-menu {
+    width: 100%;
+    left: -100%;
+
+    &.open {
+      left: 0;
+    }
+  }
+
+  .unified-slider-btn {
+    @include slider-arrow-base;
+    width: 40px;
+    height: 40px;
+    font-size: 1.1rem;
+    background: rgba(255, 255, 255, 0.98);
+    border: 2px solid var(--secondary-color);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+
+    &.prev { left: 5px; }
+    &.next { right: 5px; }
+
+    &:active {
+      transform: translateY(-50%) scale(1.05);
+      border-color: var(--secondary-color);
+    }
+  }
+}
+
+// =====================================================
+// UNIVERSAL IMPROVEMENTS (max-width: 1024px)
+// =====================================================
+
+@media (max-width: 1024px) {
+  .unified-slider-btn {
+    transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+    opacity: 1;
+    visibility: visible;
+
+    // Smart visibility based on position
+    &:not([disabled]):not([style*="opacity: 0.5"]) {
+      opacity: 0.9;
+      pointer-events: auto;
+      animation: arrowFadeIn 0.3s ease;
+
+      &:hover {
+        opacity: 1;
+        transform: translateY(-50%) scale(1.1);
+      }
+    }
+
+    // Fade out when disabled
+    &[disabled],
+    &[style*="opacity: 0.5"] {
+      animation: arrowFadeOut 0.3s ease;
+    }
+
+    // Accessibility: Focus states
+    &:focus {
+      outline: 3px solid rgba(239, 134, 9, 0.6);
+      outline-offset: 2px;
+    }
+
+    &:focus-visible {
+      background: var(--secondary-color);
+      color: white;
+    }
+  }
+}
+
+// =====================================================
+// MOBILE TOUCH IMPROVEMENTS (max-width: 768px)
+// =====================================================
+
+@media (max-width: 768px) {
+  .unified-slider-btn {
+    min-width: 44px;
+    min-height: 44px;
+    -webkit-tap-highlight-color: rgba(239, 134, 9, 0.3);
+    -webkit-touch-callout: none;
+    user-select: none;
+
+    // Touch press effect
+    &:active {
+      transform: translateY(-50%) scale(0.95);
+      transition-duration: 0.1s;
+    }
+  }
+}
+
+// =====================================================
+// ARROW ANIMATIONS
+// =====================================================
+
+@keyframes arrowFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-50%) scale(0.8);
+  }
+  to {
+    opacity: 0.9;
+    transform: translateY(-50%) scale(1);
+  }
+}
+
+@keyframes arrowFadeOut {
+  from {
+    opacity: 0.9;
+    transform: translateY(-50%) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-50%) scale(0.8);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// =====================================================
+// PRINT STYLES
+// =====================================================
+
+@media print {
+  header,
+  .search-box,
+  .book-btn,
+  footer {
+    display: none;
+  }
+
+  .hero {
+    background: none;
+    color: var(--text-dark);
+  }
+
+  body {
+    font-size: 12pt;
+    line-height: 1.4;
+  }
+}
+
+// =====================================================
+// ACCESSIBILITY - REDUCED MOTION
+// =====================================================
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms;
+    animation-iteration-count: 1;
+    transition-duration: 0.01ms;
+  }
+
+  .hero {
+    background-attachment: scroll;
+  }
+}
+
+// =====================================================
+// ACCESSIBILITY - HIGH CONTRAST
+// =====================================================
+
+@media (prefers-contrast: high) {
+  :root {
+    --shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    --shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.5);
+  }
+
+  .feature-card,
+  .tour-card,
+  .tour-category,
+  .testimonial-card {
+    border: 2px solid var(--text-dark);
+  }
+}

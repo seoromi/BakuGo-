@@ -1,0 +1,52 @@
+# Security Rules for BakuGo Tour Project
+
+## XSS Prevention Rules
+
+### ❌ FORBIDDEN: Direct innerHTML with user input
+```javascript
+// NEVER DO THIS:
+element.innerHTML = userInput;
+element.innerHTML = `${userData}`;
+element.innerHTML = dataFromAPI;
+```
+
+### ✅ REQUIRED: Safe alternatives
+
+#### For plain text:
+```javascript
+// Use textContent (safest for user input)
+element.textContent = userInput;
+```
+
+#### For HTML content:
+```javascript
+// Use Sanitize.setSafeHtml() with DOMPurify
+window.Sanitize.setSafeHtml(element, htmlContent);
+
+// Or use createElement for building DOM
+const div = window.Sanitize.createSafeElement('div', 'Text', { className: 'my-class' });
+```
+
+#### For URLs:
+```javascript
+// Always sanitize URLs
+const safeUrl = window.Sanitize.sanitizeUrl(userUrl);
+element.href = safeUrl;
+```
+
+## Code Review Checklist
+
+- [ ] No `innerHTML =` assignments with user data
+- [ ] All user input uses `textContent` or `setSafeHtml()`
+- [ ] All URLs sanitized before use in `href` or `src`
+- [ ] Form inputs validated and sanitized
+- [ ] API responses sanitized before rendering
+
+## Files to Review
+
+When modifying these files, pay extra attention to XSS:
+- `src/js/core/component.js` - Uses innerHTML (needs refactoring)
+- `src/js/pages/admin/admin.js` - Uses innerHTML (needs refactoring)
+- `src/js/pages/tour/booking-modal.js` - ✅ Already fixed
+- Any file with `innerHTML =` assignments
+
